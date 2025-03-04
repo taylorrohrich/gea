@@ -1,13 +1,21 @@
 import { Chart } from "../../types/chart";
 
+interface TileLayout {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+interface TileMetadata {
+  title: string;
+  description: string;
+}
+
 interface BaseTile {
   id: number;
-  layout: {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-  };
+  layout: TileLayout;
+  metadata: TileMetadata;
 }
 
 interface LineTile extends BaseTile {

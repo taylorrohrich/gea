@@ -49,16 +49,22 @@ export const Grid = ({
 
   // Use a memoized version of WidthProvider to prevent unnecessary re-renders
   const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
-  // Load tiles from localStorage or use defaults - memoized to avoid recalculation
-  // Default tiles if no saved configuration exists - memoized with dependencies
+
+  // Generate default chart titles based on type
+  const getDefaultTitle = useCallback((chartType: Chart) => {
+    const prefix = chartType.charAt(0).toUpperCase() + chartType.slice(1);
+    return `${prefix} Chart`;
+  }, []);
+
+  // Default tiles with metadata
   const defaultTiles = useCallback((): Tile[] => {
     return [0, 1, 2].map((id) => {
       const tilesPerRow = Math.floor(cols / tileWidth);
       const row = Math.floor(id / tilesPerRow);
       const col = (id % tilesPerRow) * tileWidth;
 
-      // Alternate between chart types for the default tiles
       const chartType = chartTypes[id % chartTypes.length];
+      const defaultTitle = getDefaultTitle(chartType);
 
       return {
         id,
@@ -69,22 +75,43 @@ export const Grid = ({
           w: tileWidth,
           h: tileHeight,
         },
+        metadata: {
+          title: defaultTitle,
+          description: `Showing data visualization using ${chartType} chart`,
+        },
       };
     });
-  }, [cols, tileWidth, tileHeight, chartTypes]);
+  }, [cols, tileWidth, tileHeight, chartTypes, getDefaultTitle]);
+
+  // Load tiles from localStorage or use defaults
   const loadTilesConfig = useCallback((): Tile[] => {
     if (typeof window === "undefined") return defaultTiles();
 
     const savedConfig = localStorage.getItem(localStorageKey);
     if (savedConfig) {
       try {
-        return JSON.parse(savedConfig);
+        const parsedConfig = JSON.parse(savedConfig);
+
+        // Upgrade old format tiles if they don't have metadata
+        return parsedConfig.map((tile: any) => {
+          if (!tile.metadata) {
+            const defaultTitle = getDefaultTitle(tile.type);
+            return {
+              ...tile,
+              metadata: {
+                title: defaultTitle,
+                description: `Showing data visualization using ${tile.type} chart`,
+              },
+            };
+          }
+          return tile;
+        });
       } catch (e) {
         console.error("Failed to parse saved grid configuration", e);
       }
     }
     return defaultTiles();
-  }, [defaultTiles, localStorageKey]);
+  }, [defaultTiles, localStorageKey, getDefaultTitle]);
 
   const [tilesConfig, setTilesConfig] = useState<Tile[]>(() =>
     loadTilesConfig()
@@ -156,6 +183,38 @@ export const Grid = ({
     setCurrentChartType(chartTypes[nextIndex]);
   }, [chartTypes, currentChartType]);
 
+  // Handler to update tile metadata (title, description)
+  const handleUpdateTileMetadata = useCallback(
+    (id: number, title: string, description: string) => {
+      setTilesConfig((prevTilesConfig) =>
+        prevTilesConfig.map((tile) => {
+          if (tile.id === id) {
+            return {
+              ...tile,
+              metadata: {
+                title,
+                description,
+              },
+            };
+          }
+          return tile;
+        })
+      );
+    },
+    []
+  );
+
+  // Handler to delete a tile
+  const handleDeleteTile = useCallback((id: number) => {
+    setTilesConfig((prevTilesConfig) =>
+      prevTilesConfig.filter((tile) => tile.id !== id)
+    );
+
+    setLayout((prevLayout) =>
+      prevLayout.filter((item) => item.i !== `tile-${id}`)
+    );
+  }, []);
+
   // Add new tile on right click
   const handleContextMenu = useCallback(
     (e: React.MouseEvent) => {
@@ -184,6 +243,7 @@ export const Grid = ({
       const safeX = Math.min(gridX, cols - tileWidth);
 
       // Create new tile config with current chart type
+      const defaultTitle = getDefaultTitle(currentChartType);
       const newTileConfig: Tile = {
         id: newTileId,
         type: currentChartType,
@@ -192,6 +252,10 @@ export const Grid = ({
           y: gridY,
           w: tileWidth,
           h: tileHeight,
+        },
+        metadata: {
+          title: defaultTitle,
+          description: `Showing data visualization using ${currentChartType} chart`,
         },
       };
 
@@ -219,6 +283,7 @@ export const Grid = ({
       tileWidth,
       tileHeight,
       cycleChartType,
+      getDefaultTitle,
     ]
   );
 
@@ -245,11 +310,16 @@ export const Grid = ({
           }}
         >
           <div style={{ height: "100%" }}>
-            <ChartRenderer tile={tileConfig} data={awaitedData} />
+            <ChartRenderer
+              tile={tileConfig}
+              data={awaitedData}
+              onUpdateTileMetadata={handleUpdateTileMetadata}
+              onDeleteTile={handleDeleteTile}
+            />
           </div>
         </div>
       )),
-    [tilesConfig, awaitedData]
+    [tilesConfig, awaitedData, handleUpdateTileMetadata, handleDeleteTile]
   );
 
   if (!isClient) {
@@ -257,27 +327,41 @@ export const Grid = ({
   }
 
   return (
-    <div
-      ref={gridRef}
-      style={{ width: "100%", overflow: "hidden" }}
-      onContextMenu={handleContextMenu}
-    >
-      <ResponsiveGridLayout
-        className="layout"
-        layout={layout}
-        cols={cols}
-        onLayoutChange={handleLayoutChange}
-        rowHeight={100}
-        compactType="vertical"
-        useCSSTransforms={true}
-        measureBeforeMount={false}
-        isDraggable
-        draggableHandle=".chart-drag-handle"
-        // Add a buffer to prevent resize jumpiness
-        margin={[20, 20]}
+    <div>
+      <div style={{ marginBottom: "10px" }}>
+        <p>Current chart type: {currentChartType}</p>
+        <button onClick={cycleChartType}>
+          Change chart type (currently: {currentChartType})
+        </button>
+        {awaitedData.length > 0 && (
+          <p>Showing data for {awaitedData.length} data series</p>
+        )}
+        <p className="text-sm text-gray-500 mt-1">
+          Right-click on the grid to add a new chart
+        </p>
+      </div>
+      <div
+        ref={gridRef}
+        style={{ width: "100%", overflow: "hidden" }}
+        onContextMenu={handleContextMenu}
       >
-        {renderedTiles}
-      </ResponsiveGridLayout>
+        <ResponsiveGridLayout
+          className="layout"
+          layout={layout}
+          cols={cols}
+          onLayoutChange={handleLayoutChange}
+          rowHeight={100}
+          compactType="vertical"
+          useCSSTransforms={true}
+          measureBeforeMount={false}
+          isDraggable
+          draggableHandle=".drag-handle"
+          // Add a buffer to prevent resize jumpiness
+          margin={[20, 20]}
+        >
+          {renderedTiles}
+        </ResponsiveGridLayout>
+      </div>
     </div>
   );
 };

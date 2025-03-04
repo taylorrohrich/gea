@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { Chart } from "../../types/chart";
 import { Tile } from "../grid/types";
 import { Data } from "@/shared/types/data";
+import { ChartHeader } from "./ChartHeader";
 
 // Dynamic imports for each chart type
 const LineChart = dynamic(
@@ -38,23 +39,32 @@ const ChartLoading = () => (
 interface ChartRendererProps {
   tile: Tile;
   data: Data[];
+  onUpdateTileMetadata: (
+    id: number,
+    title: string,
+    description: string
+  ) => void;
+  onDeleteTile: (id: number) => void;
 }
 
 // Use memo to prevent unnecessary re-renders
 export const ChartRenderer: React.FC<ChartRendererProps> = memo(
-  ({ tile, data }) => {
+  ({ tile, data, onUpdateTileMetadata, onDeleteTile }) => {
     return (
-      <div style={{ height: "100%" }}>
-        <div
-          className="chart-drag-handle"
-          style={{
-            height: "10px",
-            cursor: "move",
-            marginBottom: "5px",
-            background: "#e0e0e0",
-          }}
-        ></div>
-        {renderChart(tile, data)}
+      <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+        {/* Chart Header Component */}
+        <ChartHeader
+          id={tile.id}
+          title={tile.metadata.title}
+          description={tile.metadata.description}
+          onUpdate={onUpdateTileMetadata}
+          onDelete={onDeleteTile}
+        />
+
+        {/* Chart Content - flex-grow to fill remaining space */}
+        <div style={{ flexGrow: 1, overflow: "hidden" }}>
+          {renderChart(tile, data)}
+        </div>
       </div>
     );
   }
@@ -70,10 +80,8 @@ function renderChart(tile: Tile, data: Data[]) {
     case Chart.Pie:
       return <PieChart id={tile.id} data={data} />;
     case Chart.Area:
-      // Fallback to line chart if area not implemented
       return <LineChart id={tile.id} data={data} />;
     case Chart.Scatter:
-      // Fallback to line chart if scatter not implemented
       return <LineChart id={tile.id} data={data} />;
     default:
       return <div>Unknown chart type</div>;
