@@ -9,9 +9,6 @@ import {
   IconButton,
   Chip,
   Stack,
-  useScrollTrigger,
-  Slide,
-  Fade,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -19,6 +16,9 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { DateRangeSelector } from "./DateRangeSelector";
 import { CountrySelector, COUNTRIES } from "./CountrySelector";
 import { useRouter, useSearchParams } from "next/navigation";
+
+// Import shim for React 18 useLayoutEffect SSR warning
+import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
 interface EmissionsFiltersProps {
   defaultStartYear?: number;
@@ -51,54 +51,91 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   const [isSticky, setIsSticky] = useState(false);
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
 
-  // Function to handle scroll events
+  // Extract and parse query parameters - only extract once on mount or when searchParams change
+  const queryStartYear = React.useMemo(() => {
+    return searchParams?.get("startYear")
+      ? parseInt(searchParams.get("startYear")!, 10)
+      : defaultStartYear;
+  }, [searchParams, defaultStartYear]);
+
+  const queryEndYear = React.useMemo(() => {
+    return searchParams?.get("endYear")
+      ? parseInt(searchParams.get("endYear")!, 10)
+      : defaultEndYear;
+  }, [searchParams, defaultEndYear]);
+
+  const queryCountries = React.useMemo(() => {
+    return searchParams?.get("countries") || defaultCountries;
+  }, [searchParams, defaultCountries]);
+
+  // Set initial height - using useLayoutEffect to measure before paint
+  useIsomorphicLayoutEffect(() => {
+    if (!sticky || !filterRef.current) return;
+    // Set initial height synchronously to avoid layout shift
+    const height = filterRef.current.offsetHeight;
+    setPlaceholderHeight(height);
+  }, [sticky]);
+
+  // Function to handle scroll events - with proper cleanup
   useEffect(() => {
-    if (!sticky) return;
+    if (!sticky || typeof window === "undefined") return;
+
+    // Use requestAnimationFrame for smoother handling
+    let ticking = false;
 
     const handleScroll = () => {
-      if (!placeholderRef.current) return;
-
-      const placeholderPos = placeholderRef.current.getBoundingClientRect();
-      const shouldBeSticky = placeholderPos.top <= 0;
-
-      if (shouldBeSticky !== isSticky) {
-        setIsSticky(shouldBeSticky);
+      if (!ticking && placeholderRef.current) {
+        requestAnimationFrame(() => {
+          const placeholderPos =
+            placeholderRef.current?.getBoundingClientRect();
+          if (placeholderPos) {
+            const shouldBeSticky = placeholderPos.top <= 0;
+            if (shouldBeSticky !== isSticky) {
+              setIsSticky(shouldBeSticky);
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    // Set initial height
-    if (filterRef.current) {
-      setPlaceholderHeight(filterRef.current.offsetHeight);
-    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    window.addEventListener("scroll", handleScroll);
+    // Initial check in case we're already scrolled
+    handleScroll();
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isSticky, sticky]);
+  }, [sticky, isSticky]);
 
-  // Extract and parse query parameters
-  const queryStartYear = searchParams.get("startYear")
-    ? parseInt(searchParams.get("startYear")!, 10)
-    : defaultStartYear;
+  // Update placeholder height when filter height changes
+  useEffect(() => {
+    if (!sticky || !filterRef.current) return;
 
-  const queryEndYear = searchParams.get("endYear")
-    ? parseInt(searchParams.get("endYear")!, 10)
-    : defaultEndYear;
-
-  const queryCountries = searchParams.get("countries") || defaultCountries;
-
-  // Local state for filters
-  const [startYear, setStartYear] = React.useState(queryStartYear);
-  const [endYear, setEndYear] = React.useState(queryEndYear);
-  const [selectedCountries, setSelectedCountries] = React.useState<string[]>(
-    () => {
-      if (queryCountries === "All") {
-        return COUNTRIES.map((c) => c.code);
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setPlaceholderHeight(entry.contentRect.height);
       }
-      return queryCountries.split(",");
+    });
+
+    resizeObserver.observe(filterRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [sticky]);
+
+  // Local state for filters - initialized from props/URL
+  const [startYear, setStartYear] = useState(queryStartYear);
+  const [endYear, setEndYear] = useState(queryEndYear);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>(() => {
+    if (queryCountries === "All") {
+      return COUNTRIES.map((c) => c.code);
     }
-  );
+    return queryCountries.split(",");
+  });
 
   // Update filter state when URL parameters change
   useEffect(() => {
@@ -135,15 +172,6 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         ? "All"
         : selectedCountries.join(",");
 
-    // Create query parameters
-    const params = new URLSearchParams();
-    params.set("startYear", startYear.toString());
-    params.set("endYear", endYear.toString());
-    params.set("countries", countriesParam);
-
-    // Update the URL without refreshing the page
-    router.push(`?${params.toString()}`, { scroll: false });
-
     // Call the provided callback if it exists
     if (onApplyFilters) {
       onApplyFilters({
@@ -151,6 +179,15 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         endYear,
         countries: countriesParam === "All" ? "All" : selectedCountries,
       });
+    } else {
+      // Only used if no callback is provided (direct URL update)
+      const params = new URLSearchParams();
+      params.set("startYear", startYear.toString());
+      params.set("endYear", endYear.toString());
+      params.set("countries", countriesParam);
+
+      // Update the URL without refreshing the page
+      router.push(`?${params.toString()}`, { scroll: false });
     }
 
     // Collapse the filter panel after applying
@@ -171,7 +208,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
       elevation={isSticky ? 4 : 2}
       sx={{
         mb: 4,
-        transition: "all 0.3s ease-in-out",
+        transition: "all 0.15s ease-out", // Faster transition reduces perception of lag
         position: isSticky ? "fixed" : "relative",
         top: isSticky ? 0 : "auto",
         left: isSticky ? 0 : "auto",
@@ -180,6 +217,10 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         width: isSticky ? "100%" : "auto",
         borderRadius: isSticky ? 0 : 1,
         maxWidth: isSticky ? "none" : "100%",
+        transform: isSticky
+          ? "translateZ(0)" // Hardware acceleration
+          : "none",
+        willChange: sticky ? "position, top" : "auto", // Optimize for animation
       }}
     >
       {/* Header - Always visible */}
@@ -314,11 +355,12 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         style={{
           height: isSticky ? placeholderHeight : 0,
           marginBottom: isSticky ? 16 : 0,
+          transition: "height 0.15s ease-out", // Match the transition speed
         }}
       />
 
       {/* Actual filter component */}
-      <Fade in={true}>{filterComponent}</Fade>
+      {filterComponent}
     </>
   );
 };
