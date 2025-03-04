@@ -27,6 +27,7 @@ interface LineChartProps {
 }
 
 export const LineChart: React.FC<LineChartProps> = ({ id, data }) => {
+  console.log(data);
   // Process data for the chart - this merges the data by x-axis value for all series
   const chartData = useMemo(() => {
     // If no data, return empty array
@@ -34,7 +35,6 @@ export const LineChart: React.FC<LineChartProps> = ({ id, data }) => {
       return [];
     }
 
-    console.log(data);
     // Get all x values from all data series
     const allXValues = new Set<string>();
     data.forEach((series) => {
