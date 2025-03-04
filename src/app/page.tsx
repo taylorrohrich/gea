@@ -1,16 +1,18 @@
 import { getEmissionsData } from "@/shared/actions/emissions";
 import { Grid } from "@/shared/components/grid";
+import { Suspense } from "react";
 export default async function Home() {
-  const data = await getEmissionsData({
+  const data = getEmissionsData({
     startYear: 1972,
     endYear: 2022,
     countries: "All",
   });
-  console.log(data);
   return (
     <div>
       <main>
-        <Grid />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Grid data={data} />
+        </Suspense>
       </main>
     </div>
   );

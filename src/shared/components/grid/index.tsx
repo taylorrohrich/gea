@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useCallback,
   useMemo,
+  use,
 } from "react";
 import GridLayout, { Layout, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
@@ -14,24 +15,29 @@ import { Tile } from "./types";
 import { Chart } from "../../types/chart";
 import dynamic from "next/dynamic";
 import { debounce } from "lodash"; // You might need to install this: npm install lodash
+import { Data } from "@/shared/types/data";
 
 // Dynamically import ChartRenderer with no SSR
 const ChartRenderer = dynamic(
   () => import("../charts/ChartRenderer").then((mod) => mod.ChartRenderer),
-  { ssr: false, loading: () => <div>Loading...</div> }
+  { ssr: false, loading: () => <div>Loading chart components...</div> }
 );
 
 type GridProps = {
   tileWidth?: number;
   tileHeight?: number;
   localStorageKey?: string;
+  data: Promise<Data[]>;
 };
 
 export const Grid = ({
   tileWidth = 2,
   tileHeight = 2,
   localStorageKey = "grid-tiles-config",
+  data,
 }: GridProps) => {
+  const awaitedData = use(data);
+  console.log(awaitedData);
   const gridRef = useRef<HTMLDivElement>(null);
   const cols = 4;
   const chartTypes = useMemo<Chart[]>(
@@ -44,20 +50,6 @@ export const Grid = ({
   // Use a memoized version of WidthProvider to prevent unnecessary re-renders
   const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
   // Load tiles from localStorage or use defaults - memoized to avoid recalculation
-  const loadTilesConfig = useCallback((): Tile[] => {
-    if (typeof window === "undefined") return defaultTiles();
-
-    const savedConfig = localStorage.getItem(localStorageKey);
-    if (savedConfig) {
-      try {
-        return JSON.parse(savedConfig);
-      } catch (e) {
-        console.error("Failed to parse saved grid configuration", e);
-      }
-    }
-    return defaultTiles();
-  }, [localStorageKey]);
-
   // Default tiles if no saved configuration exists - memoized with dependencies
   const defaultTiles = useCallback((): Tile[] => {
     return [0, 1, 2].map((id) => {
@@ -80,6 +72,19 @@ export const Grid = ({
       };
     });
   }, [cols, tileWidth, tileHeight, chartTypes]);
+  const loadTilesConfig = useCallback((): Tile[] => {
+    if (typeof window === "undefined") return defaultTiles();
+
+    const savedConfig = localStorage.getItem(localStorageKey);
+    if (savedConfig) {
+      try {
+        return JSON.parse(savedConfig);
+      } catch (e) {
+        console.error("Failed to parse saved grid configuration", e);
+      }
+    }
+    return defaultTiles();
+  }, [defaultTiles, localStorageKey]);
 
   const [tilesConfig, setTilesConfig] = useState<Tile[]>(() =>
     loadTilesConfig()
@@ -240,11 +245,11 @@ export const Grid = ({
           }}
         >
           <div style={{ height: "100%" }}>
-            <ChartRenderer tile={tileConfig} />
+            <ChartRenderer tile={tileConfig} data={awaitedData} />
           </div>
         </div>
       )),
-    [tilesConfig]
+    [tilesConfig, awaitedData]
   );
 
   if (!isClient) {
@@ -258,6 +263,9 @@ export const Grid = ({
         <button onClick={cycleChartType}>
           Change chart type (currently: {currentChartType})
         </button>
+        {awaitedData.length > 0 && (
+          <p>Showing data for {awaitedData.length} data series</p>
+        )}
       </div>
       <div
         ref={gridRef}
@@ -273,6 +281,7 @@ export const Grid = ({
           compactType="vertical"
           useCSSTransforms={true}
           measureBeforeMount={false}
+          isDraggable
           draggableHandle=".chart-drag-handle"
           // Add a buffer to prevent resize jumpiness
           margin={[20, 20]}

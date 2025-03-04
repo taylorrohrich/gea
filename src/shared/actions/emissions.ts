@@ -22,7 +22,7 @@ export async function getEmissionsData({
   startYear = 1972,
   endYear = 2022,
   countries = "All",
-}: GetEmissionsParams): Promise<{ data: Data[] }> {
+}: GetEmissionsParams): Promise<Data[]> {
   try {
     // Determine which country codes to use
     let countryCodes: string[];
@@ -76,7 +76,7 @@ export async function getEmissionsData({
     // Store in our cache
     dataCache[cacheKey] = processedData;
 
-    return { data: processedData };
+    return processedData;
   } catch (error) {
     console.error("Error processing emissions data request:", error);
     throw error;
