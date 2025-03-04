@@ -2,7 +2,7 @@
 
 import { cache } from "react";
 import { COUNTRY_CODES, fetchEmissionsData } from "../api/worldbank";
-import { Data } from "../types/data";
+import { Data, Point } from "../types/data";
 
 // Define acceptable parameters
 export interface GetEmissionsParams {
@@ -12,7 +12,7 @@ export interface GetEmissionsParams {
 }
 
 // Cache to store fetched data across requests
-const dataCache: Record<string, any> = {};
+const dataCache: Record<string, Data[]> = {};
 
 /**
  * Server Action to fetch emissions data
@@ -29,7 +29,7 @@ export async function getEmissionsData({
     if (countries === "All") {
       countryCodes = Object.keys(COUNTRY_CODES);
     } else {
-      countryCodes = countries;
+      countryCodes = Array.isArray(countries) ? countries : [countries];
 
       // Validate country codes
       const invalidCodes = countryCodes.filter(
@@ -46,7 +46,7 @@ export async function getEmissionsData({
 
     // Check if we have cached data
     if (dataCache[cacheKey]) {
-      return { data: dataCache[cacheKey] };
+      return dataCache[cacheKey];
     }
 
     // Fetch data for each country in parallel
@@ -59,17 +59,32 @@ export async function getEmissionsData({
     // Transform the data into our desired format
     const processedData: Data[] = countryCodes.map((code, index) => {
       const countryData = countriesRawData[index];
+
+      // Handle empty data case
+      if (!countryData || countryData.length === 0) {
+        return {
+          label:
+            COUNTRY_CODES[code as keyof typeof COUNTRY_CODES]?.name || code,
+          values: [],
+        };
+      }
+
       const countryName =
-        countryData[0]?.country.value ||
+        countryData[0]?.country?.value ||
         COUNTRY_CODES[code as keyof typeof COUNTRY_CODES]?.name ||
         code;
 
-      return {
-        label: countryName,
-        values: countryData.map((item) => ({
+      // Transform to Point array and filter out nulls
+      const values: Point[] = countryData
+        .filter((item) => item.value !== null && item.value !== undefined)
+        .map((item) => ({
           x: item.date,
           y: item.value,
-        })),
+        }));
+
+      return {
+        label: countryName,
+        values,
       };
     });
 
@@ -79,7 +94,8 @@ export async function getEmissionsData({
     return processedData;
   } catch (error) {
     console.error("Error processing emissions data request:", error);
-    throw error;
+    // Return empty array instead of throwing to handle gracefully
+    return [];
   }
 }
 
