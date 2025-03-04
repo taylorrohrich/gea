@@ -53,11 +53,12 @@ export default async function Home({
           defaultStartYear={startYear}
           defaultEndYear={endYear}
           defaultCountries={countries}
+          sticky
         />
       </Box>
 
-      {/* Grid with data */}
-      <Box sx={{ height: "calc(100vh - 300px)", minHeight: "500px" }}>
+      {/* Grid with data - more top margin when filters are collapsed */}
+      <Box sx={{ height: "calc(100vh - 250px)", minHeight: "500px" }}>
         <Suspense
           fallback={
             <div className="flex justify-center items-center h-full">

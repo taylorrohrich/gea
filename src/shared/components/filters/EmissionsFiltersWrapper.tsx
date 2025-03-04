@@ -8,11 +8,12 @@ interface EmissionsFiltersWrapperProps {
   defaultStartYear: number;
   defaultEndYear: number;
   defaultCountries: string;
+  sticky?: boolean;
 }
 
 export const EmissionsFiltersWrapper: React.FC<
   EmissionsFiltersWrapperProps
-> = ({ defaultStartYear, defaultEndYear, defaultCountries }) => {
+> = ({ defaultStartYear, defaultEndYear, defaultCountries, sticky = true }) => {
   const router = useRouter();
 
   // Handle filter application
@@ -42,6 +43,7 @@ export const EmissionsFiltersWrapper: React.FC<
       defaultEndYear={defaultEndYear}
       defaultCountries={defaultCountries}
       onApplyFilters={handleApplyFilters}
+      sticky={sticky}
     />
   );
 };

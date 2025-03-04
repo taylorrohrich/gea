@@ -257,38 +257,27 @@ export const Grid = ({
   }
 
   return (
-    <div>
-      <div style={{ marginBottom: "10px" }}>
-        <p>Current chart type: {currentChartType}</p>
-        <button onClick={cycleChartType}>
-          Change chart type (currently: {currentChartType})
-        </button>
-        {awaitedData.length > 0 && (
-          <p>Showing data for {awaitedData.length} data series</p>
-        )}
-      </div>
-      <div
-        ref={gridRef}
-        style={{ width: "100%", overflow: "hidden" }}
-        onContextMenu={handleContextMenu}
+    <div
+      ref={gridRef}
+      style={{ width: "100%", overflow: "hidden" }}
+      onContextMenu={handleContextMenu}
+    >
+      <ResponsiveGridLayout
+        className="layout"
+        layout={layout}
+        cols={cols}
+        onLayoutChange={handleLayoutChange}
+        rowHeight={100}
+        compactType="vertical"
+        useCSSTransforms={true}
+        measureBeforeMount={false}
+        isDraggable
+        draggableHandle=".chart-drag-handle"
+        // Add a buffer to prevent resize jumpiness
+        margin={[20, 20]}
       >
-        <ResponsiveGridLayout
-          className="layout"
-          layout={layout}
-          cols={cols}
-          onLayoutChange={handleLayoutChange}
-          rowHeight={100}
-          compactType="vertical"
-          useCSSTransforms={true}
-          measureBeforeMount={false}
-          isDraggable
-          draggableHandle=".chart-drag-handle"
-          // Add a buffer to prevent resize jumpiness
-          margin={[20, 20]}
-        >
-          {renderedTiles}
-        </ResponsiveGridLayout>
-      </div>
+        {renderedTiles}
+      </ResponsiveGridLayout>
     </div>
   );
 };
