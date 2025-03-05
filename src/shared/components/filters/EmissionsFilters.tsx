@@ -1,24 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  Box,
-  Paper,
-  Button,
-  Typography,
-  Divider,
-  Collapse,
-  IconButton,
-  Chip,
-  Stack,
-} from "@mui/material";
+"use client";
+import React, { useState, useEffect } from "react";
+import { Button, Divider, IconButton, Chip } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { DateRangeSelector } from "./DateRangeSelector";
 import { CountrySelector, COUNTRIES } from "./CountrySelector";
 import { useRouter } from "next/navigation";
-
-// Import shim for React 18 useLayoutEffect SSR warning
-import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
 interface EmissionsFiltersProps {
   startYear: number;
@@ -36,14 +24,6 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
 
-  // Placeholder ref to measure the original position
-  const placeholderRef = useRef<HTMLDivElement>(null);
-  const filterRef = useRef<HTMLDivElement>(null);
-
-  // Track scroll position
-  const [isSticky, setIsSticky] = useState(false);
-  const [placeholderHeight, setPlaceholderHeight] = useState(0);
-
   // Local state for filters - initialized from props
   const [startYear, setStartYear] = useState(initialStartYear);
   const [endYear, setEndYear] = useState(initialEndYear);
@@ -54,64 +34,6 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
     return initialCountries.split(",");
   });
 
-  // Set initial height - using useLayoutEffect to measure before paint
-  useIsomorphicLayoutEffect(() => {
-    if (!sticky || !filterRef.current) return;
-    // Set initial height synchronously to avoid layout shift
-    const height = filterRef.current.offsetHeight;
-    setPlaceholderHeight(height);
-  }, [sticky]);
-
-  // Function to handle scroll events
-  useEffect(() => {
-    if (!sticky || typeof window === "undefined") return;
-
-    // Use requestAnimationFrame for smoother handling
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking && placeholderRef.current) {
-        requestAnimationFrame(() => {
-          const placeholderPos =
-            placeholderRef.current?.getBoundingClientRect();
-          if (placeholderPos) {
-            const shouldBeSticky = placeholderPos.top <= 0;
-            if (shouldBeSticky !== isSticky) {
-              setIsSticky(shouldBeSticky);
-            }
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Initial check in case we're already scrolled
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [sticky, isSticky]);
-
-  // Update placeholder height when filter height changes
-  useEffect(() => {
-    if (!sticky || !filterRef.current) return;
-
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setPlaceholderHeight(entry.contentRect.height);
-      }
-    });
-
-    resizeObserver.observe(filterRef.current);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [sticky]);
   const resetState = () => {
     setStartYear(initialStartYear);
     setEndYear(initialEndYear);
@@ -161,169 +83,131 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
 
   // Reset filters to defaults
   const resetFilters = () => {
-    // Reset URL to default values or clear params
-    router.push("/", { scroll: false });
     toggleExpanded();
+
+    // // Reset URL to default values or clear params
+    router.push("/", { scroll: false });
   };
 
-  // Render the filter component
-  const filterComponent = (
-    <Paper
-      ref={filterRef}
-      elevation={isSticky ? 4 : 2}
-      sx={{
-        mb: 4,
-        transition: "all 0.15s ease-out",
-        position: isSticky ? "fixed" : "relative",
-        top: isSticky ? 0 : "auto",
-        left: isSticky ? 0 : "auto",
-        right: isSticky ? 0 : "auto",
-        zIndex: isSticky ? 1100 : 1,
-        width: isSticky ? "100%" : "auto",
-        borderRadius: isSticky ? 0 : 1,
-        maxWidth: isSticky ? "none" : "100%",
-        transform: isSticky ? "translateZ(0)" : "none",
-        willChange: sticky ? "position, top" : "auto",
-      }}
-    >
-      {/* Header - Always visible */}
-      <Box
-        onClick={toggleExpanded}
-        sx={{
-          p: 2,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          cursor: "pointer",
-          backgroundColor: isSticky
-            ? "rgba(255, 255, 255, 0.98)"
-            : "transparent",
-          boxShadow: isSticky ? "0 2px 4px rgba(0,0,0,0.1)" : "none",
-        }}
-      >
-        <Box display="flex" alignItems="center" gap={1}>
-          <FilterListIcon color="primary" />
-          <Typography variant="h6">Emissions Data Filters</Typography>
-        </Box>
+  // Define sticky classes conditionally
+  const containerClasses = sticky
+    ? "mb-4 relative md:sticky md:top-0 md:z-50 transition-shadow duration-200 ease-out"
+    : "mb-4 relative";
 
-        {/* Summary when collapsed */}
-        {!expanded && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              flex: 1,
-              mx: 2,
-              overflow: "hidden",
-            }}
-          >
-            <Chip
-              label={`Year Range: ${startYear}-${endYear}`}
-              size="small"
-              color="primary"
-              variant="outlined"
-            />
+  const paperClasses =
+    sticky && expanded
+      ? "bg-white rounded shadow-md transition-shadow duration-200"
+      : "bg-white rounded shadow";
 
-            {selectedCountries.length === COUNTRIES.length ? (
+  const headerClasses = sticky
+    ? "p-4 flex justify-between items-center cursor-pointer bg-white border-b border-gray-200"
+    : "p-4 flex justify-between items-center cursor-pointer";
+
+  return (
+    <div className={containerClasses}>
+      <div className={paperClasses}>
+        {/* Header - Always visible */}
+        <div className={headerClasses} onClick={toggleExpanded}>
+          <div className="flex items-center gap-2">
+            <FilterListIcon color="primary" />
+            <h6 className="text-lg font-medium">Emissions Data Filters</h6>
+          </div>
+
+          {/* Summary when collapsed */}
+          {!expanded && (
+            <div className="flex items-center gap-2 flex-1 mx-2 overflow-hidden">
               <Chip
-                label="All Countries"
+                label={`Year Range: ${startYear}-${endYear}`}
                 size="small"
                 color="primary"
                 variant="outlined"
               />
-            ) : (
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{ overflow: "auto", flexWrap: "nowrap" }}
-              >
-                {selectedCountries.slice(0, 3).map((code) => {
-                  const country = COUNTRIES.find((c) => c.code === code);
-                  return (
+
+              {selectedCountries.length === COUNTRIES.length ? (
+                <Chip
+                  label="All Countries"
+                  size="small"
+                  color="primary"
+                  variant="outlined"
+                />
+              ) : (
+                <div className="flex gap-1 overflow-auto flex-nowrap">
+                  {selectedCountries.slice(0, 3).map((code) => {
+                    const country = COUNTRIES.find((c) => c.code === code);
+                    return (
+                      <Chip
+                        key={code}
+                        label={country?.name || code}
+                        size="small"
+                        color="primary"
+                        variant="outlined"
+                      />
+                    );
+                  })}
+                  {selectedCountries.length > 3 && (
                     <Chip
-                      key={code}
-                      label={country?.name || code}
+                      label={`+${selectedCountries.length - 3} more`}
                       size="small"
                       color="primary"
                       variant="outlined"
                     />
-                  );
-                })}
-                {selectedCountries.length > 3 && (
-                  <Chip
-                    label={`+${selectedCountries.length - 3} more`}
-                    size="small"
-                    color="primary"
-                    variant="outlined"
-                  />
-                )}
-              </Stack>
-            )}
-          </Box>
-        )}
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
-        <IconButton
-          aria-label={expanded ? "collapse" : "expand"}
-          sx={{ ml: "auto" }}
-        >
-          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </IconButton>
-      </Box>
-
-      <Divider />
-
-      {/* Collapsible content */}
-      <Collapse in={expanded} timeout="auto">
-        <Box sx={{ p: 2 }}>
-          <DateRangeSelector
-            startYear={startYear}
-            endYear={endYear}
-            onRangeChange={handleRangeChange}
-          />
-
-          <Divider sx={{ my: 2 }} />
-
-          <CountrySelector
-            selectedCountries={selectedCountries}
-            onSelectionChange={handleCountryChange}
-          />
-
-          <Divider sx={{ my: 2 }} />
-
-          <Box
-            sx={{ display: "flex", justifyContent: "flex-end", gap: 2, mt: 2 }}
+          <IconButton
+            aria-label={expanded ? "collapse" : "expand"}
+            className="ml-auto"
           >
-            <Button variant="outlined" color="secondary" onClick={resetFilters}>
-              Reset
-            </Button>
-            <Button variant="contained" color="primary" onClick={applyFilters}>
-              Apply Filters
-            </Button>
-          </Box>
-        </Box>
-      </Collapse>
-    </Paper>
-  );
+            {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+        </div>
 
-  // If not sticky, just return the component
-  if (!sticky) return filterComponent;
+        <Divider />
 
-  // If sticky, return with a placeholder
-  return (
-    <>
-      {/* Invisible placeholder to maintain layout space when filter becomes fixed */}
-      <div
-        ref={placeholderRef}
-        style={{
-          height: isSticky ? placeholderHeight : 0,
-          marginBottom: isSticky ? 16 : 0,
-          transition: "height 0.15s ease-out",
-        }}
-      />
+        {/* Collapsible content */}
+        <div
+          className={`transition-all duration-300 ease-in-out overflow-hidden ${
+            expanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="p-4">
+            <DateRangeSelector
+              startYear={startYear}
+              endYear={endYear}
+              onRangeChange={handleRangeChange}
+            />
 
-      {/* Actual filter component */}
-      {filterComponent}
-    </>
+            <Divider className="my-4" />
+
+            <CountrySelector
+              selectedCountries={selectedCountries}
+              onSelectionChange={handleCountryChange}
+            />
+
+            <Divider className="my-4" />
+
+            <div className="flex justify-end gap-2 mt-4">
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={resetFilters}
+              >
+                Reset
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={applyFilters}
+              >
+                Apply Filters
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

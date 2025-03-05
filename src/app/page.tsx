@@ -1,8 +1,8 @@
 import { getEmissionsData } from "@/shared/actions/emissions";
 import { Grid } from "@/shared/components/grid";
-import { EmissionsFiltersWrapper } from "@/shared/components/filters/EmissionsFiltersWrapper";
 import { Suspense } from "react";
 import { Container, Box } from "@mui/material";
+import { EmissionsFilters } from "@/shared/components/filters/EmissionsFilters";
 
 // This function gets search params in a server component
 function getSearchParams(searchParams: {
@@ -26,10 +26,10 @@ function getSearchParams(searchParams: {
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   // Extract filter parameters from URL
-  const { startYear, endYear, countries } = getSearchParams(searchParams);
+  const { startYear, endYear, countries } = getSearchParams(await searchParams);
 
   // Parse countries for data fetching
   const countriesParam = countries === "All" ? "All" : countries.split(",");
@@ -38,8 +38,8 @@ export default async function Home({
 
   // Fetch data based on filters
   const data = getEmissionsData({
-    startYear: endYearParam,
-    endYear: endYearParam,
+    startYear,
+    endYear,
     countries: countriesParam,
   });
 
@@ -51,7 +51,7 @@ export default async function Home({
         </h1>
 
         {/* Filters - server side rendered but with client interactivity */}
-        <EmissionsFiltersWrapper
+        <EmissionsFilters
           startYear={startYearParam}
           endYear={endYearParam}
           countries={countries}
