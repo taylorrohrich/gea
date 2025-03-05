@@ -1,5 +1,8 @@
 import { Chart } from "../../types/chart";
 
+// Define the view mode options
+export type ViewMode = "chart" | "table";
+
 interface TileLayout {
   x: number;
   y: number;
@@ -16,6 +19,7 @@ interface BaseTile {
   id: number;
   layout: TileLayout;
   metadata: TileMetadata;
+  viewMode?: ViewMode; // Add viewMode property to save chart/table preference
 }
 
 interface LineTile extends BaseTile {

@@ -11,7 +11,7 @@ import React, {
 import GridLayout, { Layout, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-import { Tile } from "./types";
+import { Tile, ViewMode } from "./types";
 import { Chart } from "../../types/chart";
 import dynamic from "next/dynamic";
 import { debounce } from "lodash"; // You might need to install this: npm install lodash
@@ -90,6 +90,7 @@ export const Grid = ({
           title: defaultTitle,
           description: `Showing data visualization using ${chartType} chart`,
         },
+        viewMode: "chart" as ViewMode, // Set default view mode
       };
     });
   }, [cols, tileWidth, tileHeight, chartTypes, getDefaultTitle]);
@@ -112,19 +113,25 @@ export const Grid = ({
         try {
           const parsedConfig = JSON.parse(savedConfig);
 
-          // Upgrade old format tiles if they don't have metadata
+          // Upgrade old format tiles if they don't have metadata or viewMode
           result = parsedConfig.map((tile: any) => {
-            if (!tile.metadata) {
-              const defaultTitle = getDefaultTitle(tile.type);
-              return {
-                ...tile,
-                metadata: {
-                  title: defaultTitle,
-                  description: `Showing data visualization using ${tile.type} chart`,
-                },
+            let updatedTile = { ...tile };
+
+            // Add metadata if missing
+            if (!updatedTile.metadata) {
+              const defaultTitle = getDefaultTitle(updatedTile.type);
+              updatedTile.metadata = {
+                title: defaultTitle,
+                description: `Showing data visualization using ${updatedTile.type} chart`,
               };
             }
-            return tile;
+
+            // Add viewMode if missing (default to chart)
+            if (!updatedTile.viewMode) {
+              updatedTile.viewMode = "chart";
+            }
+
+            return updatedTile;
           });
         } catch (e) {
           console.error("Failed to parse saved grid configuration", e);
@@ -284,6 +291,7 @@ export const Grid = ({
           title: defaultTitle,
           description: `Showing data visualization using ${chartType} chart`,
         },
+        viewMode: "chart", // Set default view mode
       };
 
       // Update tiles config and layout
@@ -381,6 +389,24 @@ export const Grid = ({
     []
   );
 
+  // Handler to update tile view mode
+  const handleUpdateTileViewMode = useCallback(
+    (id: number, viewMode: ViewMode) => {
+      setTilesConfig((prevTilesConfig) =>
+        prevTilesConfig.map((tile) => {
+          if (tile.id === id) {
+            return {
+              ...tile,
+              viewMode,
+            };
+          }
+          return tile;
+        })
+      );
+    },
+    []
+  );
+
   // Handler to delete a tile
   const handleDeleteTile = useCallback((id: number) => {
     setTilesConfig((prevTilesConfig) =>
@@ -407,7 +433,7 @@ export const Grid = ({
         <div
           key={`tile-${tileConfig.id}`}
           style={{
-            background: "#f7f7f7",
+            backgroundColor: "white",
             borderRadius: "8px",
             padding: "10px",
             boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
@@ -421,11 +447,18 @@ export const Grid = ({
               data={awaitedData}
               onUpdateTileMetadata={handleUpdateTileMetadata}
               onDeleteTile={handleDeleteTile}
+              onUpdateTileViewMode={handleUpdateTileViewMode}
             />
           </div>
         </div>
       )),
-    [tilesConfig, awaitedData, handleUpdateTileMetadata, handleDeleteTile]
+    [
+      tilesConfig,
+      awaitedData,
+      handleUpdateTileMetadata,
+      handleDeleteTile,
+      handleUpdateTileViewMode,
+    ]
   );
 
   if (!isClient) {
@@ -483,6 +516,7 @@ export const Grid = ({
       <Paper
         elevation={0}
         sx={{
+          backgroundColor: "grey.50",
           position: "relative",
           borderRadius: 2,
           border: "1px dashed #ccc",
@@ -493,7 +527,7 @@ export const Grid = ({
           ref={gridRef}
           style={{
             width: "100%",
-            minHeight: `${gridHeight}px`,
+            minHeight: `${gridHeight + 300}px`,
             overflow: "hidden",
             cursor: "context-menu",
           }}
@@ -505,6 +539,7 @@ export const Grid = ({
             cols={cols}
             onLayoutChange={debouncedHandleLayoutChange}
             rowHeight={100}
+            maxRows={500}
             compactType="vertical"
             useCSSTransforms={true}
             measureBeforeMount={false}
@@ -522,16 +557,16 @@ export const Grid = ({
           />
         </div>
 
-        {/* Dead zone for adding new charts at the bottom */}
+        {/* Dead zone for adding new charts at the bottom
         <div
           ref={deadZoneRef}
           style={{
             width: "100%",
             height: "200px",
             cursor: "context-menu",
-            background:
-              "linear-gradient(to bottom, rgba(240,240,240,0.2), rgba(240,240,240,0.6))",
-            borderTop: "1px dashed rgba(0,0,0,0.1)",
+            // background:
+            //   "linear-gradient(to bottom, rgba(240,240,240,0.2), rgba(240,240,240,0.6))",
+            // borderTop: "1px dashed rgba(0,0,0,0.1)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -559,7 +594,7 @@ export const Grid = ({
             <AddIcon fontSize="small" /> Right-click or click here to add
             another chart
           </Typography>
-        </div>
+        </div> */}
 
         {/* Context Menu */}
         {contextMenuPos && (
