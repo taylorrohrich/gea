@@ -22,6 +22,11 @@ const PieChart = dynamic(
   { ssr: false, loading: () => <ChartLoading /> }
 );
 
+const MapChart = dynamic(
+  () => import("./MapChart").then((mod) => mod.MapChart),
+  { ssr: false, loading: () => <ChartLoading /> }
+);
+
 // Loading component
 const ChartLoading = () => (
   <div
@@ -129,6 +134,8 @@ function renderChart(tile: Tile, data: Data[]) {
       return <LineChart id={tile.id} data={data} />;
     case Chart.Scatter:
       return <LineChart id={tile.id} data={data} />;
+    case Chart.Map:
+      return <MapChart id={tile.id} data={data} />;
     default:
       return <div>Unknown chart type</div>;
   }

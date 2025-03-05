@@ -4,4 +4,5 @@ export enum Chart {
   Pie = "pie",
   Area = "area",
   Scatter = "scatter",
+  Map = "map", // Add the new map chart type
 }

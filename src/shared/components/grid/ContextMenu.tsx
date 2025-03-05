@@ -15,6 +15,7 @@ import PieChartIcon from "@mui/icons-material/PieChart";
 import AreaChartIcon from "@mui/icons-material/StackedLineChart";
 import ScatterPlotIcon from "@mui/icons-material/BubbleChart";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import PublicIcon from "@mui/icons-material/Public";
 import { Chart } from "../../types/chart";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
@@ -31,7 +32,17 @@ const chartIcons = {
   [Chart.Pie]: <PieChartIcon />,
   [Chart.Area]: <AreaChartIcon />,
   [Chart.Scatter]: <ScatterPlotIcon />,
+  [Chart.Map]: <PublicIcon />,
 };
+
+const chartTypes = [
+  { label: "Line Chart", type: Chart.Line, icon: <TimelineIcon /> },
+  { label: "Bar Chart", type: Chart.Bar, icon: <BarChartIcon /> },
+  { label: "Pie Chart", type: Chart.Pie, icon: <PieChartIcon /> },
+  { label: "Area Chart", type: Chart.Area, icon: <AreaChartIcon /> },
+  { label: "Scatter Chart", type: Chart.Scatter, icon: <ScatterPlotIcon /> },
+  { label: "Map Chart", type: Chart.Map, icon: <PublicIcon /> }, // Add Map option
+];
 
 export const ContextMenu: React.FC<ContextMenuProps> = ({
   position,
@@ -119,18 +130,16 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
 
         {/* Menu items */}
         <MenuList dense>
-          {Object.values(Chart).map((chartType) => (
+          {chartTypes.map((chart) => (
             <MenuItem
-              key={chartType}
+              key={chart.type}
               onClick={(e) => {
                 e.stopPropagation();
-                handleSelectChart(chartType);
+                handleSelectChart(chart.type);
               }}
             >
-              <ListItemIcon>{chartIcons[chartType]}</ListItemIcon>
-              <ListItemText>
-                {chartType.charAt(0).toUpperCase() + chartType.slice(1)} Chart
-              </ListItemText>
+              <ListItemIcon>{chart.icon}</ListItemIcon>
+              <ListItemText>{chart.label}</ListItemText>
             </MenuItem>
           ))}
         </MenuList>

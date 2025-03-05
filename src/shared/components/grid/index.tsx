@@ -557,45 +557,6 @@ export const Grid = ({
           />
         </div>
 
-        {/* Dead zone for adding new charts at the bottom
-        <div
-          ref={deadZoneRef}
-          style={{
-            width: "100%",
-            height: "200px",
-            cursor: "context-menu",
-            // background:
-            //   "linear-gradient(to bottom, rgba(240,240,240,0.2), rgba(240,240,240,0.6))",
-            // borderTop: "1px dashed rgba(0,0,0,0.1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "rgba(0,0,0,0.3)",
-          }}
-          onContextMenu={handleContextMenu}
-          onClick={(e) => {
-            // Allow left-click in the dead zone to also add charts
-            const rect = deadZoneRef.current?.getBoundingClientRect();
-            if (rect) {
-              const fakeEvent = {
-                preventDefault: () => {},
-                clientX: e.clientX,
-                clientY: e.clientY,
-                currentTarget: deadZoneRef.current,
-              };
-              handleContextMenu(fakeEvent as unknown as React.MouseEvent);
-            }
-          }}
-        >
-          <Typography
-            variant="body2"
-            sx={{ display: "flex", alignItems: "center", gap: 1 }}
-          >
-            <AddIcon fontSize="small" /> Right-click or click here to add
-            another chart
-          </Typography>
-        </div> */}
-
         {/* Context Menu */}
         {contextMenuPos && (
           <ContextMenu
