@@ -5,15 +5,15 @@ import { EmissionsFilters } from "./EmissionsFilters";
 import { useRouter } from "next/navigation";
 
 interface EmissionsFiltersWrapperProps {
-  defaultStartYear: number;
-  defaultEndYear: number;
-  defaultCountries: string;
+  startYear: number;
+  endYear: number;
+  countries: string;
   sticky?: boolean;
 }
 
 export const EmissionsFiltersWrapper: React.FC<
   EmissionsFiltersWrapperProps
-> = ({ defaultStartYear, defaultEndYear, defaultCountries, sticky = true }) => {
+> = ({ startYear, endYear, countries, sticky = true }) => {
   const router = useRouter();
 
   // Handle filter application
@@ -39,9 +39,9 @@ export const EmissionsFiltersWrapper: React.FC<
 
   return (
     <EmissionsFilters
-      defaultStartYear={defaultStartYear}
-      defaultEndYear={defaultEndYear}
-      defaultCountries={defaultCountries}
+      startYear={startYear}
+      endYear={endYear}
+      countries={countries}
       onApplyFilters={handleApplyFilters}
       sticky={sticky}
     />

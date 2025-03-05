@@ -15,32 +15,25 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { DateRangeSelector } from "./DateRangeSelector";
 import { CountrySelector, COUNTRIES } from "./CountrySelector";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // Import shim for React 18 useLayoutEffect SSR warning
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
 interface EmissionsFiltersProps {
-  defaultStartYear?: number;
-  defaultEndYear?: number;
-  defaultCountries?: string;
-  onApplyFilters?: (filters: {
-    startYear: number;
-    endYear: number;
-    countries: string[] | "All";
-  }) => void;
+  startYear: number;
+  endYear: number;
+  countries: string;
   sticky?: boolean;
 }
 
 export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
-  defaultStartYear = 1972,
-  defaultEndYear = 2022,
-  defaultCountries = "All",
-  onApplyFilters,
+  startYear: initialStartYear,
+  endYear: initialEndYear,
+  countries: initialCountries,
   sticky = true,
 }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [expanded, setExpanded] = useState(false);
 
   // Placeholder ref to measure the original position
@@ -51,22 +44,15 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   const [isSticky, setIsSticky] = useState(false);
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
 
-  // Extract and parse query parameters - only extract once on mount or when searchParams change
-  const queryStartYear = React.useMemo(() => {
-    return searchParams?.get("startYear")
-      ? parseInt(searchParams.get("startYear")!, 10)
-      : defaultStartYear;
-  }, [searchParams, defaultStartYear]);
-
-  const queryEndYear = React.useMemo(() => {
-    return searchParams?.get("endYear")
-      ? parseInt(searchParams.get("endYear")!, 10)
-      : defaultEndYear;
-  }, [searchParams, defaultEndYear]);
-
-  const queryCountries = React.useMemo(() => {
-    return searchParams?.get("countries") || defaultCountries;
-  }, [searchParams, defaultCountries]);
+  // Local state for filters - initialized from props
+  const [startYear, setStartYear] = useState(initialStartYear);
+  const [endYear, setEndYear] = useState(initialEndYear);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>(() => {
+    if (initialCountries === "All") {
+      return COUNTRIES.map((c) => c.code);
+    }
+    return initialCountries.split(",");
+  });
 
   // Set initial height - using useLayoutEffect to measure before paint
   useIsomorphicLayoutEffect(() => {
@@ -76,7 +62,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
     setPlaceholderHeight(height);
   }, [sticky]);
 
-  // Function to handle scroll events - with proper cleanup
+  // Function to handle scroll events
   useEffect(() => {
     if (!sticky || typeof window === "undefined") return;
 
@@ -126,28 +112,15 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
       resizeObserver.disconnect();
     };
   }, [sticky]);
-
-  // Local state for filters - initialized from props/URL
-  const [startYear, setStartYear] = useState(queryStartYear);
-  const [endYear, setEndYear] = useState(queryEndYear);
-  const [selectedCountries, setSelectedCountries] = useState<string[]>(() => {
-    if (queryCountries === "All") {
-      return COUNTRIES.map((c) => c.code);
-    }
-    return queryCountries.split(",");
-  });
-
-  // Update filter state when URL parameters change
-  useEffect(() => {
-    setStartYear(queryStartYear);
-    setEndYear(queryEndYear);
-
-    if (queryCountries === "All") {
-      setSelectedCountries(COUNTRIES.map((c) => c.code));
-    } else {
-      setSelectedCountries(queryCountries.split(","));
-    }
-  }, [queryStartYear, queryEndYear, queryCountries]);
+  const resetState = () => {
+    setStartYear(initialStartYear);
+    setEndYear(initialEndYear);
+    setSelectedCountries(
+      initialCountries === "All"
+        ? COUNTRIES.map((c) => c.code)
+        : initialCountries.split(",")
+    );
+  };
 
   // Handle date range changes
   const handleRangeChange = (newStartYear: number, newEndYear: number) => {
@@ -163,6 +136,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   // Toggle expanded state
   const toggleExpanded = () => {
     setExpanded(!expanded);
+    resetState();
   };
 
   // Apply filters and update URL
@@ -172,23 +146,14 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         ? "All"
         : selectedCountries.join(",");
 
-    // Call the provided callback if it exists
-    if (onApplyFilters) {
-      onApplyFilters({
-        startYear,
-        endYear,
-        countries: countriesParam === "All" ? "All" : selectedCountries,
-      });
-    } else {
-      // Only used if no callback is provided (direct URL update)
-      const params = new URLSearchParams();
-      params.set("startYear", startYear.toString());
-      params.set("endYear", endYear.toString());
-      params.set("countries", countriesParam);
+    // Update URL params
+    const params = new URLSearchParams();
+    params.set("startYear", startYear.toString());
+    params.set("endYear", endYear.toString());
+    params.set("countries", countriesParam);
 
-      // Update the URL without refreshing the page
-      router.push(`?${params.toString()}`, { scroll: false });
-    }
+    // Update the URL without refreshing the page
+    router.push(`?${params.toString()}`, { scroll: false });
 
     // Collapse the filter panel after applying
     setExpanded(false);
@@ -196,9 +161,9 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
 
   // Reset filters to defaults
   const resetFilters = () => {
-    setStartYear(defaultStartYear);
-    setEndYear(defaultEndYear);
-    setSelectedCountries(COUNTRIES.map((c) => c.code));
+    // Reset URL to default values or clear params
+    router.push("/", { scroll: false });
+    toggleExpanded();
   };
 
   // Render the filter component
@@ -208,7 +173,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
       elevation={isSticky ? 4 : 2}
       sx={{
         mb: 4,
-        transition: "all 0.15s ease-out", // Faster transition reduces perception of lag
+        transition: "all 0.15s ease-out",
         position: isSticky ? "fixed" : "relative",
         top: isSticky ? 0 : "auto",
         left: isSticky ? 0 : "auto",
@@ -217,10 +182,8 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         width: isSticky ? "100%" : "auto",
         borderRadius: isSticky ? 0 : 1,
         maxWidth: isSticky ? "none" : "100%",
-        transform: isSticky
-          ? "translateZ(0)" // Hardware acceleration
-          : "none",
-        willChange: sticky ? "position, top" : "auto", // Optimize for animation
+        transform: isSticky ? "translateZ(0)" : "none",
+        willChange: sticky ? "position, top" : "auto",
       }}
     >
       {/* Header - Always visible */}
@@ -355,7 +318,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
         style={{
           height: isSticky ? placeholderHeight : 0,
           marginBottom: isSticky ? 16 : 0,
-          transition: "height 0.15s ease-out", // Match the transition speed
+          transition: "height 0.15s ease-out",
         }}
       />
 

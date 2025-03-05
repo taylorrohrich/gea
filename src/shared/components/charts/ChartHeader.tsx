@@ -13,19 +13,20 @@ import {
   Button,
   ToggleButtonGroup,
   ToggleButton,
+  useMediaQuery,
+  useTheme,
+  Stack,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import DragIndicator from "@mui/icons-material/DragIndicator";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Chart } from "../../types/chart";
 import { ViewMode } from "../grid/types";
 import { Data } from "@/shared/types/data";
-
-// Remove the redundant type definition
-// export type ViewMode = "chart" | "table";
 
 interface ChartHeaderProps {
   id: number;
@@ -50,10 +51,15 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   onDelete,
   onViewModeChange,
 }) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
+  const [moreMenuAnchorEl, setMoreMenuAnchorEl] = useState<null | HTMLElement>(
+    null
+  );
 
   // Edit dialog handlers
   const handleOpenEditDialog = () => {
@@ -153,80 +159,98 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
         sx={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          mb: 1,
+          gap: 1,
           p: 1,
+          px: 1.5,
           borderBottom: "1px solid #e0e0e0",
-          backgroundColor: "background.paper", // Ensure it's not transparent
-          position: "relative", // Set position to enable z-index
-          zIndex: 10, // Higher than the table
-          height: "52px", // Set fixed height
-          minHeight: "52px", // Ensure it doesn't collapse
-          boxSizing: "border-box", // Include padding in height calculation
+          backgroundColor: "background.paper",
+          position: "relative",
+          zIndex: 10,
+          height: { xs: "52px", sm: "52px" },
+          minHeight: "52px",
+          boxSizing: "border-box",
         }}
       >
-        {/* Left section - Drag handle and title */}
-        <Box display="flex" alignItems="center" gap={0.5}>
-          <DragIndicatorIcon
-            fontSize="small"
-            color="action"
-            sx={{ cursor: "move" }}
-            className="drag-handle"
-          />
-          <Box>
-            {title ? (
-              <>
-                <Typography variant="subtitle2" fontWeight="bold" noWrap>
-                  {title}
-                </Typography>
-                {description && (
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    noWrap
-                    sx={{
-                      display: "block",
-                      maxWidth: "220px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
-                  >
-                    {description}
-                  </Typography>
-                )}
-              </>
-            ) : (
-              <Typography variant="subtitle2" color="text.secondary">
-                Untitled Chart
-              </Typography>
-            )}
-          </Box>
-        </Box>
+        {/* Drag handle */}
+        <DragIndicator
+          fontSize="small"
+          color="action"
+          sx={{
+            cursor: "move",
+            flexShrink: 0,
+            display: { xs: "none", sm: "block" },
+          }}
+          className="drag-handle"
+        />
 
-        {/* Center section - View mode toggle */}
-        <Box flexGrow={1} display="flex" justifyContent="center">
-          <ToggleButtonGroup
-            value={viewMode}
-            exclusive
-            onChange={handleViewModeChange}
-            size="small"
-            aria-label="view mode"
+        {/* Title and description */}
+        <Box
+          sx={{
+            flexGrow: 1,
+            overflow: "hidden",
+            minWidth: 0, // Important for text truncation to work
+          }}
+        >
+          <Typography
+            variant="subtitle2"
+            fontWeight="bold"
+            noWrap
+            sx={{ lineHeight: 1.2 }}
           >
-            <ToggleButton value="chart" aria-label="chart view">
-              <Tooltip title="Chart View">
-                <BarChartIcon fontSize="small" />
-              </Tooltip>
-            </ToggleButton>
-            <ToggleButton value="table" aria-label="table view">
-              <Tooltip title="Table View">
-                <TableChartIcon fontSize="small" />
-              </Tooltip>
-            </ToggleButton>
-          </ToggleButtonGroup>
+            {title || "Untitled Chart"}
+          </Typography>
+          {description && !isSmallScreen && (
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              noWrap
+              sx={{
+                display: "block",
+                width: "100%", // Allow to use parent width
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                lineHeight: 1.2,
+              }}
+            >
+              {description}
+            </Typography>
+          )}
         </Box>
 
-        {/* Right section - Action buttons */}
-        <Box display="flex" alignItems="center" gap={0.5}>
+        {/* View Mode Toggle - Now right aligned */}
+        <ToggleButtonGroup
+          value={viewMode}
+          exclusive
+          onChange={handleViewModeChange}
+          size="small"
+          aria-label="view mode"
+          sx={{
+            flexShrink: 0,
+            borderRadius: 1,
+            ".MuiToggleButton-root": {
+              py: 0.5,
+              px: { xs: 0.75, sm: 1 },
+            },
+          }}
+        >
+          <ToggleButton value="chart" aria-label="chart view">
+            <BarChartIcon fontSize="small" />
+          </ToggleButton>
+          <ToggleButton value="table" aria-label="table view">
+            <TableChartIcon fontSize="small" />
+          </ToggleButton>
+        </ToggleButtonGroup>
+
+        {/* Action buttons - shown on larger screens */}
+        <Stack
+          direction="row"
+          spacing={0.5}
+          sx={{
+            display: { xs: "none", sm: "flex" },
+            alignItems: "center",
+            flexShrink: 0,
+          }}
+        >
           <Tooltip title="Download CSV">
             <IconButton size="small" onClick={handleExportCSV}>
               <FileDownloadIcon fontSize="small" />
@@ -254,7 +278,19 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
               <DeleteIcon fontSize="small" />
             </IconButton>
           </Tooltip>
-        </Box>
+        </Stack>
+
+        {/* More menu icon for small screens */}
+        <IconButton
+          size="small"
+          sx={{ display: { xs: "flex", sm: "none" }, flexShrink: 0 }}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleOpenEditDialog(); // On small screens, clicking "more" directly opens the edit dialog
+          }}
+        >
+          <MoreVertIcon fontSize="small" />
+        </IconButton>
       </Box>
 
       {/* Edit Dialog */}
@@ -286,6 +322,37 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
             value={editDescription}
             onChange={(e) => setEditDescription(e.target.value)}
           />
+
+          {/* Show additional actions on small screens inside the dialog */}
+          {isSmallScreen && (
+            <Box sx={{ mt: 3, pt: 2, borderTop: "1px solid #eee" }}>
+              <Typography variant="subtitle2" gutterBottom>
+                Additional Actions
+              </Typography>
+              <Button
+                startIcon={<FileDownloadIcon />}
+                onClick={() => {
+                  handleExportCSV();
+                  handleCloseEditDialog();
+                }}
+                sx={{ mr: 1 }}
+              >
+                Download CSV
+              </Button>
+              <Button
+                color="error"
+                startIcon={<DeleteIcon />}
+                onClick={() => {
+                  handleCloseEditDialog();
+                  handleOpenDeleteDialog({
+                    stopPropagation: () => {},
+                  } as React.MouseEvent);
+                }}
+              >
+                Delete Chart
+              </Button>
+            </Box>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditDialog} color="primary">

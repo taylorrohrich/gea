@@ -113,7 +113,11 @@ export const ChartRenderer: React.FC<ChartRendererProps> = memo(
               {renderChart(tile, data)}
             </div>
           ) : (
-            <DataTable title={tile.metadata.title} data={data} />
+            <DataTable 
+              title={tile.metadata.title} 
+              data={data} 
+              chartType={tile.type}  // Pass the chart type to DataTable
+            />
           )}
         </div>
       </div>

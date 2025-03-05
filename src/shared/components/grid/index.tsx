@@ -467,52 +467,6 @@ export const Grid = ({
 
   return (
     <div>
-      <Box
-        sx={{
-          mb: 2,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Box>
-          {awaitedData.length > 0 && (
-            <Typography variant="body2">
-              Showing data for {awaitedData.length} data series
-            </Typography>
-          )}
-        </Box>
-        <Tooltip title="Right-click on the grid to add a chart">
-          <Button
-            variant="outlined"
-            color="primary"
-            startIcon={<AddIcon />}
-            size="small"
-            onClick={() => {
-              // Simulate a right click in the middle of the grid
-              if (gridRef.current) {
-                const rect = gridRef.current.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-
-                // Create a synthetic event object with clientX and clientY
-                const fakeEvent = {
-                  preventDefault: () => {},
-                  clientX: centerX,
-                  clientY: centerY,
-                  currentTarget: gridRef.current,
-                };
-
-                // Call handleContextMenu with the fake event
-                handleContextMenu(fakeEvent as unknown as React.MouseEvent);
-              }
-            }}
-          >
-            Add Chart
-          </Button>
-        </Tooltip>
-      </Box>
-
       <Paper
         elevation={0}
         sx={{

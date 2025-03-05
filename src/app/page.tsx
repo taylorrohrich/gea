@@ -33,11 +33,13 @@ export default async function Home({
 
   // Parse countries for data fetching
   const countriesParam = countries === "All" ? "All" : countries.split(",");
+  const startYearParam = startYear ? Number(startYear) : 1972;
+  const endYearParam = endYear ? Number(endYear) : 2022;
 
   // Fetch data based on filters
   const data = getEmissionsData({
-    startYear,
-    endYear,
+    startYear: endYearParam,
+    endYear: endYearParam,
     countries: countriesParam,
   });
 
@@ -50,9 +52,9 @@ export default async function Home({
 
         {/* Filters - server side rendered but with client interactivity */}
         <EmissionsFiltersWrapper
-          defaultStartYear={startYear}
-          defaultEndYear={endYear}
-          defaultCountries={countries}
+          startYear={startYearParam}
+          endYear={endYearParam}
+          countries={countries}
           sticky
         />
       </Box>
