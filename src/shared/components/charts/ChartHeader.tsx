@@ -23,17 +23,14 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Chart } from "../../types/chart";
 import { ViewMode } from "../grid/types";
-import { Data } from "@/shared/types/data";
+import { useGridContext } from "../grid/GridContext";
 
 interface ChartHeaderProps {
   id: number;
   title: string;
   description: string;
   chartType: Chart;
-  data: Data[];
   viewMode: ViewMode;
-  onUpdate: (id: number, title: string, description: string) => void;
-  onDelete: (id: number) => void;
   onViewModeChange: (viewMode: ViewMode) => void;
 }
 
@@ -42,10 +39,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   title,
   description,
   chartType,
-  data,
   viewMode,
-  onUpdate,
-  onDelete,
   onViewModeChange,
 }) => {
   const theme = useTheme();
@@ -54,6 +48,9 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
+
+  // Get data and dispatch from context
+  const { data, dispatch } = useGridContext();
 
   // Edit dialog handlers
   const handleOpenEditDialog = () => {
@@ -67,7 +64,12 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   };
 
   const handleSaveChanges = () => {
-    onUpdate(id, editTitle, editDescription);
+    dispatch({
+      type: "UPDATE_TILE_METADATA",
+      id,
+      title: editTitle,
+      description: editDescription,
+    });
     setEditDialogOpen(false);
   };
 
@@ -82,11 +84,11 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   };
 
   const handleConfirmDelete = () => {
-    onDelete(id);
+    dispatch({ type: "DELETE_TILE", id });
     setDeleteDialogOpen(false);
   };
 
-  // View mode toggle handler
+  // View mode toggle handler - this is kept locally to avoid unnecessary context updates
   const handleViewModeChange = (
     _: React.MouseEvent<HTMLElement>,
     newMode: ViewMode
@@ -230,7 +232,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
           className="flex sm:hidden flex-shrink-0"
           onClick={(e) => {
             e.stopPropagation();
-            handleOpenEditDialog(); // On small screens, clicking "more" directly opens the edit dialog
+            handleOpenEditDialog();
           }}
         >
           <MoreVertIcon fontSize="small" />

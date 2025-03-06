@@ -6,22 +6,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   TableSortLabel,
   TablePagination,
   Box,
   Typography,
   Chip,
 } from "@mui/material";
-import { Data } from "@/shared/types/data";
 import { Chart } from "@/shared/types/chart";
+import { useGridContext } from "../grid/GridContext";
 
-interface DataTableProps {
-  data: Data[];
-  title?: string;
-  chartType: Chart;
-}
-
+// Type definitions
 // Type for regular table data (time series)
 type TimeSeriesRow = {
   x: string;
@@ -35,11 +29,15 @@ type AggregatedRow = {
   percentage?: string;
 };
 
-export const DataTable: React.FC<DataTableProps> = ({
-  data,
-  title,
-  chartType,
-}) => {
+interface DataTableProps {
+  title?: string;
+  chartType: Chart;
+}
+
+export const DataTable: React.FC<DataTableProps> = ({ title, chartType }) => {
+  // Get data from context
+  const { data } = useGridContext();
+
   // Helper function to determine if we should show aggregated data
   function shouldShowAggregatedData(chartType: Chart): boolean {
     return chartType === Chart.Pie || chartType === Chart.Map;

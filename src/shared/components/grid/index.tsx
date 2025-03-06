@@ -11,12 +11,13 @@ import React, {
 import GridLayout, { Layout, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-import { Tile, ViewMode } from "./types";
+import { Tile } from "./types";
 import { Chart } from "../../types/chart";
 import { ChartRenderer } from "../charts/ChartRenderer";
 import { debounce } from "lodash";
 import { Data } from "@/shared/types/data";
 import { ContextMenu } from "./ContextMenu";
+import { GridProvider, useGridContext } from "./GridContext";
 import {
   createDefaultTiles,
   createLayoutFromTiles,
@@ -31,6 +32,10 @@ interface Props {
   data: Promise<Data[]>;
 }
 
+// Grid configuration constants
+const cols = 4;
+const rowHeight = 100;
+
 export function Grid({
   tileWidth = 2,
   tileHeight = 4,
@@ -38,20 +43,6 @@ export function Grid({
   data,
 }: Props) {
   const awaitedData = use(data);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const [contextMenuPos, setContextMenuPos] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
-  const [gridPos, setGridPos] = useState<{ x: number; y: number } | null>(null);
-  const [isClient, setIsClient] = useState(false);
-
-  // Grid configuration constants
-  const cols = 4;
-  const rowHeight = 100;
-
-  // Use memoized version of WidthProvider to prevent unnecessary re-renders
-  const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
 
   // Load tiles from localStorage or use defaults
   const loadTilesConfig = useCallback((): Tile[] => {
@@ -70,20 +61,15 @@ export function Grid({
       console.error("Failed to parse saved grid configuration", e);
       return createDefaultTiles(cols, tileWidth, tileHeight);
     }
-  }, [cols, tileWidth, tileHeight, localStorageKey]);
+  }, [tileWidth, tileHeight, localStorageKey]);
 
   // State for tiles
   const [tilesConfig, setTilesConfig] = useState<Tile[]>(() =>
     loadTilesConfig()
   );
 
-  // Derive layout from tiles using memoization instead of separate state
-  const layout = useMemo(
-    () => createLayoutFromTiles(tilesConfig),
-    [tilesConfig]
-  );
-
-  // Set isClient once after component mounts
+  // Wait for client-side rendering
+  const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -104,11 +90,67 @@ export function Grid({
     debouncedSave(tilesConfig);
   }, [tilesConfig, debouncedSave]);
 
+  if (!isClient) {
+    return null;
+  }
+
+  return (
+    <GridProvider
+      initialTiles={tilesConfig}
+      data={awaitedData}
+      onTilesUpdate={setTilesConfig}
+    >
+      <GridContent
+        tileWidth={tileWidth}
+        tileHeight={tileHeight}
+        cols={cols}
+        rowHeight={rowHeight}
+      />
+    </GridProvider>
+  );
+}
+
+// Separate component that uses the GridContext
+function GridContent({
+  tileWidth,
+  tileHeight,
+  cols,
+  rowHeight,
+}: {
+  tileWidth: number;
+  tileHeight: number;
+  cols: number;
+  rowHeight: number;
+}) {
+  const { tilesConfig, dispatch } = useGridContext();
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [contextMenuPos, setContextMenuPos] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+  const [gridPos, setGridPos] = useState<{ x: number; y: number } | null>(null);
+
+  // Use memoized version of WidthProvider to prevent unnecessary re-renders
+  const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
+
+  // Derive layout from tiles using memoization instead of separate state
+  const layout = useMemo(
+    () => createLayoutFromTiles(tilesConfig),
+    [tilesConfig]
+  );
+
   // Layout change handler
-  const handleLayoutChange = useCallback((newLayout: Layout[]) => {
-    // Update tiles based on layout changes
-    setTilesConfig((prev) => updateTilesFromLayout(prev, newLayout));
-  }, []);
+  const handleLayoutChange = useCallback(
+    (newLayout: Layout[]) => {
+      // Update tiles based on layout changes
+      const updatedTiles = updateTilesFromLayout(tilesConfig, newLayout);
+      dispatch({
+        type: "UPDATE_TILES_FROM_LAYOUT",
+        newTilesConfig: updatedTiles,
+      });
+    },
+    [tilesConfig, dispatch]
+  );
 
   // Debounced layout change handler
   const debouncedHandleLayoutChange = useMemo(
@@ -131,9 +173,9 @@ export function Grid({
       );
 
       // Only need to update tiles - layout will be derived automatically
-      setTilesConfig((prev) => [...prev, newTile]);
+      dispatch({ type: "ADD_TILE", tile: newTile });
     },
-    [gridPos, tilesConfig, cols, tileWidth, tileHeight]
+    [gridPos, tilesConfig, cols, tileWidth, tileHeight, dispatch]
   );
 
   // Handle chart selection from context menu
@@ -170,43 +212,8 @@ export function Grid({
 
       setGridPos({ x: gridX, y: gridY });
     },
-    [cols, gridRef]
+    [cols, gridRef, rowHeight]
   );
-
-  // Update tile metadata
-  const handleUpdateTileMetadata = useCallback(
-    (id: number, title: string, description: string) => {
-      setTilesConfig((prev) =>
-        prev.map((tile) => {
-          if (tile.id === id) {
-            return { ...tile, metadata: { title, description } };
-          }
-          return tile;
-        })
-      );
-    },
-    []
-  );
-
-  // Update tile view mode
-  const handleUpdateTileViewMode = useCallback(
-    (id: number, viewMode: ViewMode) => {
-      setTilesConfig((prev) =>
-        prev.map((tile) => {
-          if (tile.id === id) {
-            return { ...tile, viewMode };
-          }
-          return tile;
-        })
-      );
-    },
-    []
-  );
-
-  // Delete a tile
-  const handleDeleteTile = useCallback((id: number) => {
-    setTilesConfig((prev) => prev.filter((tile) => tile.id !== id));
-  }, []);
 
   // Render tiles
   const renderedTiles = useMemo(
@@ -217,29 +224,12 @@ export function Grid({
           className="bg-white rounded-lg p-2.5 shadow-sm overflow-hidden h-full"
         >
           <div className="h-full">
-            <ChartRenderer
-              tile={tileConfig}
-              data={awaitedData}
-              onUpdateTileMetadata={handleUpdateTileMetadata}
-              onDeleteTile={handleDeleteTile}
-              onUpdateTileViewMode={handleUpdateTileViewMode}
-            />
+            <ChartRenderer tile={tileConfig} />
           </div>
         </div>
       )),
-    [
-      tilesConfig,
-      awaitedData,
-      handleUpdateTileMetadata,
-      handleDeleteTile,
-      handleUpdateTileViewMode,
-    ]
+    [tilesConfig]
   );
-
-  // Wait for client-side rendering
-  if (!isClient) {
-    return null;
-  }
 
   return (
     <div>
