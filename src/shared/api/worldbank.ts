@@ -1,87 +1,13 @@
-import { cache } from "react";
+import { WorldBankDataPoint, WorldBankMetadata } from "./types";
 
-// Define country codes
-export const COUNTRY_CODES = {
-  USA: { code: "USA", name: "United States" },
-  JPN: { code: "JPN", name: "Japan" },
-  CHN: { code: "CHN", name: "China" },
-  IND: { code: "IND", name: "India" },
-  FRA: { code: "FRA", name: "France" },
-  BRA: { code: "BRA", name: "Brazil" },
-};
+const INDICATOR = "EN.GHG.ALL.MT.CE.AR5";
 
-export type CountryCode = keyof typeof COUNTRY_CODES;
-
-// Define the response types from World Bank API
-interface WorldBankMetadata {
-  page: number;
-  pages: number;
-  per_page: number;
-  total: number;
-  sourceid: string;
-  lastupdated: string;
-}
-
-interface WorldBankIndicator {
-  id: string;
-  value: string;
-}
-
-interface WorldBankCountry {
-  id: string;
-  value: string;
-}
-
-export interface WorldBankDataPoint {
-  indicator: WorldBankIndicator;
-  country: WorldBankCountry;
-  countryiso3code: string;
-  date: string;
-  value: number;
-  unit: string;
-  obs_status: string;
-  decimal: number;
-}
-
-export interface WorldBankResponse {
-  metadata: WorldBankMetadata;
-  data: WorldBankDataPoint[];
-}
-
-// Define our transformed data structure
-export interface ProcessedDataPoint {
-  x: string; // date
-  y: number; // value
-}
-
-export interface CountryData {
-  country: string;
-  countryCode: string;
-  values: ProcessedDataPoint[];
-}
-
-// Cache to store fetched data
-const dataCache: Record<string, WorldBankDataPoint[]> = {};
-
-/**
- * Fetches emissions data for a specific country within a date range
- */
 export async function fetchEmissionsData(
   countryCode: string,
   startYear: number,
   endYear: number
 ): Promise<WorldBankDataPoint[]> {
-  // Create a cache key
-  const cacheKey = `${countryCode}-${startYear}-${endYear}`;
-
-  // Check if data is already cached
-  if (dataCache[cacheKey]) {
-    return dataCache[cacheKey];
-  }
-
-  // Emissions indicator: EN.GHG.ALL.MT.CE.AR5 - Total greenhouse gas emissions excluding LULUCF
-  const indicator = "EN.GHG.ALL.MT.CE.AR5";
-  const baseUrl = `https://api.worldbank.org/v2/country/${countryCode}/indicator/${indicator}`;
+  const baseUrl = `https://api.worldbank.org/v2/country/${countryCode}/indicator/${INDICATOR}`;
 
   let allData: WorldBankDataPoint[] = [];
   let currentPage = 1;
@@ -122,47 +48,5 @@ export async function fetchEmissionsData(
     }
   } while (currentPage <= totalPages);
 
-  // Filter out entries with no values and sort by date
-  const filteredData = allData
-    .filter((item) => item.value !== null)
-    .sort((a, b) => parseInt(a.date) - parseInt(b.date));
-
-  // Store in cache
-  dataCache[cacheKey] = filteredData;
-
-  return filteredData;
+  return allData.sort((a, b) => parseInt(a.date) - parseInt(b.date));
 }
-
-/**
- * Process data for multiple countries
- */
-export async function processEmissionsData(
-  countryCodes: string[],
-  startYear: number,
-  endYear: number
-): Promise<CountryData[]> {
-  // Fetch data for each country in parallel
-  const promises = countryCodes.map((countryCode) =>
-    fetchEmissionsData(countryCode, startYear, endYear)
-  );
-
-  const countriesData = await Promise.all(promises);
-
-  // Process the data into the desired format
-  return countryCodes.map((code, index) => {
-    const countryData = countriesData[index];
-    const countryName = countryData[0]?.country.value || code;
-
-    return {
-      country: countryName,
-      countryCode: code,
-      values: countryData.map((item) => ({
-        x: item.date,
-        y: item.value,
-      })),
-    };
-  });
-}
-
-// Create a cached version of the data processor
-export const getCachedEmissionsData = cache(processEmissionsData);

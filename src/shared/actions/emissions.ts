@@ -1,14 +1,16 @@
 "use server";
 
 import { cache } from "react";
-import { COUNTRY_CODES, fetchEmissionsData } from "../api/worldbank";
+import { fetchEmissionsData } from "../api/worldbank";
 import { Data, Point } from "../types/data";
+import { CountryCode } from "../types/countries";
+import { COUNTRY_CODES_MAP } from "../constants/countries";
 
 // Define acceptable parameters
 export interface GetEmissionsParams {
-  startYear?: number;
-  endYear?: number;
-  countries?: string[] | "All";
+  startYear: number;
+  endYear: number;
+  countries: CountryCode[];
 }
 
 // Cache to store fetched data across requests
@@ -19,30 +21,20 @@ const dataCache: Record<string, Data[]> = {};
  * This function can be called directly from client components
  */
 export async function getEmissionsData({
-  startYear = 1972,
-  endYear = 2022,
-  countries = "All",
+  startYear,
+  endYear,
+  countries,
 }: GetEmissionsParams): Promise<Data[]> {
   try {
-    // Determine which country codes to use
-    let countryCodes: string[];
-    if (countries === "All") {
-      countryCodes = Object.keys(COUNTRY_CODES);
-    } else {
-      countryCodes = Array.isArray(countries) ? countries : [countries];
+    const invalidCodes = countries.filter(
+      (code) => !Object.keys(COUNTRY_CODES_MAP).includes(code)
+    );
 
-      // Validate country codes
-      const invalidCodes = countryCodes.filter(
-        (code) => !Object.keys(COUNTRY_CODES).includes(code)
-      );
-
-      if (invalidCodes.length > 0) {
-        throw new Error(`Invalid country codes: ${invalidCodes.join(", ")}`);
-      }
+    if (invalidCodes.length > 0) {
+      throw new Error(`Invalid country codes: ${invalidCodes.join(", ")}`);
     }
-
     // Generate cache key
-    const cacheKey = `${startYear}-${endYear}-${countryCodes.sort().join(",")}`;
+    const cacheKey = `${startYear}-${endYear}-${countries.sort().join(",")}`;
 
     // Check if we have cached data
     if (dataCache[cacheKey]) {
@@ -50,31 +42,27 @@ export async function getEmissionsData({
     }
 
     // Fetch data for each country in parallel
-    const promises = countryCodes.map((countryCode) =>
+    const promises = countries.map((countryCode) =>
       fetchEmissionsData(countryCode, startYear, endYear)
     );
 
     const countriesRawData = await Promise.all(promises);
 
     // Transform the data into our desired format
-    const processedData: Data[] = countryCodes.map((code, index) => {
+    const processedData: Data[] = countries.map((code, index) => {
       const countryData = countriesRawData[index];
 
       // Handle empty data case
       if (!countryData || countryData.length === 0) {
         return {
-          label:
-            COUNTRY_CODES[code as keyof typeof COUNTRY_CODES]?.name || code,
+          label: COUNTRY_CODES_MAP[code] ?? code,
           values: [],
         };
       }
 
       const countryName =
-        countryData[0]?.country?.value ||
-        COUNTRY_CODES[code as keyof typeof COUNTRY_CODES]?.name ||
-        code;
+        countryData[0]?.country?.value ?? COUNTRY_CODES_MAP[code] ?? code;
 
-      // Transform to Point array and filter out nulls
       const values: Point[] = countryData
         .filter((item) => item.value !== null && item.value !== undefined)
         .map((item) => ({

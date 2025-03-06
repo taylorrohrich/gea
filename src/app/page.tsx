@@ -3,11 +3,9 @@ import { Grid } from "@/shared/components/grid";
 import { Suspense } from "react";
 import { Container, Box } from "@mui/material";
 import { EmissionsFilters } from "@/shared/components/filters/EmissionsFilters";
+import { CountryCode } from "@/shared/types/countries";
 
-// This function gets search params in a server component
-function getSearchParams(searchParams: {
-  [key: string]: string | string[] | undefined;
-}) {
+function getSearchParams(searchParams: SearchParams) {
   const startYear = searchParams.startYear
     ? parseInt(searchParams.startYear as string, 10)
     : 1972;
@@ -15,32 +13,34 @@ function getSearchParams(searchParams: {
   const endYear = searchParams.endYear
     ? parseInt(searchParams.endYear as string, 10)
     : 2022;
-
-  const countries = searchParams.countries
-    ? (searchParams.countries as string)
-    : "All";
-
+  let countries: CountryCode[] = [];
+  if (searchParams.countries === "All") {
+    countries = Object.values(CountryCode);
+  } else {
+    countries = searchParams.countries.split(",") as CountryCode[];
+  }
   return { startYear, endYear, countries };
+}
+
+interface SearchParams {
+  startYear: string;
+  endYear: string;
+  countries: string;
 }
 
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<SearchParams>;
 }) {
   // Extract filter parameters from URL
   const { startYear, endYear, countries } = getSearchParams(await searchParams);
-
-  // Parse countries for data fetching
-  const countriesParam = countries === "All" ? "All" : countries.split(",");
-  const startYearParam = startYear ? Number(startYear) : 1972;
-  const endYearParam = endYear ? Number(endYear) : 2022;
 
   // Fetch data based on filters
   const data = getEmissionsData({
     startYear,
     endYear,
-    countries: countriesParam,
+    countries,
   });
 
   return (
@@ -52,8 +52,8 @@ export default async function Home({
 
         {/* Filters - server side rendered but with client interactivity */}
         <EmissionsFilters
-          startYear={startYearParam}
-          endYear={endYearParam}
+          startYear={startYear}
+          endYear={endYear}
           countries={countries}
           sticky
         />

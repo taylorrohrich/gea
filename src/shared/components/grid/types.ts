@@ -42,4 +42,14 @@ interface ScatterTile extends BaseTile {
   type: Chart.Scatter;
 }
 
-export type Tile = LineTile | BarTile | PieTile | AreaTile | ScatterTile;
+interface MapTile extends BaseTile {
+  type: Chart.Map;
+}
+
+export type Tile =
+  | LineTile
+  | BarTile
+  | PieTile
+  | AreaTile
+  | ScatterTile
+  | MapTile;

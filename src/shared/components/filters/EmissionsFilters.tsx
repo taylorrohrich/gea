@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Divider, IconButton, Chip } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -7,41 +7,31 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { DateRangeSelector } from "./DateRangeSelector";
 import { CountrySelector, COUNTRIES } from "./CountrySelector";
 import { useRouter } from "next/navigation";
+import { CountryCode } from "@/shared/types/countries";
 
 interface EmissionsFiltersProps {
   startYear: number;
   endYear: number;
-  countries: string;
-  sticky?: boolean;
+  countries: CountryCode[];
 }
 
 export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   startYear: initialStartYear,
   endYear: initialEndYear,
   countries: initialCountries,
-  sticky = true,
 }) => {
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
-
   // Local state for filters - initialized from props
   const [startYear, setStartYear] = useState(initialStartYear);
   const [endYear, setEndYear] = useState(initialEndYear);
-  const [selectedCountries, setSelectedCountries] = useState<string[]>(() => {
-    if (initialCountries === "All") {
-      return COUNTRIES.map((c) => c.code);
-    }
-    return initialCountries.split(",");
-  });
+  const [selectedCountries, setSelectedCountries] =
+    useState<CountryCode[]>(initialCountries);
 
   const resetState = () => {
     setStartYear(initialStartYear);
     setEndYear(initialEndYear);
-    setSelectedCountries(
-      initialCountries === "All"
-        ? COUNTRIES.map((c) => c.code)
-        : initialCountries.split(",")
-    );
+    setSelectedCountries(initialCountries);
   };
 
   // Handle date range changes
@@ -51,7 +41,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   };
 
   // Handle country selection changes
-  const handleCountryChange = (selected: string[]) => {
+  const handleCountryChange = (selected: CountryCode[]) => {
     setSelectedCountries(selected);
   };
 
@@ -89,25 +79,14 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
     router.push("/", { scroll: false });
   };
 
-  // Define sticky classes conditionally
-  const containerClasses = sticky
-    ? "mb-4 relative md:sticky md:top-0 md:z-50 transition-shadow duration-200 ease-out"
-    : "mb-4 relative";
-
-  const paperClasses =
-    sticky && expanded
-      ? "bg-white rounded shadow-md transition-shadow duration-200"
-      : "bg-white rounded shadow";
-
-  const headerClasses = sticky
-    ? "p-4 flex justify-between items-center cursor-pointer bg-white border-b border-gray-200"
-    : "p-4 flex justify-between items-center cursor-pointer";
-
   return (
-    <div className={containerClasses}>
-      <div className={paperClasses}>
+    <div className="mb-4 relative">
+      <div className="bg-white rounded shadow">
         {/* Header - Always visible */}
-        <div className={headerClasses} onClick={toggleExpanded}>
+        <div
+          className="p-4 flex justify-between items-center cursor-pointer"
+          onClick={toggleExpanded}
+        >
           <div className="flex items-center gap-2">
             <FilterListIcon color="primary" />
             <h6 className="text-lg font-medium">Emissions Data Filters</h6>
@@ -156,7 +135,6 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
               )}
             </div>
           )}
-
           <IconButton
             aria-label={expanded ? "collapse" : "expand"}
             className="ml-auto"
@@ -181,14 +159,12 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
             />
 
             <Divider className="my-4" />
-
             <CountrySelector
               selectedCountries={selectedCountries}
               onSelectionChange={handleCountryChange}
             />
 
             <Divider className="my-4" />
-
             <div className="flex justify-end gap-2 mt-4">
               <Button
                 variant="outlined"
