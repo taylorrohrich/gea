@@ -21,24 +21,20 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { ViewMode } from "../grid/types";
-import { useGridContext, GridActionType } from "../grid/GridContext";
+import { Tile, ViewMode } from "../types";
+import { useGridContext, GridActionType } from "../GridContext";
 
-interface ChartHeaderProps {
-  id: number;
-  title: string;
-  description: string;
-  viewMode: ViewMode;
-  onViewModeChange: (viewMode: ViewMode) => void;
+interface Props {
+  tile: Tile;
 }
 
-export const ChartHeader: React.FC<ChartHeaderProps> = ({
-  id,
-  title,
-  description,
-  viewMode,
-  onViewModeChange,
-}) => {
+export function TileHeader({
+  tile: {
+    id,
+    metadata: { title, description },
+    viewMode,
+  },
+}: Props) {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [editDialogOpen, setEditDialogOpen] = useState(false);
@@ -59,7 +55,6 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   const handleCloseEditDialog = () => {
     setEditDialogOpen(false);
   };
-
   const handleSaveChanges = () => {
     dispatch({
       type: GridActionType.UPDATE_TILE_METADATA,
@@ -91,7 +86,11 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
     newMode: ViewMode
   ) => {
     if (newMode !== null) {
-      onViewModeChange(newMode);
+      dispatch({
+        type: GridActionType.UPDATE_TILE_VIEW_MODE,
+        id,
+        viewMode: newMode,
+      });
     }
   };
 
@@ -340,4 +339,4 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
       </Dialog>
     </>
   );
-};
+}

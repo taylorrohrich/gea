@@ -123,7 +123,7 @@ export function useGridContext() {
 }
 
 // Export the provider directly
-export const GridContextProvider = GridContext.Provider;
+const GridContextProvider = GridContext.Provider;
 const saveTiles = debounce((data: Tile[]) => {
   if (typeof window !== "undefined") {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));

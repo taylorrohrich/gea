@@ -99,7 +99,7 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
             <ListItemText primary="Select All" />
           </MenuItem>
           {Object.entries(COUNTRY_CODES_MAP).map(([code, country]) => (
-            <MenuItem key={code} value={country}>
+            <MenuItem key={code} value={code}>
               <Checkbox
                 checked={selectedCountries.includes(code as CountryCode)}
               />

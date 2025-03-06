@@ -5,7 +5,7 @@ import GridLayout, { Layout, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { Chart } from "../../types/chart";
-import { ChartRenderer } from "../charts/ChartRenderer";
+import { Tile } from "./tile";
 import { debounce } from "lodash";
 import { ContextMenu } from "./ContextMenu";
 import { GridActionType, useGridContext } from "./GridContext";
@@ -105,13 +105,8 @@ export function Grid() {
   const renderedTiles = useMemo(
     () =>
       tiles.map((tile) => (
-        <div
-          key={`tile-${tile.id}`}
-          className="bg-white rounded-lg p-2.5 shadow-sm overflow-hidden h-full"
-        >
-          <div className="h-full">
-            <ChartRenderer tile={tile} />
-          </div>
+        <div key={`tile-${tile.id}`}>
+          <Tile tile={tile} />
         </div>
       )),
     [tiles]
