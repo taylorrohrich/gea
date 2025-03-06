@@ -13,210 +13,92 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { Tile, ViewMode } from "./types";
 import { Chart } from "../../types/chart";
-import dynamic from "next/dynamic";
-import { debounce } from "lodash"; // You might need to install this: npm install lodash
+import { ChartRenderer } from "../charts/ChartRenderer";
+import { debounce } from "lodash";
 import { Data } from "@/shared/types/data";
-import { Button, Box, Paper, Tooltip, Typography } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import { ContextMenu } from "./ContextMenu";
-import { GridOverlay } from "./GridOverlay";
+import {
+  createDefaultTiles,
+  createLayoutFromTiles,
+  updateTilesFromLayout,
+  createNewTile,
+} from "./helpers";
 
-// Dynamically import ChartRenderer with no SSR
-const ChartRenderer = dynamic(
-  () => import("../charts/ChartRenderer").then((mod) => mod.ChartRenderer),
-  { ssr: false, loading: () => <div>Loading chart components...</div> }
-);
-
-type GridProps = {
+interface Props {
   tileWidth?: number;
   tileHeight?: number;
   localStorageKey?: string;
   data: Promise<Data[]>;
-};
+}
 
-export const Grid = ({
+export function Grid({
   tileWidth = 2,
-  tileHeight = 2,
+  tileHeight = 4,
   localStorageKey = "grid-tiles-config",
   data,
-}: GridProps) => {
+}: Props) {
   const awaitedData = use(data);
   const gridRef = useRef<HTMLDivElement>(null);
-  const deadZoneRef = useRef<HTMLDivElement>(null);
   const [contextMenuPos, setContextMenuPos] = useState<{
     x: number;
     y: number;
   } | null>(null);
   const [gridPos, setGridPos] = useState<{ x: number; y: number } | null>(null);
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [overlayTimer, setOverlayTimer] = useState<NodeJS.Timeout | null>(null);
-  const [gridHeight, setGridHeight] = useState<number>(0);
+  const [isClient, setIsClient] = useState(false);
 
+  // Grid configuration constants
   const cols = 4;
+  const rowHeight = 100;
+
+  // Available chart types
   const chartTypes = useMemo<Chart[]>(
-    () => [Chart.Line, Chart.Bar, Chart.Pie, Chart.Area, Chart.Scatter],
+    () => [
+      Chart.Line,
+      Chart.Bar,
+      Chart.Pie,
+      Chart.Area,
+      Chart.Scatter,
+      Chart.Map,
+    ],
     []
   );
 
-  // Use a memoized version of WidthProvider to prevent unnecessary re-renders
+  // Use memoized version of WidthProvider to prevent unnecessary re-renders
   const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
 
-  // Generate default chart titles based on type
-  const getDefaultTitle = useCallback((chartType: Chart) => {
-    const prefix = chartType.charAt(0).toUpperCase() + chartType.slice(1);
-    return `${prefix} Chart`;
-  }, []);
-
-  // Default tiles with metadata
-  const defaultTiles = useCallback((): Tile[] => {
-    return [0, 1, 2].map((id) => {
-      const tilesPerRow = Math.floor(cols / tileWidth);
-      const row = Math.floor(id / tilesPerRow);
-      const col = (id % tilesPerRow) * tileWidth;
-
-      const chartType = chartTypes[id % chartTypes.length];
-      const defaultTitle = getDefaultTitle(chartType);
-
-      return {
-        id,
-        type: chartType,
-        layout: {
-          x: col,
-          y: row * tileHeight,
-          w: tileWidth,
-          h: tileHeight,
-        },
-        metadata: {
-          title: defaultTitle,
-          description: `Showing data visualization using ${chartType} chart`,
-        },
-        viewMode: "chart" as ViewMode, // Set default view mode
-      };
-    });
-  }, [cols, tileWidth, tileHeight, chartTypes, getDefaultTitle]);
-
-  // Load tiles from localStorage or use defaults - FIXED to use a ref
-  const initialTilesConfigRef = useRef<Tile[] | null>(null);
+  // Load tiles from localStorage or use defaults
   const loadTilesConfig = useCallback((): Tile[] => {
-    // Only run this logic once per component mount
-    if (initialTilesConfigRef.current) {
-      return initialTilesConfigRef.current;
-    }
-
-    let result: Tile[];
-
     if (typeof window === "undefined") {
-      result = defaultTiles();
-    } else {
-      const savedConfig = localStorage.getItem(localStorageKey);
-      if (savedConfig) {
-        try {
-          const parsedConfig = JSON.parse(savedConfig);
-
-          // Upgrade old format tiles if they don't have metadata or viewMode
-          result = parsedConfig.map((tile: any) => {
-            let updatedTile = { ...tile };
-
-            // Add metadata if missing
-            if (!updatedTile.metadata) {
-              const defaultTitle = getDefaultTitle(updatedTile.type);
-              updatedTile.metadata = {
-                title: defaultTitle,
-                description: `Showing data visualization using ${updatedTile.type} chart`,
-              };
-            }
-
-            // Add viewMode if missing (default to chart)
-            if (!updatedTile.viewMode) {
-              updatedTile.viewMode = "chart";
-            }
-
-            return updatedTile;
-          });
-        } catch (e) {
-          console.error("Failed to parse saved grid configuration", e);
-          result = defaultTiles();
-        }
-      } else {
-        result = defaultTiles();
-      }
+      return createDefaultTiles(chartTypes, cols, tileWidth, tileHeight);
     }
 
-    initialTilesConfigRef.current = result;
-    return result;
-  }, [defaultTiles, localStorageKey, getDefaultTitle]);
-  const [currentChartType, setCurrentChartType] = useState<Chart>(Chart.Line);
+    const savedConfig = localStorage.getItem(localStorageKey);
+    if (!savedConfig) {
+      return createDefaultTiles(chartTypes, cols, tileWidth, tileHeight);
+    }
+
+    try {
+      return JSON.parse(savedConfig);
+    } catch (e) {
+      console.error("Failed to parse saved grid configuration", e);
+      return createDefaultTiles(chartTypes, cols, tileWidth, tileHeight);
+    }
+  }, [chartTypes, cols, tileWidth, tileHeight, localStorageKey]);
+
+  // State for tiles and layout
   const [tilesConfig, setTilesConfig] = useState<Tile[]>(() =>
     loadTilesConfig()
   );
-
-  // Calculate the maximum row occupied by any tile
-  const calculateMaxRow = useCallback(() => {
-    if (!tilesConfig.length) return -1;
-    return Math.max(
-      ...tilesConfig.map((tile) => tile.layout.y + tile.layout.h)
-    );
-  }, [tilesConfig]);
-
-  // Ensure the grid has a minimum height
-  const calculateGridMinHeight = useCallback(() => {
-    const maxRow = calculateMaxRow();
-    const rowHeight = 100; // Same as in GridLayout
-    const minRows = 5; // Minimum number of rows to show
-
-    // Height based on content + extra space
-    const contentHeight = (maxRow + 1) * rowHeight;
-    const minHeight = minRows * rowHeight;
-
-    // Use the larger of contentHeight or minHeight
-    return Math.max(contentHeight, minHeight);
-  }, [calculateMaxRow]);
-
-  // Update the grid height when tiles change
-  useEffect(() => {
-    const height = calculateGridMinHeight();
-    setGridHeight(height);
-  }, [tilesConfig, calculateGridMinHeight]);
-
-  // Show overlay for new users or when grid is empty - FIXED dependency array
-  useEffect(() => {
-    // Skip running this effect during SSR
-    if (typeof window === "undefined") return;
-
-    // Show overlay if there are no tiles
-    if (tilesConfig.length === 0) {
-      setShowOverlay(true);
-      // Clear any existing timeout
-      if (overlayTimer) clearTimeout(overlayTimer);
-    } else {
-      // For users with existing charts, show the overlay briefly then fade it
-      const timer = setTimeout(() => {
-        setShowOverlay(false);
-      }, 3000);
-      setOverlayTimer(timer);
-    }
-
-    return () => {
-      if (overlayTimer) clearTimeout(overlayTimer);
-    };
-  }, [tilesConfig.length]); // Removed overlayTimer from dependencies
-
-  // Convert tile configurations to react-grid-layout format - memoized
-  const createLayout = useCallback((configs: Tile[]): Layout[] => {
-    return configs.map((config) => ({
-      i: `tile-${config.id}`,
-      x: config.layout.x,
-      y: config.layout.y,
-      w: config.layout.w,
-      h: config.layout.h,
-    }));
-  }, []);
-
   const [layout, setLayout] = useState<Layout[]>(() =>
-    createLayout(tilesConfig)
+    createLayoutFromTiles(tilesConfig)
   );
 
-  // Debounced save to localStorage to reduce writes during rapid changes
+  // Set isClient once after component mounts
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Debounced save to localStorage
   const debouncedSave = useMemo(
     () =>
       debounce((data: Tile[]) => {
@@ -227,97 +109,56 @@ export const Grid = ({
     [localStorageKey]
   );
 
-  // Save to localStorage whenever tiles or layout changes (debounced)
+  // Save to localStorage when tiles change
   useEffect(() => {
     debouncedSave(tilesConfig);
   }, [tilesConfig, debouncedSave]);
 
-  // Debounced layout change handler to reduce state updates during resizing
+  // Layout change handler
   const handleLayoutChange = useCallback((newLayout: Layout[]) => {
-    // Debounce the layout updates directly within the callback
     setLayout(newLayout);
-
-    // Update tile configurations when layout changes
-    setTilesConfig((prevTilesConfig) =>
-      prevTilesConfig.map((tile) => {
-        const layoutItem = newLayout.find(
-          (item) => item.i === `tile-${tile.id}`
-        );
-        if (layoutItem) {
-          return {
-            ...tile,
-            layout: {
-              x: layoutItem.x,
-              y: layoutItem.y,
-              w: layoutItem.w,
-              h: layoutItem.h,
-            },
-          };
-        }
-        return tile;
-      })
-    );
+    setTilesConfig((prev) => updateTilesFromLayout(prev, newLayout));
   }, []);
 
-  // Memoized debounced handler to avoid recreation on every render
+  // Debounced layout change handler
   const debouncedHandleLayoutChange = useMemo(
     () => debounce(handleLayoutChange, 50),
     [handleLayoutChange]
   );
 
-  // Create a new tile with the given chart type
+  // Create new tile
   const createTile = useCallback(
     (chartType: Chart) => {
       if (!gridPos) return;
 
-      // Create a new tile ID
-      const newTileId = Math.max(...tilesConfig.map((tile) => tile.id), -1) + 1;
+      const newTile = createNewTile(
+        tilesConfig,
+        chartType,
+        gridPos,
+        cols,
+        tileWidth,
+        tileHeight
+      );
 
-      // Ensure x doesn't exceed max columns
-      const safeX = Math.min(gridPos.x, cols - tileWidth);
-
-      // Create new tile config
-      const defaultTitle = getDefaultTitle(chartType);
-      const newTileConfig: Tile = {
-        id: newTileId,
-        type: chartType,
-        layout: {
-          x: safeX,
-          y: gridPos.y,
-          w: tileWidth,
-          h: tileHeight,
-        },
-        metadata: {
-          title: defaultTitle,
-          description: `Showing data visualization using ${chartType} chart`,
-        },
-        viewMode: "chart", // Set default view mode
-      };
-
-      // Update tiles config and layout
-      setTilesConfig((prev) => [...prev, newTileConfig]);
+      setTilesConfig((prev) => [...prev, newTile]);
       setLayout((prev) => [
         ...prev,
         {
-          i: `tile-${newTileId}`,
-          x: safeX,
-          y: gridPos.y,
-          w: tileWidth,
-          h: tileHeight,
+          i: `tile-${newTile.id}`,
+          x: newTile.layout.x,
+          y: newTile.layout.y,
+          w: newTile.layout.w,
+          h: newTile.layout.h,
         },
       ]);
-
-      // Hide the overlay once user adds a chart
-      setShowOverlay(false);
     },
-    [gridPos, tilesConfig, cols, tileWidth, tileHeight, getDefaultTitle]
+    [gridPos, tilesConfig, cols, tileWidth, tileHeight]
   );
 
-  // Handler for chart selection from context menu
+  // Handle chart selection from context menu
   const handleSelectChart = useCallback(
     (chartType: Chart) => {
       createTile(chartType);
-      // Close the context menu
       setContextMenuPos(null);
     },
     [createTile]
@@ -328,59 +169,36 @@ export const Grid = ({
     setContextMenuPos(null);
   }, []);
 
-  // Cycle to next chart type
-  const cycleChartType = useCallback(() => {
-    const currentIndex = chartTypes.indexOf(currentChartType);
-    const nextIndex = (currentIndex + 1) % chartTypes.length;
-    setCurrentChartType(chartTypes[nextIndex]);
-  }, [chartTypes, currentChartType]);
-
   // Context menu on right click
   const handleContextMenu = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-
       if (!gridRef.current) return;
 
-      // Position for context menu
       setContextMenuPos({ x: e.clientX, y: e.clientY });
 
       // Calculate position for grid placement
       const gridRect = gridRef.current.getBoundingClientRect();
       const relX = e.clientX - gridRect.left;
       const relY = e.clientY - gridRect.top;
-      const colWidth = gridRect.width / cols;
-      const rowHeight = 100; // match rowHeight prop
 
       // Calculate grid coordinates
-      let gridX = Math.floor(relX / colWidth);
-      let gridY = Math.floor(relY / rowHeight);
+      const colWidth = gridRect.width / cols;
+      const gridX = Math.floor(relX / colWidth);
+      const gridY = Math.floor(relY / rowHeight);
 
-      // Check if we're in the dead zone - if so, append to the end
-      const maxRow = calculateMaxRow();
-      if (e.currentTarget === deadZoneRef.current) {
-        gridY = maxRow + 1; // Position new tile just after the last row
-      }
-
-      // Store grid position for when a chart type is selected
       setGridPos({ x: gridX, y: gridY });
     },
-    [gridRef, cols, calculateMaxRow]
+    [cols, gridRef]
   );
 
-  // Handler to update tile metadata (title, description)
+  // Update tile metadata
   const handleUpdateTileMetadata = useCallback(
     (id: number, title: string, description: string) => {
-      setTilesConfig((prevTilesConfig) =>
-        prevTilesConfig.map((tile) => {
+      setTilesConfig((prev) =>
+        prev.map((tile) => {
           if (tile.id === id) {
-            return {
-              ...tile,
-              metadata: {
-                title,
-                description,
-              },
-            };
+            return { ...tile, metadata: { title, description } };
           }
           return tile;
         })
@@ -389,16 +207,13 @@ export const Grid = ({
     []
   );
 
-  // Handler to update tile view mode
+  // Update tile view mode
   const handleUpdateTileViewMode = useCallback(
     (id: number, viewMode: ViewMode) => {
-      setTilesConfig((prevTilesConfig) =>
-        prevTilesConfig.map((tile) => {
+      setTilesConfig((prev) =>
+        prev.map((tile) => {
           if (tile.id === id) {
-            return {
-              ...tile,
-              viewMode,
-            };
+            return { ...tile, viewMode };
           }
           return tile;
         })
@@ -407,41 +222,21 @@ export const Grid = ({
     []
   );
 
-  // Handler to delete a tile
+  // Delete a tile
   const handleDeleteTile = useCallback((id: number) => {
-    setTilesConfig((prevTilesConfig) =>
-      prevTilesConfig.filter((tile) => tile.id !== id)
-    );
-
-    setLayout((prevLayout) =>
-      prevLayout.filter((item) => item.i !== `tile-${id}`)
-    );
+    setTilesConfig((prev) => prev.filter((tile) => tile.id !== id));
+    setLayout((prev) => prev.filter((item) => item.i !== `tile-${id}`));
   }, []);
 
-  // Client-side rendering management
-  const [isClient, setIsClient] = useState(false);
-
-  // Set isClient only once after component mounts
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Memoize the rendered tiles to prevent unnecessary re-renders
+  // Render tiles
   const renderedTiles = useMemo(
     () =>
       tilesConfig.map((tileConfig) => (
         <div
           key={`tile-${tileConfig.id}`}
-          style={{
-            backgroundColor: "white",
-            borderRadius: "8px",
-            padding: "10px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-            overflow: "hidden",
-            height: "100%",
-          }}
+          className="bg-white rounded-lg p-2.5 shadow-sm overflow-hidden h-full"
         >
-          <div style={{ height: "100%" }}>
+          <div className="h-full">
             <ChartRenderer
               tile={tileConfig}
               data={awaitedData}
@@ -461,30 +256,17 @@ export const Grid = ({
     ]
   );
 
+  // Wait for client-side rendering
   if (!isClient) {
     return null;
   }
 
   return (
     <div>
-      <Paper
-        elevation={0}
-        sx={{
-          backgroundColor: "grey.50",
-          position: "relative",
-          borderRadius: 2,
-          border: "1px dashed #ccc",
-          minHeight: "500px",
-        }}
-      >
+      <div className="bg-gray-100 relative rounded-lg border border-dashed border-gray-300 min-h-[500px] flex flex-col">
         <div
           ref={gridRef}
-          style={{
-            width: "100%",
-            minHeight: `${gridHeight + 300}px`,
-            overflow: "hidden",
-            cursor: "context-menu",
-          }}
+          className="w-full overflow-hidden cursor-context-menu pb-12 h-full flex-1"
           onContextMenu={handleContextMenu}
         >
           <ResponsiveGridLayout
@@ -492,7 +274,7 @@ export const Grid = ({
             layout={layout}
             cols={cols}
             onLayoutChange={debouncedHandleLayoutChange}
-            rowHeight={100}
+            rowHeight={rowHeight}
             maxRows={500}
             compactType="vertical"
             useCSSTransforms={true}
@@ -503,12 +285,6 @@ export const Grid = ({
           >
             {renderedTiles}
           </ResponsiveGridLayout>
-
-          {/* Grid Overlay with Instructions */}
-          <GridOverlay
-            visible={showOverlay}
-            hasCharts={tilesConfig.length > 0}
-          />
         </div>
 
         {/* Context Menu */}
@@ -519,7 +295,7 @@ export const Grid = ({
             onClose={handleCloseContextMenu}
           />
         )}
-      </Paper>
+      </div>
     </div>
   );
-};
+}
