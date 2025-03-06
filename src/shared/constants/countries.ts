@@ -1,6 +1,6 @@
 import { CountryCode } from "../types/countries";
 
-export const COUNTRY_CODES_MAP = {
+export const COUNTRY_CODES_MAP: Record<CountryCode, string> = {
   [CountryCode.USA]: "United States",
   [CountryCode.JPN]: "Japan",
   [CountryCode.CHN]: "China",
@@ -8,3 +8,5 @@ export const COUNTRY_CODES_MAP = {
   [CountryCode.FRA]: "France",
   [CountryCode.BRA]: "Brazil",
 };
+
+export const COUNTRY_COUNT = Object.keys(COUNTRY_CODES_MAP).length;

@@ -1,42 +1,28 @@
-import React from "react";
-import { Slider, Box, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-
-const StyledSlider = styled(Slider)({
-  "& .MuiSlider-thumb": {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
-      boxShadow: "0 0 0 8px rgba(63, 81, 181, 0.16)",
-    },
-  },
-  "& .MuiSlider-track": {
-    height: 4,
-  },
-  "& .MuiSlider-rail": {
-    height: 4,
-    opacity: 0.5,
-    backgroundColor: "#bfbfbf",
-  },
-});
+import React, { ComponentProps } from "react";
+import { Slider } from "@mui/material";
 
 const MIN_YEAR = 1950;
 const MAX_YEAR = 2024;
+
+const MARKS: ComponentProps<typeof Slider>["marks"] = [];
+for (let i = MAX_YEAR; i >= MIN_YEAR; i -= 10) {
+  MARKS.push({ value: i, label: i.toString() });
+}
+MARKS.push({ value: MIN_YEAR, label: MIN_YEAR.toString() });
+
 const STEP = 1;
 
-interface DateRangeSelectorProps {
+interface Props {
   startYear: number;
   endYear: number;
   onRangeChange: (startYear: number, endYear: number) => void;
 }
 
-export const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
+export function DateRangeSelector({
   startYear,
   endYear,
   onRangeChange,
-}) => {
+}: Props) {
   // Handler for slider changes
   const handleSliderChange = (_event: Event, newValue: number | number[]) => {
     if (Array.isArray(newValue)) {
@@ -44,43 +30,43 @@ export const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
     }
   };
 
-  // Handler for direct text input changes
-  const handleStartYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (!isNaN(value) && value >= MIN_YEAR && value <= endYear) {
-      onRangeChange(value, endYear);
-    }
-  };
-
-  const handleEndYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (!isNaN(value) && value <= MAX_YEAR && value >= startYear) {
-      onRangeChange(startYear, value);
-    }
-  };
-
   return (
-    <Box sx={{ width: "100%", padding: 2 }}>
-      <Typography variant="subtitle1" gutterBottom>
-        Date Range
-      </Typography>
-
-      <StyledSlider
+    <div className="w-full py-4 px-2">
+      <h3 className="text-base font-medium mb-2">Date Range</h3>
+      <div className="text-center">
+        <span className="text-sm bg-blue-50 text-blue-800 py-1 px-3 rounded-full">
+          Selected: {startYear} - {endYear}
+        </span>
+      </div>
+      <Slider
         value={[startYear, endYear]}
         onChange={handleSliderChange}
         valueLabelDisplay="auto"
         min={MIN_YEAR}
         max={MAX_YEAR}
         step={STEP}
-        marks={[
-          { value: MIN_YEAR, label: MIN_YEAR.toString() },
-          { value: 1990, label: "1990" },
-          { value: 2000, label: "2000" },
-          { value: 2010, label: "2010" },
-          { value: MAX_YEAR, label: MAX_YEAR.toString() },
-        ]}
-        sx={{ mt: 4, mb: 1 }}
+        marks={MARKS}
+        sx={{
+          "& .MuiSlider-thumb": {
+            height: 20,
+            width: 20,
+            backgroundColor: "#fff",
+            border: "2px solid currentColor",
+            "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
+              boxShadow: "0 0 0 8px rgba(63, 81, 181, 0.16)",
+            },
+          },
+          "& .MuiSlider-track": {
+            height: 4,
+          },
+          "& .MuiSlider-rail": {
+            height: 4,
+            opacity: 0.5,
+            backgroundColor: "#bfbfbf",
+          },
+          mt: 2,
+        }}
       />
-    </Box>
+    </div>
   );
-};
+}

@@ -13,30 +13,23 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-
-// Define available countries
-export const COUNTRIES = [
-  { code: "USA", name: "United States" },
-  { code: "JPN", name: "Japan" },
-  { code: "CHN", name: "China" },
-  { code: "IND", name: "India" },
-  { code: "FRA", name: "France" },
-  { code: "BRA", name: "Brazil" },
-];
+import { COUNTRY_CODES_MAP } from "@/shared/constants/countries";
+import { CountryCode } from "@/shared/types/countries";
 
 interface CountrySelectorProps {
-  selectedCountries: string[]; // Array of country codes
-  onSelectionChange: (selected: string[]) => void;
+  selectedCountries: CountryCode[]; // Array of country codes
+  onSelectionChange: (selected: CountryCode[]) => void;
 }
 
 export const CountrySelector: React.FC<CountrySelectorProps> = ({
   selectedCountries,
   onSelectionChange,
 }) => {
-  const isAllSelected = selectedCountries.length === COUNTRIES.length;
+  const isAllSelected =
+    selectedCountries.length === Object.keys(COUNTRY_CODES_MAP).length;
 
   // Handle selection change
-  const handleChange = (event: SelectChangeEvent<string[]>) => {
+  const handleChange = (event: SelectChangeEvent<CountryCode[]>) => {
     const value = event.target.value;
 
     // On autofill we get a string array
@@ -46,11 +39,9 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
     if (selected.includes("all")) {
       // If all countries were previously selected, clear the selection
       // Otherwise select all countries
-      onSelectionChange(
-        isAllSelected ? [] : COUNTRIES.map((country) => country.code)
-      );
+      onSelectionChange(isAllSelected ? [] : Object.values(CountryCode));
     } else {
-      onSelectionChange(selected);
+      onSelectionChange(selected as CountryCode[]);
     }
   };
 
@@ -66,7 +57,6 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
       <Typography variant="subtitle1" gutterBottom>
         Countries
       </Typography>
-
       <FormControl fullWidth>
         <InputLabel id="countries-select-label">Selected Countries</InputLabel>
         <Select
@@ -79,11 +69,11 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((code) => {
-                const country = COUNTRIES.find((c) => c.code === code);
+                const countryName = COUNTRY_CODES_MAP[code];
                 return (
                   <Chip
                     key={code}
-                    label={country?.name || code}
+                    label={countryName}
                     onDelete={handleDelete(code)}
                     deleteIcon={
                       <CancelIcon
@@ -108,11 +98,12 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
             <Checkbox checked={isAllSelected} />
             <ListItemText primary="Select All" />
           </MenuItem>
-
-          {COUNTRIES.map((country) => (
-            <MenuItem key={country.code} value={country.code}>
-              <Checkbox checked={selectedCountries.includes(country.code)} />
-              <ListItemText primary={country.name} secondary={country.code} />
+          {Object.entries(COUNTRY_CODES_MAP).map(([code, country]) => (
+            <MenuItem key={code} value={country}>
+              <Checkbox
+                checked={selectedCountries.includes(code as CountryCode)}
+              />
+              <ListItemText primary={country} secondary={country} />
             </MenuItem>
           ))}
         </Select>

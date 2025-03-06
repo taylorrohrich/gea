@@ -29,15 +29,7 @@ const MapChart = dynamic(
 
 // Loading component
 const ChartLoading = () => (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100%",
-      background: "#f9f9f9",
-    }}
-  >
+  <div className="flex justify-center items-center h-full bg-gray-50">
     Loading chart...
   </div>
 );
@@ -73,7 +65,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = memo(
       if (tile.viewMode !== viewMode) {
         setViewMode(tile.viewMode || "chart");
       }
-    }, [tile.viewMode]);
+    }, [tile.viewMode, viewMode]);
 
     // Handle view mode changes
     const handleViewModeChange = (newMode: ViewMode) => {
@@ -82,10 +74,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = memo(
     };
 
     return (
-      <div
-        style={{ height: "100%", display: "flex", flexDirection: "column" }}
-        className="bg-white"
-      >
+      <div className="h-full flex flex-col bg-white">
         {/* Chart Header Component */}
         <ChartHeader
           id={tile.id}
@@ -99,24 +88,15 @@ export const ChartRenderer: React.FC<ChartRendererProps> = memo(
           onViewModeChange={handleViewModeChange}
         />
 
-        {/* Chart Content Container - flex-grow to fill remaining space */}
-        <div
-          style={{
-            flexGrow: 1,
-            position: "relative", // Container is relative
-            height: "calc(100% - 60px)", // Subtract header height
-            overflow: "hidden", // Contain the overflow
-          }}
-        >
+        {/* Chart Content Container */}
+        <div className="flex-grow relative h-[calc(100%-60px)] overflow-hidden">
           {viewMode === "chart" ? (
-            <div style={{ height: "100%", width: "100%" }}>
-              {renderChart(tile, data)}
-            </div>
+            <div className="h-full w-full">{renderChart(tile, data)}</div>
           ) : (
-            <DataTable 
-              title={tile.metadata.title} 
-              data={data} 
-              chartType={tile.type}  // Pass the chart type to DataTable
+            <DataTable
+              title={tile.metadata.title}
+              data={data}
+              chartType={tile.type}
             />
           )}
         </div>

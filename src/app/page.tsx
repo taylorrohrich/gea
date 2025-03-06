@@ -5,7 +5,13 @@ import { Container, Box } from "@mui/material";
 import { EmissionsFilters } from "@/shared/components/filters/EmissionsFilters";
 import { CountryCode } from "@/shared/types/countries";
 
-function getSearchParams(searchParams: SearchParams) {
+interface SearchParams {
+  startYear: string;
+  endYear: string;
+  countries: string;
+}
+
+function getSearchParams(searchParams: Partial<SearchParams>) {
   const startYear = searchParams.startYear
     ? parseInt(searchParams.startYear as string, 10)
     : 1972;
@@ -14,7 +20,7 @@ function getSearchParams(searchParams: SearchParams) {
     ? parseInt(searchParams.endYear as string, 10)
     : 2022;
   let countries: CountryCode[] = [];
-  if (searchParams.countries === "All") {
+  if (searchParams.countries === "All" || !searchParams.countries) {
     countries = Object.values(CountryCode);
   } else {
     countries = searchParams.countries.split(",") as CountryCode[];
@@ -22,16 +28,10 @@ function getSearchParams(searchParams: SearchParams) {
   return { startYear, endYear, countries };
 }
 
-interface SearchParams {
-  startYear: string;
-  endYear: string;
-  countries: string;
-}
-
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<SearchParams>;
+  searchParams: Promise<Partial<SearchParams>>;
 }) {
   // Extract filter parameters from URL
   const { startYear, endYear, countries } = getSearchParams(await searchParams);
@@ -49,28 +49,21 @@ export default async function Home({
         <h1 className="text-2xl font-bold mb-6">
           Greenhouse Gas Emissions Dashboard
         </h1>
-
-        {/* Filters - server side rendered but with client interactivity */}
         <EmissionsFilters
           startYear={startYear}
           endYear={endYear}
           countries={countries}
-          sticky
         />
       </Box>
-
-      {/* Grid with data - more top margin when filters are collapsed */}
-      <Box sx={{ height: "calc(100vh - 250px)", minHeight: "500px" }}>
-        <Suspense
-          fallback={
-            <div className="flex justify-center items-center h-full">
-              Loading chart data...
-            </div>
-          }
-        >
-          <Grid data={data} />
-        </Suspense>
-      </Box>
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center h-full">
+            Loading chart data...
+          </div>
+        }
+      >
+        <Grid data={data} />
+      </Suspense>
     </Container>
   );
 }

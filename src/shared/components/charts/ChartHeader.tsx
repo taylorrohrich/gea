@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Box,
-  Typography,
   IconButton,
   TextField,
   Tooltip,
@@ -15,7 +13,6 @@ import {
   ToggleButton,
   useMediaQuery,
   useTheme,
-  Stack,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -57,9 +54,6 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
-  const [moreMenuAnchorEl, setMoreMenuAnchorEl] = useState<null | HTMLElement>(
-    null
-  );
 
   // Edit dialog handlers
   const handleOpenEditDialog = () => {
@@ -155,77 +149,35 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   return (
     <>
       {/* Chart Header */}
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          p: 1,
-          px: 1.5,
-          borderBottom: "1px solid #e0e0e0",
-          backgroundColor: "background.paper",
-          position: "relative",
-          zIndex: 10,
-          height: { xs: "52px", sm: "52px" },
-          minHeight: "52px",
-          boxSizing: "border-box",
-        }}
-      >
+      <div className="flex items-center gap-2 p-2 border-b border-gray-200 bg-white relative z-10 h-[52px] min-h-[52px] box-border">
         {/* Drag handle */}
         <DragIndicator
           fontSize="small"
           color="action"
-          sx={{
-            cursor: "move",
-            flexShrink: 0,
-            display: { xs: "none", sm: "block" },
-          }}
-          className="drag-handle"
+          className="cursor-move flex-shrink-0 hidden sm:block drag-handle"
         />
 
         {/* Title and description */}
-        <Box
-          sx={{
-            flexGrow: 1,
-            overflow: "hidden",
-            minWidth: 0, // Important for text truncation to work
-          }}
-        >
-          <Typography
-            variant="subtitle2"
-            fontWeight="bold"
-            noWrap
-            sx={{ lineHeight: 1.2 }}
-          >
+        <div className="flex-grow overflow-hidden min-w-0">
+          <h3 className="text-sm font-bold leading-tight truncate">
             {title || "Untitled Chart"}
-          </Typography>
+          </h3>
           {description && !isSmallScreen && (
-            <Typography
-              variant="caption"
-              color="text.secondary"
-              noWrap
-              sx={{
-                display: "block",
-                width: "100%", // Allow to use parent width
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                lineHeight: 1.2,
-              }}
-            >
+            <p className="text-xs text-gray-500 leading-tight truncate w-full">
               {description}
-            </Typography>
+            </p>
           )}
-        </Box>
+        </div>
 
-        {/* View Mode Toggle - Now right aligned */}
+        {/* View Mode Toggle */}
         <ToggleButtonGroup
           value={viewMode}
           exclusive
           onChange={handleViewModeChange}
           size="small"
           aria-label="view mode"
+          className="flex-shrink-0"
           sx={{
-            flexShrink: 0,
             borderRadius: 1,
             ".MuiToggleButton-root": {
               py: 0.5,
@@ -242,15 +194,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
         </ToggleButtonGroup>
 
         {/* Action buttons - shown on larger screens */}
-        <Stack
-          direction="row"
-          spacing={0.5}
-          sx={{
-            display: { xs: "none", sm: "flex" },
-            alignItems: "center",
-            flexShrink: 0,
-          }}
-        >
+        <div className="hidden sm:flex items-center gap-1 flex-shrink-0">
           <Tooltip title="Download CSV">
             <IconButton size="small" onClick={handleExportCSV}>
               <FileDownloadIcon fontSize="small" />
@@ -278,12 +222,12 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
               <DeleteIcon fontSize="small" />
             </IconButton>
           </Tooltip>
-        </Stack>
+        </div>
 
         {/* More menu icon for small screens */}
         <IconButton
           size="small"
-          sx={{ display: { xs: "flex", sm: "none" }, flexShrink: 0 }}
+          className="flex sm:hidden flex-shrink-0"
           onClick={(e) => {
             e.stopPropagation();
             handleOpenEditDialog(); // On small screens, clicking "more" directly opens the edit dialog
@@ -291,7 +235,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
         >
           <MoreVertIcon fontSize="small" />
         </IconButton>
-      </Box>
+      </div>
 
       {/* Edit Dialog */}
       <Dialog
@@ -325,17 +269,15 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
 
           {/* Show additional actions on small screens inside the dialog */}
           {isSmallScreen && (
-            <Box sx={{ mt: 3, pt: 2, borderTop: "1px solid #eee" }}>
-              <Typography variant="subtitle2" gutterBottom>
-                Additional Actions
-              </Typography>
+            <div className="mt-6 pt-4 border-t border-gray-200">
+              <h4 className="text-base font-medium mb-2">Additional Actions</h4>
               <Button
                 startIcon={<FileDownloadIcon />}
                 onClick={() => {
                   handleExportCSV();
                   handleCloseEditDialog();
                 }}
-                sx={{ mr: 1 }}
+                className="mr-2"
               >
                 Download CSV
               </Button>
@@ -351,7 +293,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
               >
                 Delete Chart
               </Button>
-            </Box>
+            </div>
           )}
         </DialogContent>
         <DialogActions>

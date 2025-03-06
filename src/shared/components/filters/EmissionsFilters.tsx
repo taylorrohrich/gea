@@ -5,9 +5,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { DateRangeSelector } from "./DateRangeSelector";
-import { CountrySelector, COUNTRIES } from "./CountrySelector";
+import { CountrySelector } from "./CountrySelector";
 import { useRouter } from "next/navigation";
 import { CountryCode } from "@/shared/types/countries";
+import { COUNTRY_CODES_MAP, COUNTRY_COUNT } from "@/shared/constants/countries";
 
 interface EmissionsFiltersProps {
   startYear: number;
@@ -15,11 +16,11 @@ interface EmissionsFiltersProps {
   countries: CountryCode[];
 }
 
-export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
+export function EmissionsFilters({
   startYear: initialStartYear,
   endYear: initialEndYear,
   countries: initialCountries,
-}) => {
+}: EmissionsFiltersProps) {
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
   // Local state for filters - initialized from props
@@ -54,7 +55,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
   // Apply filters and update URL
   const applyFilters = () => {
     const countriesParam =
-      selectedCountries.length === COUNTRIES.length
+      selectedCountries.length === COUNTRY_COUNT
         ? "All"
         : selectedCountries.join(",");
 
@@ -101,8 +102,7 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
                 color="primary"
                 variant="outlined"
               />
-
-              {selectedCountries.length === COUNTRIES.length ? (
+              {selectedCountries.length === COUNTRY_COUNT ? (
                 <Chip
                   label="All Countries"
                   size="small"
@@ -112,11 +112,11 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
               ) : (
                 <div className="flex gap-1 overflow-auto flex-nowrap">
                   {selectedCountries.slice(0, 3).map((code) => {
-                    const country = COUNTRIES.find((c) => c.code === code);
+                    const country = COUNTRY_CODES_MAP[code];
                     return (
                       <Chip
                         key={code}
-                        label={country?.name || code}
+                        label={country}
                         size="small"
                         color="primary"
                         variant="outlined"
@@ -157,7 +157,6 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
               endYear={endYear}
               onRangeChange={handleRangeChange}
             />
-
             <Divider className="my-4" />
             <CountrySelector
               selectedCountries={selectedCountries}
@@ -186,4 +185,4 @@ export const EmissionsFilters: React.FC<EmissionsFiltersProps> = ({
       </div>
     </div>
   );
-};
+}
