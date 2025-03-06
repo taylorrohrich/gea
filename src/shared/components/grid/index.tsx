@@ -5,7 +5,7 @@ import GridLayout, { Layout, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { Chart } from "../../types/chart";
-import { Tile } from "./tile";
+import { Tile } from "@/shared/components/tile";
 import { debounce } from "lodash";
 import { ContextMenu } from "./ContextMenu";
 import { GridActionType, useGridContext } from "./GridContext";
