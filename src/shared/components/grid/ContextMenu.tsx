@@ -5,16 +5,10 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-  Typography,
-  Divider,
-  Box,
 } from "@mui/material";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PieChartIcon from "@mui/icons-material/PieChart";
-import AreaChartIcon from "@mui/icons-material/StackedLineChart";
-import ScatterPlotIcon from "@mui/icons-material/BubbleChart";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 import PublicIcon from "@mui/icons-material/Public";
 import { Chart } from "../../types/chart";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
@@ -25,22 +19,10 @@ interface ContextMenuProps {
   onClose: () => void;
 }
 
-// Map of chart types to their icons
-const chartIcons = {
-  [Chart.Line]: <TimelineIcon />,
-  [Chart.Bar]: <BarChartIcon />,
-  [Chart.Pie]: <PieChartIcon />,
-  [Chart.Area]: <AreaChartIcon />,
-  [Chart.Scatter]: <ScatterPlotIcon />,
-  [Chart.Map]: <PublicIcon />,
-};
-
 const chartTypes = [
   { label: "Line Chart", type: Chart.Line, icon: <TimelineIcon /> },
   { label: "Bar Chart", type: Chart.Bar, icon: <BarChartIcon /> },
   { label: "Pie Chart", type: Chart.Pie, icon: <PieChartIcon /> },
-  { label: "Area Chart", type: Chart.Area, icon: <AreaChartIcon /> },
-  { label: "Scatter Chart", type: Chart.Scatter, icon: <ScatterPlotIcon /> },
   { label: "Map Chart", type: Chart.Map, icon: <PublicIcon /> }, // Add Map option
 ];
 
@@ -91,17 +73,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
   };
 
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 1300,
-      }}
-      onClick={onClose}
-    >
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-50" onClick={onClose}>
       <Paper
         sx={{
           position: "absolute",
@@ -112,23 +84,10 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
           zIndex: 1400,
           width: menuWidth,
           overflow: "hidden",
-          transform: "translateZ(0)", // Hardware acceleration
-          willChange: "transform", // Optimize for animation
+          transform: "translateZ(0)",
+          willChange: "transform",
         }}
       >
-        {/* Menu header */}
-        <Box p={1} bgcolor="primary.main" color="white">
-          <Typography variant="subtitle2">
-            <AddBoxIcon
-              fontSize="small"
-              sx={{ verticalAlign: "middle", mr: 1 }}
-            />
-            Add Chart
-          </Typography>
-        </Box>
-        <Divider />
-
-        {/* Menu items */}
         <MenuList dense>
           {chartTypes.map((chart) => (
             <MenuItem
@@ -144,6 +103,6 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
           ))}
         </MenuList>
       </Paper>
-    </Box>
+    </div>
   );
 };

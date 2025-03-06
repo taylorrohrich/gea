@@ -1,8 +1,8 @@
 import { Chart } from "@/shared/types/chart";
 import { Layout } from "react-grid-layout";
 import { Tile } from "./types";
-import { pick } from "lodash";
 
+const chartTypes = Object.values(Chart);
 /**
  * Generates a default chart title based on the chart type
  */
@@ -15,7 +15,6 @@ export function getDefaultTitle(chartType: Chart): string {
  * Creates default tile configurations
  */
 export function createDefaultTiles(
-  chartTypes: Chart[],
   cols: number,
   tileWidth: number,
   tileHeight: number
@@ -52,16 +51,11 @@ export function createDefaultTiles(
 export function createLayoutFromTiles(tiles: Tile[]): Layout[] {
   return tiles.map((tile) => ({
     i: `tile-${tile.id}`,
-    ...pick(tile.layout, "x", "y", "w", "h"),
+    x: tile.layout.x,
+    y: tile.layout.y,
+    w: tile.layout.w,
+    h: tile.layout.h,
   }));
-}
-
-/**
- * Calculates the maximum row occupied by any tile
- */
-export function calculateMaxRow(tiles: Tile[]): number {
-  if (!tiles.length) return -1;
-  return Math.max(...tiles.map((tile) => tile.layout.y + tile.layout.h));
 }
 
 /**
@@ -71,12 +65,21 @@ export function updateTilesFromLayout(
   tiles: Tile[],
   newLayout: Layout[]
 ): Tile[] {
+  // Create a map for quick lookup
+  const layoutMap = new Map(newLayout.map((item) => [item.i, item]));
+
   return tiles.map((tile) => {
-    const layoutItem = newLayout.find((item) => item.i === `tile-${tile.id}`);
+    const layoutItem = layoutMap.get(`tile-${tile.id}`);
+
     if (layoutItem) {
       return {
         ...tile,
-        layout: layoutItem,
+        layout: {
+          x: layoutItem.x,
+          y: layoutItem.y,
+          w: layoutItem.w,
+          h: layoutItem.h,
+        },
       };
     }
     return tile;
@@ -95,7 +98,8 @@ export function createNewTile(
   tileHeight: number
 ): Tile {
   // Create a new tile ID
-  const newTileId = Math.max(...tiles.map((tile) => tile.id), -1) + 1;
+  const newTileId =
+    Math.max(...tiles.map((tile) => tile.id).concat([-1]), 0) + 1;
 
   // Ensure x doesn't exceed max columns
   const safeX = Math.min(position.x, maxColumns - tileWidth);

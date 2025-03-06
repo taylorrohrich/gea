@@ -50,47 +50,37 @@ export function Grid({
   const cols = 4;
   const rowHeight = 100;
 
-  // Available chart types
-  const chartTypes = useMemo<Chart[]>(
-    () => [
-      Chart.Line,
-      Chart.Bar,
-      Chart.Pie,
-      Chart.Area,
-      Chart.Scatter,
-      Chart.Map,
-    ],
-    []
-  );
-
   // Use memoized version of WidthProvider to prevent unnecessary re-renders
   const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
 
   // Load tiles from localStorage or use defaults
   const loadTilesConfig = useCallback((): Tile[] => {
     if (typeof window === "undefined") {
-      return createDefaultTiles(chartTypes, cols, tileWidth, tileHeight);
+      return createDefaultTiles(cols, tileWidth, tileHeight);
     }
 
     const savedConfig = localStorage.getItem(localStorageKey);
     if (!savedConfig) {
-      return createDefaultTiles(chartTypes, cols, tileWidth, tileHeight);
+      return createDefaultTiles(cols, tileWidth, tileHeight);
     }
 
     try {
       return JSON.parse(savedConfig);
     } catch (e) {
       console.error("Failed to parse saved grid configuration", e);
-      return createDefaultTiles(chartTypes, cols, tileWidth, tileHeight);
+      return createDefaultTiles(cols, tileWidth, tileHeight);
     }
-  }, [chartTypes, cols, tileWidth, tileHeight, localStorageKey]);
+  }, [cols, tileWidth, tileHeight, localStorageKey]);
 
-  // State for tiles and layout
+  // State for tiles
   const [tilesConfig, setTilesConfig] = useState<Tile[]>(() =>
     loadTilesConfig()
   );
-  const [layout, setLayout] = useState<Layout[]>(() =>
-    createLayoutFromTiles(tilesConfig)
+
+  // Derive layout from tiles using memoization instead of separate state
+  const layout = useMemo(
+    () => createLayoutFromTiles(tilesConfig),
+    [tilesConfig]
   );
 
   // Set isClient once after component mounts
@@ -116,7 +106,7 @@ export function Grid({
 
   // Layout change handler
   const handleLayoutChange = useCallback((newLayout: Layout[]) => {
-    setLayout(newLayout);
+    // Update tiles based on layout changes
     setTilesConfig((prev) => updateTilesFromLayout(prev, newLayout));
   }, []);
 
@@ -140,17 +130,8 @@ export function Grid({
         tileHeight
       );
 
+      // Only need to update tiles - layout will be derived automatically
       setTilesConfig((prev) => [...prev, newTile]);
-      setLayout((prev) => [
-        ...prev,
-        {
-          i: `tile-${newTile.id}`,
-          x: newTile.layout.x,
-          y: newTile.layout.y,
-          w: newTile.layout.w,
-          h: newTile.layout.h,
-        },
-      ]);
     },
     [gridPos, tilesConfig, cols, tileWidth, tileHeight]
   );
@@ -225,7 +206,6 @@ export function Grid({
   // Delete a tile
   const handleDeleteTile = useCallback((id: number) => {
     setTilesConfig((prev) => prev.filter((tile) => tile.id !== id));
-    setLayout((prev) => prev.filter((item) => item.i !== `tile-${id}`));
   }, []);
 
   // Render tiles

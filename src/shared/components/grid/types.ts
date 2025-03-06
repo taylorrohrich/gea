@@ -15,41 +15,10 @@ interface TileMetadata {
   description: string;
 }
 
-interface BaseTile {
+export interface Tile {
   id: number;
   layout: TileLayout;
   metadata: TileMetadata;
   viewMode?: ViewMode; // Add viewMode property to save chart/table preference
+  type: Chart;
 }
-
-interface LineTile extends BaseTile {
-  type: Chart.Line;
-}
-
-interface BarTile extends BaseTile {
-  type: Chart.Bar;
-}
-
-interface PieTile extends BaseTile {
-  type: Chart.Pie;
-}
-
-interface AreaTile extends BaseTile {
-  type: Chart.Area;
-}
-
-interface ScatterTile extends BaseTile {
-  type: Chart.Scatter;
-}
-
-interface MapTile extends BaseTile {
-  type: Chart.Map;
-}
-
-export type Tile =
-  | LineTile
-  | BarTile
-  | PieTile
-  | AreaTile
-  | ScatterTile
-  | MapTile;
