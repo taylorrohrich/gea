@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Container, Box } from "@mui/material";
 import { EmissionsFilters } from "@/shared/components/filters/EmissionsFilters";
 import { CountryCode } from "@/shared/types/countries";
+import { GridProvider } from "@/shared/components/grid/GridContext";
 
 interface SearchParams {
   startYear: string;
@@ -62,7 +63,9 @@ export default async function Home({
           </div>
         }
       >
-        <Grid data={data} />
+        <GridProvider data={data}>
+          <Grid />
+        </GridProvider>
       </Suspense>
     </Container>
   );

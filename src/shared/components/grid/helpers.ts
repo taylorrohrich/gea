@@ -1,6 +1,7 @@
 import { Chart } from "@/shared/types/chart";
 import { Layout } from "react-grid-layout";
 import { Tile } from "./types";
+import { GRID_COLS, TILE_HEIGHT, TILE_WIDTH } from "./constants";
 
 const chartTypes = Object.values(Chart);
 /**
@@ -14,15 +15,11 @@ export function getDefaultTitle(chartType: Chart): string {
 /**
  * Creates default tile configurations
  */
-export function createDefaultTiles(
-  cols: number,
-  tileWidth: number,
-  tileHeight: number
-): Tile[] {
+export function createDefaultTiles(): Tile[] {
   return [0, 1, 2].map((id) => {
-    const tilesPerRow = Math.floor(cols / tileWidth);
+    const tilesPerRow = Math.floor(GRID_COLS / TILE_WIDTH);
     const row = Math.floor(id / tilesPerRow);
-    const col = (id % tilesPerRow) * tileWidth;
+    const col = (id % tilesPerRow) * TILE_WIDTH;
 
     const chartType = chartTypes[id % chartTypes.length];
     const defaultTitle = getDefaultTitle(chartType);
@@ -32,9 +29,9 @@ export function createDefaultTiles(
       type: chartType,
       layout: {
         x: col,
-        y: row * tileHeight,
-        w: tileWidth,
-        h: tileHeight,
+        y: row * TILE_HEIGHT,
+        w: TILE_WIDTH,
+        h: TILE_HEIGHT,
       },
       metadata: {
         title: defaultTitle,
@@ -92,17 +89,14 @@ export function updateTilesFromLayout(
 export function createNewTile(
   tiles: Tile[],
   chartType: Chart,
-  position: { x: number; y: number },
-  maxColumns: number,
-  tileWidth: number,
-  tileHeight: number
+  position: { x: number; y: number }
 ): Tile {
   // Create a new tile ID
   const newTileId =
     Math.max(...tiles.map((tile) => tile.id).concat([-1]), 0) + 1;
 
   // Ensure x doesn't exceed max columns
-  const safeX = Math.min(position.x, maxColumns - tileWidth);
+  const safeX = Math.min(position.x, GRID_COLS - TILE_WIDTH);
 
   // Create new tile config
   return {
@@ -111,8 +105,8 @@ export function createNewTile(
     layout: {
       x: safeX,
       y: position.y,
-      w: tileWidth,
-      h: tileHeight,
+      w: TILE_WIDTH,
+      h: TILE_HEIGHT,
     },
     metadata: {
       title: getDefaultTitle(chartType),

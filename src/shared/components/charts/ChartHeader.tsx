@@ -21,15 +21,13 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Chart } from "../../types/chart";
 import { ViewMode } from "../grid/types";
-import { useGridContext } from "../grid/GridContext";
+import { useGridContext, GridActionType } from "../grid/GridContext";
 
 interface ChartHeaderProps {
   id: number;
   title: string;
   description: string;
-  chartType: Chart;
   viewMode: ViewMode;
   onViewModeChange: (viewMode: ViewMode) => void;
 }
@@ -38,7 +36,6 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   id,
   title,
   description,
-  chartType,
   viewMode,
   onViewModeChange,
 }) => {
@@ -65,7 +62,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
 
   const handleSaveChanges = () => {
     dispatch({
-      type: "UPDATE_TILE_METADATA",
+      type: GridActionType.UPDATE_TILE_METADATA,
       id,
       title: editTitle,
       description: editDescription,
@@ -84,7 +81,7 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
   };
 
   const handleConfirmDelete = () => {
-    dispatch({ type: "DELETE_TILE", id });
+    dispatch({ type: GridActionType.DELETE_TILE, id });
     setDeleteDialogOpen(false);
   };
 
