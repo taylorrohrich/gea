@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Global Emissions Analytics",
     images: [
       {
-        url: "/public/leaf.png",
+        url: "/leaf.png",
         width: 1200,
         height: 630,
         alt: "Global Emissions Preview",
@@ -34,6 +34,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Global Emissions Analytics",
     description: "Interactive data visualization for global emissions data",
-    images: ["/public/leaf.png"],
+    images: ["/leaf.png"],
   },
 };
