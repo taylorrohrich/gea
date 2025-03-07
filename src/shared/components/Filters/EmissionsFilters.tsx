@@ -54,10 +54,7 @@ export function EmissionsFilters({
 
   // Apply filters and update URL
   const applyFilters = () => {
-    const countriesParam =
-      selectedCountries.length === COUNTRY_COUNT
-        ? "All"
-        : selectedCountries.join(",");
+    const countriesParam = selectedCountries.join(",");
 
     // Update URL params
     const params = new URLSearchParams();

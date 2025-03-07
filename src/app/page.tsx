@@ -21,9 +21,9 @@ function getSearchParams(searchParams: Partial<SearchParams>) {
     ? parseInt(searchParams.endYear as string, 10)
     : 2022;
   let countries: CountryCode[] = [];
-  if (searchParams.countries === "All" || !searchParams.countries) {
+  if (!("countries" in searchParams)) {
     countries = Object.values(CountryCode);
-  } else {
+  } else if (searchParams.countries) {
     countries = searchParams.countries.split(",") as CountryCode[];
   }
   return { startYear, endYear, countries };
