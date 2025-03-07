@@ -7,7 +7,7 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { useGridContext, GridActionType } from "../grid/GridContext";
+import { useGridContext, GridActionType } from "../Grid/GridContext";
 
 interface Props {
   id: number;

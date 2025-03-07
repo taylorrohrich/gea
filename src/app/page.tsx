@@ -1,10 +1,10 @@
 import { getEmissionsData } from "@/shared/actions/emissions";
-import { Grid } from "@/shared/components/grid";
+import { Grid } from "@/shared/components/Grid";
 import { Suspense } from "react";
 import { Container, Box } from "@mui/material";
-import { EmissionsFilters } from "@/shared/components/filters/EmissionsFilters";
+import { EmissionsFilters } from "@/shared/components/Filters/EmissionsFilters";
 import { CountryCode } from "@/shared/types/countries";
-import { GridProvider } from "@/shared/components/grid/GridContext";
+import { GridProvider } from "@/shared/components/Grid/GridContext";
 
 interface SearchParams {
   startYear: string;

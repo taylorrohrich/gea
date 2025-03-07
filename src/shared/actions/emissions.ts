@@ -55,6 +55,7 @@ export async function getEmissionsData({
       // Handle empty data case
       if (!countryData || countryData.length === 0) {
         return {
+          id: code,
           label: COUNTRY_CODES_MAP[code] ?? code,
           values: [],
         };

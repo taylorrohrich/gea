@@ -7,7 +7,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import { useGridContext, GridActionType } from "../grid/GridContext";
+import { useGridContext, GridActionType } from "../Grid/GridContext";
 
 interface EditTileDialogProps {
   id: number;

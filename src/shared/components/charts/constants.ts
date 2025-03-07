@@ -8,3 +8,5 @@ export const COUNTRY_COLORS_MAP: Record<CountryCode, string> = {
   [CountryCode.FRA]: "#0088FE",
   [CountryCode.BRA]: "#FF5733",
 };
+
+export const CHART_Y_AXIS_LABEL = "Mt CO2e";

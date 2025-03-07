@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Chart } from "@/shared/types/chart";
 import { Data } from "@/shared/types/data";
 import { prepareTableData, shouldShowAggregatedData } from "./helpers";
+import { NoData } from "../../NoData";
 
 interface Props {
   data: Data[];
@@ -18,11 +19,7 @@ export function DataTable({ data, chartType }: Props) {
 
   // If no data, show a message
   if (rows.length === 0) {
-    return (
-      <div className="flex items-center justify-center h-full w-full">
-        No data available for display.
-      </div>
-    );
+    return <NoData />;
   }
 
   return (

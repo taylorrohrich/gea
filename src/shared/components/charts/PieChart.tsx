@@ -8,62 +8,28 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Data } from "@/shared/types/data";
+import { transformData } from "./helpers";
+import { NoData } from "../NoData";
+import { COUNTRY_COLORS_MAP } from "./constants";
 
-const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#8884d8",
-  "#82ca9d",
-];
-
-interface PieChartProps {
-  id: number;
+interface Props {
   data: Data[];
 }
 
-export const PieChart: React.FC<PieChartProps> = ({ id, data }) => {
-  // For pie chart, we'll use the sum of values for each series
-  const pieData = useMemo(() => {
-    if (!data || data.length === 0) {
-      return [];
-    }
-
-    return data.map((series) => {
-      // Sum all values in the series
-      const totalValue = series.values.reduce((sum, point) => sum + point.y, 0);
-
-      return {
-        name: series.label,
-        value: totalValue,
-      };
-    });
-  }, [data]);
-
-  // If no data, show a message
-  if (!data || data.length === 0 || pieData.length === 0) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-          background: "#f9f9f9",
-          color: "#666",
-        }}
-      >
-        No data available
-      </div>
-    );
+export function PieChart({ data }: Props) {
+  const chartData = useMemo(
+    () => transformData(data, { aggregate: true }),
+    [data]
+  );
+  if (!data || chartData.length === 0) {
+    return <NoData />;
   }
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RechartsPieChart>
         <Pie
-          data={pieData}
+          data={chartData}
           cx="50%"
           cy="50%"
           labelLine={false}
@@ -71,16 +37,15 @@ export const PieChart: React.FC<PieChartProps> = ({ id, data }) => {
             `${name}: ${(percent * 100).toFixed(0)}%`
           }
           outerRadius={80}
-          fill="#8884d8"
           dataKey="value"
         >
-          {pieData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          {data.map((series) => (
+            <Cell key={series.label} fill={COUNTRY_COLORS_MAP[series.id]} />
           ))}
         </Pie>
-        <Tooltip formatter={(value) => value.toFixed(2)} />
+        <Tooltip formatter={(value: number) => value.toFixed(2)} />
         <Legend />
       </RechartsPieChart>
     </ResponsiveContainer>
   );
-};
+}
