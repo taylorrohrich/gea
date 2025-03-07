@@ -91,7 +91,9 @@ export function TileHeader({ tile }: Props) {
         <Tooltip title="Download CSV">
           <IconButton
             size="small"
-            onClick={() => exportDataToCsv(data, title || "chart-data")}
+            onClick={() =>
+              exportDataToCsv(data, tile.type, title || "chart-data")
+            }
           >
             <FileDownloadIcon fontSize="small" />
           </IconButton>
