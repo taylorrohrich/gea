@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 
+// Metadata for the site
 export const metadata: Metadata = {
-  title: "Global Emissions Dashboard",
+  title: "Global Emissions Analytics",
   description: "Interactive data visualization for global emissions data",
   keywords: [
     "emissions",
@@ -16,13 +17,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://emissions-analyzer.example.com/",
-    title: "Global Emissions Dashboard",
+    url: "https://gea-six.vercel.app",
+    title: "Global Emissions Analytics",
     description: "Interactive data visualization for global emissions data",
-    siteName: "Global Emissions Dashboard",
+    siteName: "Global Emissions Analytics",
     images: [
       {
-        url: "/leaf.png",
+        url: "/public/leaf.png",
         width: 1200,
         height: 630,
         alt: "Global Emissions Preview",
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Global Emissions Dashboard",
+    title: "Global Emissions Analytics",
     description: "Interactive data visualization for global emissions data",
-    images: ["/leaf.png"],
+    images: ["/public/leaf.png"],
   },
 };

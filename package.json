@@ -5,9 +5,9 @@
   "description": "Global Emissions Analytics - Interactive data visualization tool for global emissions data",
   "author": {
     "name": "Taylor Rohrich",
-    "email": "admin@example.com"
+    "email": "taylorrohrich@gmail.com"
   },
-  "homepage": "https://gea.example.com",
+  "homepage": "https://gea-six.vercel.app",
   "repository": {
     "type": "git",
     "url": "https://github.com/taylorrohrich/gea.git"

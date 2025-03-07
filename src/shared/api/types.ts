@@ -1,3 +1,4 @@
+// these types outline the structure of the data that we will be fetching from the World Bank API
 export interface WorldBankMetadata {
   page: number;
   pages: number;

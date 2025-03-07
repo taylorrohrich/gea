@@ -13,6 +13,7 @@ interface SearchParams {
 }
 
 function getSearchParams(searchParams: Partial<SearchParams>) {
+  // convert to numbers or set defaults
   const startYear = searchParams.startYear
     ? parseInt(searchParams.startYear as string, 10)
     : 1972;
@@ -20,6 +21,7 @@ function getSearchParams(searchParams: Partial<SearchParams>) {
   const endYear = searchParams.endYear
     ? parseInt(searchParams.endYear as string, 10)
     : 2022;
+  // if country key not defined; default to all countries
   let countries: CountryCode[] = [];
   if (!("countries" in searchParams)) {
     countries = Object.values(CountryCode);
@@ -46,13 +48,12 @@ export default async function Home({
 
   return (
     <div className="container mx-auto py-16 flex gap-4 flex-col">
-      <h1 className="text-2xl font-bold">Greenhouse Gas Emissions Dashboard</h1>
+      <h1 className="text-2xl font-bold">Global Emissions Analytics</h1>
       <EmissionsFilters
         startYear={startYear}
         endYear={endYear}
         countries={countries}
       />
-
       <Suspense
         fallback={
           <div className="flex justify-center items-center h-[500px]">

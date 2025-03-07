@@ -1,30 +1,31 @@
+// used to load the map
 export const GEO_DATA = {
-  "type": "Topology",
-  "objects": {
-    "countries": {
-      "type": "GeometryCollection",
-      "geometries": [
+  type: "Topology",
+  objects: {
+    countries: {
+      type: "GeometryCollection",
+      geometries: [
         {
-          "type": "MultiPolygon",
-          "arcs": [[[0]], [[1]]],
-          "id": "242",
-          "properties": { "name": "Fiji" }
+          type: "MultiPolygon",
+          arcs: [[[0]], [[1]]],
+          id: "242",
+          properties: { name: "Fiji" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[2, 3, 4, 5, 6, 7, 8, 9, 10]],
-          "id": "834",
-          "properties": { "name": "Tanzania" }
+          type: "Polygon",
+          arcs: [[2, 3, 4, 5, 6, 7, 8, 9, 10]],
+          id: "834",
+          properties: { name: "Tanzania" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[11, 12, 13, 14]],
-          "id": "732",
-          "properties": { "name": "W. Sahara" }
+          type: "Polygon",
+          arcs: [[11, 12, 13, 14]],
+          id: "732",
+          properties: { name: "W. Sahara" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[15, 16, 17, 18]],
             [[19]],
             [[20]],
@@ -54,14 +55,14 @@ export const GEO_DATA = {
             [[44]],
             [[45]],
             [[46]],
-            [[47]]
+            [[47]],
           ],
-          "id": "124",
-          "properties": { "name": "Canada" }
+          id: "124",
+          properties: { name: "Canada" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[-19, 48, 49, 50]],
             [[51]],
             [[52]],
@@ -71,32 +72,32 @@ export const GEO_DATA = {
             [[56]],
             [[57]],
             [[-17, 58]],
-            [[59]]
+            [[59]],
           ],
-          "id": "840",
-          "properties": { "name": "United States of America" }
+          id: "840",
+          properties: { name: "United States of America" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[60, 61, 62, 63, 64, 65]],
-          "id": "398",
-          "properties": { "name": "Kazakhstan" }
+          type: "Polygon",
+          arcs: [[60, 61, 62, 63, 64, 65]],
+          id: "398",
+          properties: { name: "Kazakhstan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-63, 66, 67, 68, 69]],
-          "id": "860",
-          "properties": { "name": "Uzbekistan" }
+          type: "Polygon",
+          arcs: [[-63, 66, 67, 68, 69]],
+          id: "860",
+          properties: { name: "Uzbekistan" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[70, 71]], [[72]], [[73]], [[74]]],
-          "id": "598",
-          "properties": { "name": "Papua New Guinea" }
+          type: "MultiPolygon",
+          arcs: [[[70, 71]], [[72]], [[73]], [[74]]],
+          id: "598",
+          properties: { name: "Papua New Guinea" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[-72, 75]],
             [[76, 77]],
             [[78]],
@@ -109,68 +110,68 @@ export const GEO_DATA = {
             [[86]],
             [[87]],
             [[88]],
-            [[89]]
+            [[89]],
           ],
-          "id": "360",
-          "properties": { "name": "Indonesia" }
+          id: "360",
+          properties: { name: "Indonesia" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[90, 91]], [[92, 93, 94, 95, 96, 97]]],
-          "id": "032",
-          "properties": { "name": "Argentina" }
+          type: "MultiPolygon",
+          arcs: [[[90, 91]], [[92, 93, 94, 95, 96, 97]]],
+          id: "032",
+          properties: { name: "Argentina" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-92, 98]], [[99, -95, 100, 101]]],
-          "id": "152",
-          "properties": { "name": "Chile" }
+          type: "MultiPolygon",
+          arcs: [[[-92, 98]], [[99, -95, 100, 101]]],
+          id: "152",
+          properties: { name: "Chile" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-8, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111]],
-          "id": "180",
-          "properties": { "name": "Dem. Rep. Congo" }
+          type: "Polygon",
+          arcs: [[-8, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111]],
+          id: "180",
+          properties: { name: "Dem. Rep. Congo" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[112, 113, 114, 115]],
-          "id": "706",
-          "properties": { "name": "Somalia" }
+          type: "Polygon",
+          arcs: [[112, 113, 114, 115]],
+          id: "706",
+          properties: { name: "Somalia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-3, 116, 117, 118, -113, 119]],
-          "id": "404",
-          "properties": { "name": "Kenya" }
+          type: "Polygon",
+          arcs: [[-3, 116, 117, 118, -113, 119]],
+          id: "404",
+          properties: { name: "Kenya" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[120, 121, 122, 123, 124, 125, 126, 127]],
-          "id": "729",
-          "properties": { "name": "Sudan" }
+          type: "Polygon",
+          arcs: [[120, 121, 122, 123, 124, 125, 126, 127]],
+          id: "729",
+          properties: { name: "Sudan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-122, 128, 129, 130, 131]],
-          "id": "148",
-          "properties": { "name": "Chad" }
+          type: "Polygon",
+          arcs: [[-122, 128, 129, 130, 131]],
+          id: "148",
+          properties: { name: "Chad" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[132, 133]],
-          "id": "332",
-          "properties": { "name": "Haiti" }
+          type: "Polygon",
+          arcs: [[132, 133]],
+          id: "332",
+          properties: { name: "Haiti" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-133, 134]],
-          "id": "214",
-          "properties": { "name": "Dominican Rep." }
+          type: "Polygon",
+          arcs: [[-133, 134]],
+          id: "214",
+          properties: { name: "Dominican Rep." },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[135]],
             [[136]],
             [[137]],
@@ -183,878 +184,870 @@ export const GEO_DATA = {
             [
               [
                 146, 147, 148, 149, -66, 150, 151, 152, 153, 154, 155, 156, 157,
-                158, 159, 160, 161
-              ]
+                158, 159, 160, 161,
+              ],
             ],
             [[162]],
-            [[163, 164]]
+            [[163, 164]],
           ],
-          "id": "643",
-          "properties": { "name": "Russia" }
+          id: "643",
+          properties: { name: "Russia" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[165]], [[166]], [[167]]],
-          "id": "044",
-          "properties": { "name": "Bahamas" }
+          type: "MultiPolygon",
+          arcs: [[[165]], [[166]], [[167]]],
+          id: "044",
+          properties: { name: "Bahamas" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[168]],
-          "id": "238",
-          "properties": { "name": "Falkland Is." }
+          type: "Polygon",
+          arcs: [[168]],
+          id: "238",
+          properties: { name: "Falkland Is." },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[169]], [[-161, 170, 171, 172]], [[173]], [[174]]],
-          "id": "578",
-          "properties": { "name": "Norway" }
+          type: "MultiPolygon",
+          arcs: [[[169]], [[-161, 170, 171, 172]], [[173]], [[174]]],
+          id: "578",
+          properties: { name: "Norway" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[175]],
-          "id": "304",
-          "properties": { "name": "Greenland" }
+          type: "Polygon",
+          arcs: [[175]],
+          id: "304",
+          properties: { name: "Greenland" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[176]],
-          "id": "260",
-          "properties": { "name": "Fr. S. Antarctic Lands" }
+          type: "Polygon",
+          arcs: [[176]],
+          id: "260",
+          properties: { name: "Fr. S. Antarctic Lands" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[177, -77]],
-          "id": "626",
-          "properties": { "name": "Timor-Leste" }
+          type: "Polygon",
+          arcs: [[177, -77]],
+          id: "626",
+          properties: { name: "Timor-Leste" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[178, 179, 180, 181, 182, 183, 184], [185]],
-          "id": "710",
-          "properties": { "name": "South Africa" }
+          type: "Polygon",
+          arcs: [[178, 179, 180, 181, 182, 183, 184], [185]],
+          id: "710",
+          properties: { name: "South Africa" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-186]],
-          "id": "426",
-          "properties": { "name": "Lesotho" }
+          type: "Polygon",
+          arcs: [[-186]],
+          id: "426",
+          properties: { name: "Lesotho" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-50, 186, 187, 188, 189]],
-          "id": "484",
-          "properties": { "name": "Mexico" }
+          type: "Polygon",
+          arcs: [[-50, 186, 187, 188, 189]],
+          id: "484",
+          properties: { name: "Mexico" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[190, 191, -93]],
-          "id": "858",
-          "properties": { "name": "Uruguay" }
+          type: "Polygon",
+          arcs: [[190, 191, -93]],
+          id: "858",
+          properties: { name: "Uruguay" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-191, -98, 192, 193, 194, 195, 196, 197, 198, 199, 200]],
-          "id": "076",
-          "properties": { "name": "Brazil" }
+          type: "Polygon",
+          arcs: [[-191, -98, 192, 193, 194, 195, 196, 197, 198, 199, 200]],
+          id: "076",
+          properties: { name: "Brazil" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-194, 201, -96, -100, 202]],
-          "id": "068",
-          "properties": { "name": "Bolivia" }
+          type: "Polygon",
+          arcs: [[-194, 201, -96, -100, 202]],
+          id: "068",
+          properties: { name: "Bolivia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-195, -203, -102, 203, 204, 205]],
-          "id": "604",
-          "properties": { "name": "Peru" }
+          type: "Polygon",
+          arcs: [[-195, -203, -102, 203, 204, 205]],
+          id: "604",
+          properties: { name: "Peru" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-196, -206, 206, 207, 208, 209, 210]],
-          "id": "170",
-          "properties": { "name": "Colombia" }
+          type: "Polygon",
+          arcs: [[-196, -206, 206, 207, 208, 209, 210]],
+          id: "170",
+          properties: { name: "Colombia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-209, 211, 212, 213]],
-          "id": "591",
-          "properties": { "name": "Panama" }
+          type: "Polygon",
+          arcs: [[-209, 211, 212, 213]],
+          id: "591",
+          properties: { name: "Panama" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-213, 214, 215, 216]],
-          "id": "188",
-          "properties": { "name": "Costa Rica" }
+          type: "Polygon",
+          arcs: [[-213, 214, 215, 216]],
+          id: "188",
+          properties: { name: "Costa Rica" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-216, 217, 218, 219]],
-          "id": "558",
-          "properties": { "name": "Nicaragua" }
+          type: "Polygon",
+          arcs: [[-216, 217, 218, 219]],
+          id: "558",
+          properties: { name: "Nicaragua" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-219, 220, 221, 222, 223]],
-          "id": "340",
-          "properties": { "name": "Honduras" }
+          type: "Polygon",
+          arcs: [[-219, 220, 221, 222, 223]],
+          id: "340",
+          properties: { name: "Honduras" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-222, 224, 225]],
-          "id": "222",
-          "properties": { "name": "El Salvador" }
+          type: "Polygon",
+          arcs: [[-222, 224, 225]],
+          id: "222",
+          properties: { name: "El Salvador" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-189, 226, 227, -223, -226, 228]],
-          "id": "320",
-          "properties": { "name": "Guatemala" }
+          type: "Polygon",
+          arcs: [[-189, 226, 227, -223, -226, 228]],
+          id: "320",
+          properties: { name: "Guatemala" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-188, 229, -227]],
-          "id": "084",
-          "properties": { "name": "Belize" }
+          type: "Polygon",
+          arcs: [[-188, 229, -227]],
+          id: "084",
+          properties: { name: "Belize" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-197, -211, 230, 231]],
-          "id": "862",
-          "properties": { "name": "Venezuela" }
+          type: "Polygon",
+          arcs: [[-197, -211, 230, 231]],
+          id: "862",
+          properties: { name: "Venezuela" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-198, -232, 232, 233]],
-          "id": "328",
-          "properties": { "name": "Guyana" }
+          type: "Polygon",
+          arcs: [[-198, -232, 232, 233]],
+          id: "328",
+          properties: { name: "Guyana" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-199, -234, 234, 235]],
-          "id": "740",
-          "properties": { "name": "Suriname" }
+          type: "Polygon",
+          arcs: [[-199, -234, 234, 235]],
+          id: "740",
+          properties: { name: "Suriname" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[-200, -236, 236]],
             [[237, 238, 239, 240, 241, 242, 243, 244]],
-            [[245]]
+            [[245]],
           ],
-          "id": "250",
-          "properties": { "name": "France" }
+          id: "250",
+          properties: { name: "France" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-205, 246, -207]],
-          "id": "218",
-          "properties": { "name": "Ecuador" }
+          type: "Polygon",
+          arcs: [[-205, 246, -207]],
+          id: "218",
+          properties: { name: "Ecuador" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[247]],
-          "id": "630",
-          "properties": { "name": "Puerto Rico" }
+          type: "Polygon",
+          arcs: [[247]],
+          id: "630",
+          properties: { name: "Puerto Rico" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[248]],
-          "id": "388",
-          "properties": { "name": "Jamaica" }
+          type: "Polygon",
+          arcs: [[248]],
+          id: "388",
+          properties: { name: "Jamaica" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[249]],
-          "id": "192",
-          "properties": { "name": "Cuba" }
+          type: "Polygon",
+          arcs: [[249]],
+          id: "192",
+          properties: { name: "Cuba" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-181, 250, 251, 252]],
-          "id": "716",
-          "properties": { "name": "Zimbabwe" }
+          type: "Polygon",
+          arcs: [[-181, 250, 251, 252]],
+          id: "716",
+          properties: { name: "Zimbabwe" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-180, 253, 254, -251]],
-          "id": "072",
-          "properties": { "name": "Botswana" }
+          type: "Polygon",
+          arcs: [[-180, 253, 254, -251]],
+          id: "072",
+          properties: { name: "Botswana" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-179, 255, 256, 257, -254]],
-          "id": "516",
-          "properties": { "name": "Namibia" }
+          type: "Polygon",
+          arcs: [[-179, 255, 256, 257, -254]],
+          id: "516",
+          properties: { name: "Namibia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[258, 259, 260, 261, 262, 263, 264]],
-          "id": "686",
-          "properties": { "name": "Senegal" }
+          type: "Polygon",
+          arcs: [[258, 259, 260, 261, 262, 263, 264]],
+          id: "686",
+          properties: { name: "Senegal" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-261, 265, 266, 267, 268, 269, 270]],
-          "id": "466",
-          "properties": { "name": "Mali" }
+          type: "Polygon",
+          arcs: [[-261, 265, 266, 267, 268, 269, 270]],
+          id: "466",
+          properties: { name: "Mali" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-13, 271, -266, -260, 272]],
-          "id": "478",
-          "properties": { "name": "Mauritania" }
+          type: "Polygon",
+          arcs: [[-13, 271, -266, -260, 272]],
+          id: "478",
+          properties: { name: "Mauritania" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[273, 274, 275, 276, 277]],
-          "id": "204",
-          "properties": { "name": "Benin" }
+          type: "Polygon",
+          arcs: [[273, 274, 275, 276, 277]],
+          id: "204",
+          properties: { name: "Benin" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-131, 278, 279, -277, 280, -268, 281, 282]],
-          "id": "562",
-          "properties": { "name": "Niger" }
+          type: "Polygon",
+          arcs: [[-131, 278, 279, -277, 280, -268, 281, 282]],
+          id: "562",
+          properties: { name: "Niger" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-278, -280, 283, 284]],
-          "id": "566",
-          "properties": { "name": "Nigeria" }
+          type: "Polygon",
+          arcs: [[-278, -280, 283, 284]],
+          id: "566",
+          properties: { name: "Nigeria" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-130, 285, 286, 287, 288, 289, -284, -279]],
-          "id": "120",
-          "properties": { "name": "Cameroon" }
+          type: "Polygon",
+          arcs: [[-130, 285, 286, 287, 288, 289, -284, -279]],
+          id: "120",
+          properties: { name: "Cameroon" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-275, 290, 291, 292]],
-          "id": "768",
-          "properties": { "name": "Togo" }
+          type: "Polygon",
+          arcs: [[-275, 290, 291, 292]],
+          id: "768",
+          properties: { name: "Togo" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-292, 293, 294, 295]],
-          "id": "288",
-          "properties": { "name": "Ghana" }
+          type: "Polygon",
+          arcs: [[-292, 293, 294, 295]],
+          id: "288",
+          properties: { name: "Ghana" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-270, 296, -295, 297, 298, 299]],
-          "id": "384",
-          "properties": { "name": "Côte d'Ivoire" }
+          type: "Polygon",
+          arcs: [[-270, 296, -295, 297, 298, 299]],
+          id: "384",
+          properties: { name: "Côte d'Ivoire" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-262, -271, -300, 300, 301, 302, 303]],
-          "id": "324",
-          "properties": { "name": "Guinea" }
+          type: "Polygon",
+          arcs: [[-262, -271, -300, 300, 301, 302, 303]],
+          id: "324",
+          properties: { name: "Guinea" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-263, -304, 304]],
-          "id": "624",
-          "properties": { "name": "Guinea-Bissau" }
+          type: "Polygon",
+          arcs: [[-263, -304, 304]],
+          id: "624",
+          properties: { name: "Guinea-Bissau" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-299, 305, 306, -301]],
-          "id": "430",
-          "properties": { "name": "Liberia" }
+          type: "Polygon",
+          arcs: [[-299, 305, 306, -301]],
+          id: "430",
+          properties: { name: "Liberia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-302, -307, 307]],
-          "id": "694",
-          "properties": { "name": "Sierra Leone" }
+          type: "Polygon",
+          arcs: [[-302, -307, 307]],
+          id: "694",
+          properties: { name: "Sierra Leone" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-269, -281, -276, -293, -296, -297]],
-          "id": "854",
-          "properties": { "name": "Burkina Faso" }
+          type: "Polygon",
+          arcs: [[-269, -281, -276, -293, -296, -297]],
+          id: "854",
+          properties: { name: "Burkina Faso" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-108, 308, -286, -129, -121, 309]],
-          "id": "140",
-          "properties": { "name": "Central African Rep." }
+          type: "Polygon",
+          arcs: [[-108, 308, -286, -129, -121, 309]],
+          id: "140",
+          properties: { name: "Central African Rep." },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-107, 310, 311, 312, -287, -309]],
-          "id": "178",
-          "properties": { "name": "Congo" }
+          type: "Polygon",
+          arcs: [[-107, 310, 311, 312, -287, -309]],
+          id: "178",
+          properties: { name: "Congo" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-288, -313, 313, 314]],
-          "id": "266",
-          "properties": { "name": "Gabon" }
+          type: "Polygon",
+          arcs: [[-288, -313, 313, 314]],
+          id: "266",
+          properties: { name: "Gabon" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-289, -315, 315]],
-          "id": "226",
-          "properties": { "name": "Eq. Guinea" }
+          type: "Polygon",
+          arcs: [[-289, -315, 315]],
+          id: "226",
+          properties: { name: "Eq. Guinea" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-7, 316, 317, -252, -255, -258, 318, -103]],
-          "id": "894",
-          "properties": { "name": "Zambia" }
+          type: "Polygon",
+          arcs: [[-7, 316, 317, -252, -255, -258, 318, -103]],
+          id: "894",
+          properties: { name: "Zambia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-6, 319, -317]],
-          "id": "454",
-          "properties": { "name": "Malawi" }
+          type: "Polygon",
+          arcs: [[-6, 319, -317]],
+          id: "454",
+          properties: { name: "Malawi" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-5, 320, -184, 321, -182, -253, -318, -320]],
-          "id": "508",
-          "properties": { "name": "Mozambique" }
+          type: "Polygon",
+          arcs: [[-5, 320, -184, 321, -182, -253, -318, -320]],
+          id: "508",
+          properties: { name: "Mozambique" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-183, -322]],
-          "id": "748",
-          "properties": { "name": "eSwatini" }
+          type: "Polygon",
+          arcs: [[-183, -322]],
+          id: "748",
+          properties: { name: "eSwatini" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-106, 322, -311]], [[-104, -319, -257, 323]]],
-          "id": "024",
-          "properties": { "name": "Angola" }
+          type: "MultiPolygon",
+          arcs: [[[-106, 322, -311]], [[-104, -319, -257, 323]]],
+          id: "024",
+          properties: { name: "Angola" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-9, -112, 324]],
-          "id": "108",
-          "properties": { "name": "Burundi" }
+          type: "Polygon",
+          arcs: [[-9, -112, 324]],
+          id: "108",
+          properties: { name: "Burundi" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[325, 326, 327, 328, 329, 330, 331]],
-          "id": "376",
-          "properties": { "name": "Israel" }
+          type: "Polygon",
+          arcs: [[325, 326, 327, 328, 329, 330, 331]],
+          id: "376",
+          properties: { name: "Israel" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-331, 332, 333]],
-          "id": "422",
-          "properties": { "name": "Lebanon" }
+          type: "Polygon",
+          arcs: [[-331, 332, 333]],
+          id: "422",
+          properties: { name: "Lebanon" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[334]],
-          "id": "450",
-          "properties": { "name": "Madagascar" }
+          type: "Polygon",
+          arcs: [[334]],
+          id: "450",
+          properties: { name: "Madagascar" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-327, 335]],
-          "id": "275",
-          "properties": { "name": "Palestine" }
+          type: "Polygon",
+          arcs: [[-327, 335]],
+          id: "275",
+          properties: { name: "Palestine" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-265, 336]],
-          "id": "270",
-          "properties": { "name": "Gambia" }
+          type: "Polygon",
+          arcs: [[-265, 336]],
+          id: "270",
+          properties: { name: "Gambia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[337, 338, 339]],
-          "id": "788",
-          "properties": { "name": "Tunisia" }
+          type: "Polygon",
+          arcs: [[337, 338, 339]],
+          id: "788",
+          properties: { name: "Tunisia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-12, 340, 341, -338, 342, -282, -267, -272]],
-          "id": "012",
-          "properties": { "name": "Algeria" }
+          type: "Polygon",
+          arcs: [[-12, 340, 341, -338, 342, -282, -267, -272]],
+          id: "012",
+          properties: { name: "Algeria" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-326, 343, 344, 345, 346, -328, -336]],
-          "id": "400",
-          "properties": { "name": "Jordan" }
+          type: "Polygon",
+          arcs: [[-326, 343, 344, 345, 346, -328, -336]],
+          id: "400",
+          properties: { name: "Jordan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[347, 348, 349, 350, 351]],
-          "id": "784",
-          "properties": { "name": "United Arab Emirates" }
+          type: "Polygon",
+          arcs: [[347, 348, 349, 350, 351]],
+          id: "784",
+          properties: { name: "United Arab Emirates" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[352, 353]],
-          "id": "634",
-          "properties": { "name": "Qatar" }
+          type: "Polygon",
+          arcs: [[352, 353]],
+          id: "634",
+          properties: { name: "Qatar" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[354, 355, 356]],
-          "id": "414",
-          "properties": { "name": "Kuwait" }
+          type: "Polygon",
+          arcs: [[354, 355, 356]],
+          id: "414",
+          properties: { name: "Kuwait" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-345, 357, 358, 359, 360, -357, 361]],
-          "id": "368",
-          "properties": { "name": "Iraq" }
+          type: "Polygon",
+          arcs: [[-345, 357, 358, 359, 360, -357, 361]],
+          id: "368",
+          properties: { name: "Iraq" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-351, 362, 363, 364]], [[-349, 365]]],
-          "id": "512",
-          "properties": { "name": "Oman" }
+          type: "MultiPolygon",
+          arcs: [[[-351, 362, 363, 364]], [[-349, 365]]],
+          id: "512",
+          properties: { name: "Oman" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[366]], [[367]]],
-          "id": "548",
-          "properties": { "name": "Vanuatu" }
+          type: "MultiPolygon",
+          arcs: [[[366]], [[367]]],
+          id: "548",
+          properties: { name: "Vanuatu" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[368, 369, 370, 371]],
-          "id": "116",
-          "properties": { "name": "Cambodia" }
+          type: "Polygon",
+          arcs: [[368, 369, 370, 371]],
+          id: "116",
+          properties: { name: "Cambodia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-369, 372, 373, 374, 375, 376]],
-          "id": "764",
-          "properties": { "name": "Thailand" }
+          type: "Polygon",
+          arcs: [[-369, 372, 373, 374, 375, 376]],
+          id: "764",
+          properties: { name: "Thailand" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-370, -377, 377, 378, 379]],
-          "id": "418",
-          "properties": { "name": "Laos" }
+          type: "Polygon",
+          arcs: [[-370, -377, 377, 378, 379]],
+          id: "418",
+          properties: { name: "Laos" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-376, 380, 381, 382, 383, -378]],
-          "id": "104",
-          "properties": { "name": "Myanmar" }
+          type: "Polygon",
+          arcs: [[-376, 380, 381, 382, 383, -378]],
+          id: "104",
+          properties: { name: "Myanmar" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-371, -380, 384, 385]],
-          "id": "704",
-          "properties": { "name": "Vietnam" }
+          type: "Polygon",
+          arcs: [[-371, -380, 384, 385]],
+          id: "704",
+          properties: { name: "Vietnam" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[386, 386, 386]], [[-147, 387, 388, 389, 390]]],
-          "id": "408",
-          "properties": { "name": "North Korea" }
+          type: "MultiPolygon",
+          arcs: [[[386, 386, 386]], [[-147, 387, 388, 389, 390]]],
+          id: "408",
+          properties: { name: "North Korea" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-389, 391]],
-          "id": "410",
-          "properties": { "name": "South Korea" }
+          type: "Polygon",
+          arcs: [[-389, 391]],
+          id: "410",
+          properties: { name: "South Korea" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-149, 392]],
-          "id": "496",
-          "properties": { "name": "Mongolia" }
+          type: "Polygon",
+          arcs: [[-149, 392]],
+          id: "496",
+          properties: { name: "Mongolia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-383, 393, 394, 395, 396, 397, 398, 399, 400]],
-          "id": "356",
-          "properties": { "name": "India" }
+          type: "Polygon",
+          arcs: [[-383, 393, 394, 395, 396, 397, 398, 399, 400]],
+          id: "356",
+          properties: { name: "India" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-382, 401, -394]],
-          "id": "050",
-          "properties": { "name": "Bangladesh" }
+          type: "Polygon",
+          arcs: [[-382, 401, -394]],
+          id: "050",
+          properties: { name: "Bangladesh" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-400, 402]],
-          "id": "064",
-          "properties": { "name": "Bhutan" }
+          type: "Polygon",
+          arcs: [[-400, 402]],
+          id: "064",
+          properties: { name: "Bhutan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-398, 403]],
-          "id": "524",
-          "properties": { "name": "Nepal" }
+          type: "Polygon",
+          arcs: [[-398, 403]],
+          id: "524",
+          properties: { name: "Nepal" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-396, 404, 405, 406, 407]],
-          "id": "586",
-          "properties": { "name": "Pakistan" }
+          type: "Polygon",
+          arcs: [[-396, 404, 405, 406, 407]],
+          id: "586",
+          properties: { name: "Pakistan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-69, 408, 409, -407, 410, 411]],
-          "id": "004",
-          "properties": { "name": "Afghanistan" }
+          type: "Polygon",
+          arcs: [[-69, 408, 409, -407, 410, 411]],
+          id: "004",
+          properties: { name: "Afghanistan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-68, 412, 413, -409]],
-          "id": "762",
-          "properties": { "name": "Tajikistan" }
+          type: "Polygon",
+          arcs: [[-68, 412, 413, -409]],
+          id: "762",
+          properties: { name: "Tajikistan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-62, 414, -413, -67]],
-          "id": "417",
-          "properties": { "name": "Kyrgyzstan" }
+          type: "Polygon",
+          arcs: [[-62, 414, -413, -67]],
+          id: "417",
+          properties: { name: "Kyrgyzstan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-64, -70, -412, 415, 416]],
-          "id": "795",
-          "properties": { "name": "Turkmenistan" }
+          type: "Polygon",
+          arcs: [[-64, -70, -412, 415, 416]],
+          id: "795",
+          properties: { name: "Turkmenistan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-360, 417, 418, 419, 420, 421, -416, -411, -406, 422]],
-          "id": "364",
-          "properties": { "name": "Iran" }
+          type: "Polygon",
+          arcs: [[-360, 417, 418, 419, 420, 421, -416, -411, -406, 422]],
+          id: "364",
+          properties: { name: "Iran" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-332, -334, 423, 424, -358, -344]],
-          "id": "760",
-          "properties": { "name": "Syria" }
+          type: "Polygon",
+          arcs: [[-332, -334, 423, 424, -358, -344]],
+          id: "760",
+          properties: { name: "Syria" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-420, 425, 426, 427, 428]],
-          "id": "051",
-          "properties": { "name": "Armenia" }
+          type: "Polygon",
+          arcs: [[-420, 425, 426, 427, 428]],
+          id: "051",
+          properties: { name: "Armenia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-172, 429, 430]],
-          "id": "752",
-          "properties": { "name": "Sweden" }
+          type: "Polygon",
+          arcs: [[-172, 429, 430]],
+          id: "752",
+          properties: { name: "Sweden" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-156, 431, 432, 433, 434]],
-          "id": "112",
-          "properties": { "name": "Belarus" }
+          type: "Polygon",
+          arcs: [[-156, 431, 432, 433, 434]],
+          id: "112",
+          properties: { name: "Belarus" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-155, 435, -164, 436, 437, 438, 439, 440, 441, 442, -432]],
-          "id": "804",
-          "properties": { "name": "Ukraine" }
+          type: "Polygon",
+          arcs: [[-155, 435, -164, 436, 437, 438, 439, 440, 441, 442, -432]],
+          id: "804",
+          properties: { name: "Ukraine" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-433, -443, 443, 444, 445, 446, -142, 447]],
-          "id": "616",
-          "properties": { "name": "Poland" }
+          type: "Polygon",
+          arcs: [[-433, -443, 443, 444, 445, 446, -142, 447]],
+          id: "616",
+          properties: { name: "Poland" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[448, 449, 450, 451, 452, 453, 454]],
-          "id": "040",
-          "properties": { "name": "Austria" }
+          type: "Polygon",
+          arcs: [[448, 449, 450, 451, 452, 453, 454]],
+          id: "040",
+          properties: { name: "Austria" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-441, 455, 456, 457, 458, -449, 459]],
-          "id": "348",
-          "properties": { "name": "Hungary" }
+          type: "Polygon",
+          arcs: [[-441, 455, 456, 457, 458, -449, 459]],
+          id: "348",
+          properties: { name: "Hungary" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-439, 460]],
-          "id": "498",
-          "properties": { "name": "Moldova" }
+          type: "Polygon",
+          arcs: [[-439, 460]],
+          id: "498",
+          properties: { name: "Moldova" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-438, 461, 462, 463, -456, -440, -461]],
-          "id": "642",
-          "properties": { "name": "Romania" }
+          type: "Polygon",
+          arcs: [[-438, 461, 462, 463, -456, -440, -461]],
+          id: "642",
+          properties: { name: "Romania" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-434, -448, -144, 464, 465]],
-          "id": "440",
-          "properties": { "name": "Lithuania" }
+          type: "Polygon",
+          arcs: [[-434, -448, -144, 464, 465]],
+          id: "440",
+          properties: { name: "Lithuania" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-157, -435, -466, 466, 467]],
-          "id": "428",
-          "properties": { "name": "Latvia" }
+          type: "Polygon",
+          arcs: [[-157, -435, -466, 466, 467]],
+          id: "428",
+          properties: { name: "Latvia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-158, -468, 468]],
-          "id": "233",
-          "properties": { "name": "Estonia" }
+          type: "Polygon",
+          arcs: [[-158, -468, 468]],
+          id: "233",
+          properties: { name: "Estonia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-446, 469, -453, 470, -238, 471, 472, 473, 474, 475, 476]],
-          "id": "276",
-          "properties": { "name": "Germany" }
+          type: "Polygon",
+          arcs: [[-446, 469, -453, 470, -238, 471, 472, 473, 474, 475, 476]],
+          id: "276",
+          properties: { name: "Germany" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-463, 477, 478, 479, 480, 481]],
-          "id": "100",
-          "properties": { "name": "Bulgaria" }
+          type: "Polygon",
+          arcs: [[-463, 477, 478, 479, 480, 481]],
+          id: "100",
+          properties: { name: "Bulgaria" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[482]], [[-480, 483, 484, 485, 486]]],
-          "id": "300",
-          "properties": { "name": "Greece" }
+          type: "MultiPolygon",
+          arcs: [[[482]], [[-480, 483, 484, 485, 486]]],
+          id: "300",
+          properties: { name: "Greece" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-359, -425, 487, 488, -427, -418]], [[-479, 489, -484]]],
-          "id": "792",
-          "properties": { "name": "Turkey" }
+          type: "MultiPolygon",
+          arcs: [[[-359, -425, 487, 488, -427, -418]], [[-479, 489, -484]]],
+          id: "792",
+          properties: { name: "Turkey" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-486, 490, 491, 492, 493]],
-          "id": "008",
-          "properties": { "name": "Albania" }
+          type: "Polygon",
+          arcs: [[-486, 490, 491, 492, 493]],
+          id: "008",
+          properties: { name: "Albania" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-458, 494, 495, 496, 497, 498]],
-          "id": "191",
-          "properties": { "name": "Croatia" }
+          type: "Polygon",
+          arcs: [[-458, 494, 495, 496, 497, 498]],
+          id: "191",
+          properties: { name: "Croatia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-452, 499, -239, -471]],
-          "id": "756",
-          "properties": { "name": "Switzerland" }
+          type: "Polygon",
+          arcs: [[-452, 499, -239, -471]],
+          id: "756",
+          properties: { name: "Switzerland" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-472, -245, 500]],
-          "id": "442",
-          "properties": { "name": "Luxembourg" }
+          type: "Polygon",
+          arcs: [[-472, -245, 500]],
+          id: "442",
+          properties: { name: "Luxembourg" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-473, -501, -244, 501, 502]],
-          "id": "056",
-          "properties": { "name": "Belgium" }
+          type: "Polygon",
+          arcs: [[-473, -501, -244, 501, 502]],
+          id: "056",
+          properties: { name: "Belgium" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-474, -503, 503]],
-          "id": "528",
-          "properties": { "name": "Netherlands" }
+          type: "Polygon",
+          arcs: [[-474, -503, 503]],
+          id: "528",
+          properties: { name: "Netherlands" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[504, 505]],
-          "id": "620",
-          "properties": { "name": "Portugal" }
+          type: "Polygon",
+          arcs: [[504, 505]],
+          id: "620",
+          properties: { name: "Portugal" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-505, 506, -242, 507]],
-          "id": "724",
-          "properties": { "name": "Spain" }
+          type: "Polygon",
+          arcs: [[-505, 506, -242, 507]],
+          id: "724",
+          properties: { name: "Spain" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[508, 509]],
-          "id": "372",
-          "properties": { "name": "Ireland" }
+          type: "Polygon",
+          arcs: [[508, 509]],
+          id: "372",
+          properties: { name: "Ireland" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[510]],
-          "id": "540",
-          "properties": { "name": "New Caledonia" }
+          type: "Polygon",
+          arcs: [[510]],
+          id: "540",
+          properties: { name: "New Caledonia" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[511]], [[512]], [[513]], [[514]], [[515]]],
-          "id": "090",
-          "properties": { "name": "Solomon Is." }
+          type: "MultiPolygon",
+          arcs: [[[511]], [[512]], [[513]], [[514]], [[515]]],
+          id: "090",
+          properties: { name: "Solomon Is." },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[516]], [[517]]],
-          "id": "554",
-          "properties": { "name": "New Zealand" }
+          type: "MultiPolygon",
+          arcs: [[[516]], [[517]]],
+          id: "554",
+          properties: { name: "New Zealand" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[518]], [[519]]],
-          "id": "036",
-          "properties": { "name": "Australia" }
+          type: "MultiPolygon",
+          arcs: [[[518]], [[519]]],
+          id: "036",
+          properties: { name: "Australia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[520]],
-          "id": "144",
-          "properties": { "name": "Sri Lanka" }
+          type: "Polygon",
+          arcs: [[520]],
+          id: "144",
+          properties: { name: "Sri Lanka" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[521]],
             [
               [
                 -61, -150, -393, -148, -391, 522, -385, -379, -384, -401, -403,
-                -399, -404, -397, -408, -410, -414, -415
-              ]
-            ]
+                -399, -404, -397, -408, -410, -414, -415,
+              ],
+            ],
           ],
-          "id": "156",
-          "properties": { "name": "China" }
+          id: "156",
+          properties: { name: "China" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[523]],
-          "id": "158",
-          "properties": { "name": "Taiwan" }
+          type: "Polygon",
+          arcs: [[523]],
+          id: "158",
+          properties: { name: "Taiwan" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-451, 524, 525, -240, -500]], [[526]], [[527]]],
-          "id": "380",
-          "properties": { "name": "Italy" }
+          type: "MultiPolygon",
+          arcs: [[[-451, 524, 525, -240, -500]], [[526]], [[527]]],
+          id: "380",
+          properties: { name: "Italy" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-476, 528]], [[529]]],
-          "id": "208",
-          "properties": { "name": "Denmark" }
+          type: "MultiPolygon",
+          arcs: [[[-476, 528]], [[529]]],
+          id: "208",
+          properties: { name: "Denmark" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-510, 530]], [[531]]],
-          "id": "826",
-          "properties": { "name": "United Kingdom" }
+          type: "MultiPolygon",
+          arcs: [[[-510, 530]], [[531]]],
+          id: "826",
+          properties: { name: "United Kingdom" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[532]],
-          "id": "352",
-          "properties": { "name": "Iceland" }
+          type: "Polygon",
+          arcs: [[532]],
+          id: "352",
+          properties: { name: "Iceland" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-152, 533, -421, -429, 534]], [[-419, -426]]],
-          "id": "031",
-          "properties": { "name": "Azerbaijan" }
+          type: "MultiPolygon",
+          arcs: [[[-152, 533, -421, -429, 534]], [[-419, -426]]],
+          id: "031",
+          properties: { name: "Azerbaijan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-153, -535, -428, -489, 535]],
-          "id": "268",
-          "properties": { "name": "Georgia" }
+          type: "Polygon",
+          arcs: [[-153, -535, -428, -489, 535]],
+          id: "268",
+          properties: { name: "Georgia" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
-            [[536]],
-            [[537]],
-            [[538]],
-            [[539]],
-            [[540]],
-            [[541]],
-            [[542]]
-          ],
-          "id": "608",
-          "properties": { "name": "Philippines" }
+          type: "MultiPolygon",
+          arcs: [[[536]], [[537]], [[538]], [[539]], [[540]], [[541]], [[542]]],
+          id: "608",
+          properties: { name: "Philippines" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[-374, 543]], [[-81, 544, 545, 546]]],
-          "id": "458",
-          "properties": { "name": "Malaysia" }
+          type: "MultiPolygon",
+          arcs: [[[-374, 543]], [[-81, 544, 545, 546]]],
+          id: "458",
+          properties: { name: "Malaysia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-546, 547]],
-          "id": "096",
-          "properties": { "name": "Brunei" }
+          type: "Polygon",
+          arcs: [[-546, 547]],
+          id: "096",
+          properties: { name: "Brunei" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-450, -459, -499, 548, -525]],
-          "id": "705",
-          "properties": { "name": "Slovenia" }
+          type: "Polygon",
+          arcs: [[-450, -459, -499, 548, -525]],
+          id: "705",
+          properties: { name: "Slovenia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-160, 549, -430, -171]],
-          "id": "246",
-          "properties": { "name": "Finland" }
+          type: "Polygon",
+          arcs: [[-160, 549, -430, -171]],
+          id: "246",
+          properties: { name: "Finland" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-442, -460, -455, 550, -444]],
-          "id": "703",
-          "properties": { "name": "Slovakia" }
+          type: "Polygon",
+          arcs: [[-442, -460, -455, 550, -444]],
+          id: "703",
+          properties: { name: "Slovakia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-445, -551, -454, -470]],
-          "id": "203",
-          "properties": { "name": "Czechia" }
+          type: "Polygon",
+          arcs: [[-445, -551, -454, -470]],
+          id: "203",
+          properties: { name: "Czechia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-126, 551, 552, 553]],
-          "id": "232",
-          "properties": { "name": "Eritrea" }
+          type: "Polygon",
+          arcs: [[-126, 551, 552, 553]],
+          id: "232",
+          properties: { name: "Eritrea" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [[[554]], [[555]], [[556]]],
-          "id": "392",
-          "properties": { "name": "Japan" }
+          type: "MultiPolygon",
+          arcs: [[[554]], [[555]], [[556]]],
+          id: "392",
+          properties: { name: "Japan" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-193, -97, -202]],
-          "id": "600",
-          "properties": { "name": "Paraguay" }
+          type: "Polygon",
+          arcs: [[-193, -97, -202]],
+          id: "600",
+          properties: { name: "Paraguay" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-364, 557, 558]],
-          "id": "887",
-          "properties": { "name": "Yemen" }
+          type: "Polygon",
+          arcs: [[-364, 557, 558]],
+          id: "887",
+          properties: { name: "Yemen" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-346, -362, -356, 559, -354, 560, -352, -365, -559, 561]],
-          "id": "682",
-          "properties": { "name": "Saudi Arabia" }
+          type: "Polygon",
+          arcs: [[-346, -362, -356, 559, -354, 560, -352, -365, -559, 561]],
+          id: "682",
+          properties: { name: "Saudi Arabia" },
         },
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[562]],
             [[563]],
             [[564]],
@@ -1062,118 +1055,118 @@ export const GEO_DATA = {
             [[566]],
             [[567]],
             [[568]],
-            [[569]]
+            [[569]],
           ],
-          "id": "010",
-          "properties": { "name": "Antarctica" }
+          id: "010",
+          properties: { name: "Antarctica" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[570, 571]],
-          "properties": { "name": "N. Cyprus" }
+          type: "Polygon",
+          arcs: [[570, 571]],
+          properties: { name: "N. Cyprus" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-572, 572]],
-          "id": "196",
-          "properties": { "name": "Cyprus" }
+          type: "Polygon",
+          arcs: [[-572, 572]],
+          id: "196",
+          properties: { name: "Cyprus" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-341, -15, 573]],
-          "id": "504",
-          "properties": { "name": "Morocco" }
+          type: "Polygon",
+          arcs: [[-341, -15, 573]],
+          id: "504",
+          properties: { name: "Morocco" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-124, 574, 575, -329, 576]],
-          "id": "818",
-          "properties": { "name": "Egypt" }
+          type: "Polygon",
+          arcs: [[-124, 574, 575, -329, 576]],
+          id: "818",
+          properties: { name: "Egypt" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-123, -132, -283, -343, -340, 577, -575]],
-          "id": "434",
-          "properties": { "name": "Libya" }
+          type: "Polygon",
+          arcs: [[-123, -132, -283, -343, -340, 577, -575]],
+          id: "434",
+          properties: { name: "Libya" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-114, -119, 578, -127, -554, 579, 580]],
-          "id": "231",
-          "properties": { "name": "Ethiopia" }
+          type: "Polygon",
+          arcs: [[-114, -119, 578, -127, -554, 579, 580]],
+          id: "231",
+          properties: { name: "Ethiopia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-553, 581, 582, -580]],
-          "id": "262",
-          "properties": { "name": "Djibouti" }
+          type: "Polygon",
+          arcs: [[-553, 581, 582, -580]],
+          id: "262",
+          properties: { name: "Djibouti" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-115, -581, -583, 583]],
-          "properties": { "name": "Somaliland" }
+          type: "Polygon",
+          arcs: [[-115, -581, -583, 583]],
+          properties: { name: "Somaliland" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-11, 584, -110, 585, -117]],
-          "id": "800",
-          "properties": { "name": "Uganda" }
+          type: "Polygon",
+          arcs: [[-11, 584, -110, 585, -117]],
+          id: "800",
+          properties: { name: "Uganda" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-10, -325, -111, -585]],
-          "id": "646",
-          "properties": { "name": "Rwanda" }
+          type: "Polygon",
+          arcs: [[-10, -325, -111, -585]],
+          id: "646",
+          properties: { name: "Rwanda" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-496, 586, 587]],
-          "id": "070",
-          "properties": { "name": "Bosnia and Herz." }
+          type: "Polygon",
+          arcs: [[-496, 586, 587]],
+          id: "070",
+          properties: { name: "Bosnia and Herz." },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-481, -487, -494, 588, 589]],
-          "id": "807",
-          "properties": { "name": "Macedonia" }
+          type: "Polygon",
+          arcs: [[-481, -487, -494, 588, 589]],
+          id: "807",
+          properties: { name: "Macedonia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-457, -464, -482, -590, 590, 591, -587, -495]],
-          "id": "688",
-          "properties": { "name": "Serbia" }
+          type: "Polygon",
+          arcs: [[-457, -464, -482, -590, 590, 591, -587, -495]],
+          id: "688",
+          properties: { name: "Serbia" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-492, 592, -497, -588, -592, 593]],
-          "id": "499",
-          "properties": { "name": "Montenegro" }
+          type: "Polygon",
+          arcs: [[-492, 592, -497, -588, -592, 593]],
+          id: "499",
+          properties: { name: "Montenegro" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-493, -594, -591, -589]],
-          "properties": { "name": "Kosovo" }
+          type: "Polygon",
+          arcs: [[-493, -594, -591, -589]],
+          properties: { name: "Kosovo" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[594]],
-          "id": "780",
-          "properties": { "name": "Trinidad and Tobago" }
+          type: "Polygon",
+          arcs: [[594]],
+          id: "780",
+          properties: { name: "Trinidad and Tobago" },
         },
         {
-          "type": "Polygon",
-          "arcs": [[-109, -310, -128, -579, -118, -586]],
-          "id": "728",
-          "properties": { "name": "S. Sudan" }
-        }
-      ]
+          type: "Polygon",
+          arcs: [[-109, -310, -128, -579, -118, -586]],
+          id: "728",
+          properties: { name: "S. Sudan" },
+        },
+      ],
     },
-    "land": {
-      "type": "GeometryCollection",
-      "geometries": [
+    land: {
+      type: "GeometryCollection",
+      geometries: [
         {
-          "type": "MultiPolygon",
-          "arcs": [
+          type: "MultiPolygon",
+          arcs: [
             [[0]],
             [[1]],
             [
@@ -1185,16 +1178,16 @@ export const GEO_DATA = {
                 242, 501, 503, 474, 528, 476, 446, 142, 464, 466, 468, 158, 549,
                 430, 172, 161, 387, 391, 389, 522, 385, 371, 372, 543, 374, 380,
                 401, 394, 404, 422, 360, 354, 559, 352, 560, 347, 365, 349, 362,
-                557, 561, 346, 576, 124, 551, 581, 583, 115, 119
+                557, 561, 346, 576, 124, 551, 581, 583, 115, 119,
               ],
-              [421, 416, 64, 150, 533]
+              [421, 416, 64, 150, 533],
             ],
             [
               [
                 17, 48, 186, 229, 227, 223, 219, 216, 213, 209, 230, 232, 234,
                 236, 200, 191, 93, 100, 203, 246, 207, 211, 214, 217, 220, 224,
-                228, 189, 50, 15, 58
-              ]
+                228, 189, 50, 15, 58,
+              ],
             ],
             [[19]],
             [[20]],
@@ -1315,13 +1308,13 @@ export const GEO_DATA = {
             [[568]],
             [[569]],
             [[570, 572]],
-            [[594]]
-          ]
-        }
-      ]
-    }
+            [[594]],
+          ],
+        },
+      ],
+    },
   },
-  "arcs": [
+  arcs: [
     [
       [99478, 40237],
       [69, 98],
@@ -1331,7 +1324,7 @@ export const GEO_DATA = {
       [-153, 73],
       [-27, 260],
       [107, 203],
-      [126, -74]
+      [126, -74],
     ],
     [
       [0, 41087],
@@ -1344,14 +1337,14 @@ export const GEO_DATA = {
       [139, 121],
       [88, 33],
       [163, 184],
-      [-99999, 0]
+      [-99999, 0],
     ],
     [
       [59417, 50018],
       [47, -65],
       [1007, -1203],
       [19, -343],
-      [399, -590]
+      [399, -590],
     ],
     [
       [60889, 47817],
@@ -1364,7 +1357,7 @@ export const GEO_DATA = {
       [-18, -282],
       [97, -370],
       [115, -583],
-      [101, -129]
+      [101, -129],
     ],
     [
       [61198, 44484],
@@ -1375,21 +1368,21 @@ export const GEO_DATA = {
       [-193, -16],
       [-73, -74],
       [-334, 166],
-      [-209, -48]
+      [-209, -48],
     ],
     [
       [59599, 43773],
       [-77, 804],
       [-95, 275],
       [-55, 164],
-      [-273, 110]
+      [-273, 110],
     ],
     [
       [59099, 45126],
       [-157, 177],
       [-177, 100],
       [-111, 99],
-      [-116, 150]
+      [-116, 150],
     ],
     [
       [58538, 45652],
@@ -1397,7 +1390,7 @@ export const GEO_DATA = {
       [-161, 330],
       [-55, 343],
       [27, 307],
-      [-50, 544]
+      [-50, 544],
     ],
     [
       [58149, 47921],
@@ -1407,24 +1400,24 @@ export const GEO_DATA = {
       [69, 124],
       [-3, 192],
       [-60, 134],
-      [-16, 233]
+      [-16, 233],
     ],
     [
       [58463, 49154],
       [80, 74],
       [16, 348],
-      [-110, 333]
+      [-110, 333],
     ],
     [
       [58449, 49909],
       [98, 71],
       [304, -7],
-      [566, 45]
+      [566, 45],
     ],
     [
       [47592, 66920],
       [1, -40],
-      [-6, -114]
+      [-6, -114],
     ],
     [
       [47587, 66766],
@@ -1435,11 +1428,11 @@ export const GEO_DATA = {
       [-68, -304],
       [53, -853],
       [-1088, 4],
-      [-60, -197]
+      [-60, -197],
     ],
     [
       [45260, 62987],
-      [12, 249]
+      [12, 249],
     ],
     [
       [45272, 63236],
@@ -1458,7 +1451,7 @@ export const GEO_DATA = {
       [90, 134],
       [172, 19],
       [-7, 317],
-      [42, 0]
+      [42, 0],
     ],
     [
       [15878, 79530],
@@ -1471,7 +1464,7 @@ export const GEO_DATA = {
       [-356, 252],
       [-48, 476],
       [-336, 429],
-      [-6, 304]
+      [-6, 304],
     ],
     [
       [13740, 82958],
@@ -1490,7 +1483,7 @@ export const GEO_DATA = {
       [-271, 164],
       [-273, 17],
       [1, 3364],
-      [2, 2193]
+      [2, 2193],
     ],
     [
       [10837, 91767],
@@ -1667,7 +1660,7 @@ export const GEO_DATA = {
       [-11, 500],
       [483, 488],
       [-445, -19],
-      [-309, -72]
+      [-309, -72],
     ],
     [
       [31350, 77248],
@@ -1741,7 +1734,7 @@ export const GEO_DATA = {
       [-847, 0],
       [-273, 0],
       [-824, 0],
-      [-789, 0]
+      [-789, 0],
     ],
     [
       [26668, 87478],
@@ -1750,7 +1743,7 @@ export const GEO_DATA = {
       [-6, -114],
       [-325, -326],
       [-196, 13],
-      [-61, 160]
+      [-61, 160],
     ],
     [
       [27840, 93593],
@@ -1763,7 +1756,7 @@ export const GEO_DATA = {
       [-296, 17],
       [-299, 13],
       [-304, -80],
-      [-80, 36]
+      [-80, 36],
     ],
     [
       [27690, 87261],
@@ -1773,7 +1766,7 @@ export const GEO_DATA = {
       [-108, -310],
       [-123, 50],
       [-73, 176],
-      [13, 41]
+      [13, 41],
     ],
     [
       [23996, 94879],
@@ -1783,7 +1776,7 @@ export const GEO_DATA = {
       [148, 266],
       [399, 159],
       [243, -208],
-      [101, -187]
+      [101, -187],
     ],
     [
       [23933, 96380],
@@ -1792,7 +1785,7 @@ export const GEO_DATA = {
       [-74, 165],
       [559, -9],
       [195, -109],
-      [-33, -68]
+      [-33, -68],
     ],
     [
       [23124, 97116],
@@ -1803,7 +1796,7 @@ export const GEO_DATA = {
       [-119, 221],
       [-22, 245],
       [360, -24],
-      [162, -39]
+      [162, -39],
     ],
     [
       [25514, 94532],
@@ -1833,7 +1826,7 @@ export const GEO_DATA = {
       [-414, -127],
       [-355, 72],
       [-797, -91],
-      [-570, -11]
+      [-570, -11],
     ],
     [
       [19093, 96754],
@@ -1842,7 +1835,7 @@ export const GEO_DATA = {
       [-518, -170],
       [-411, 191],
       [224, 188],
-      [406, 60]
+      [406, 60],
     ],
     [
       [19177, 97139],
@@ -1851,7 +1844,7 @@ export const GEO_DATA = {
       [-461, 1],
       [5, 84],
       [285, 177],
-      [149, -27]
+      [149, -27],
     ],
     [
       [34555, 80899],
@@ -1886,7 +1879,7 @@ export const GEO_DATA = {
       [172, 336],
       [241, 204],
       [129, -26],
-      [-54, -160]
+      [-54, -160],
     ],
     [
       [26699, 89048],
@@ -1908,7 +1901,7 @@ export const GEO_DATA = {
       [201, -49],
       [51, -259],
       [143, 91],
-      [161, -155]
+      [161, -155],
     ],
     [
       [28119, 93327],
@@ -1983,7 +1976,7 @@ export const GEO_DATA = {
       [704, 242],
       [477, -611],
       [-42, -387],
-      [550, 172]
+      [550, 172],
     ],
     [
       [23749, 94380],
@@ -1996,7 +1989,7 @@ export const GEO_DATA = {
       [-173, 519],
       [4, 294],
       [145, 251],
-      [276, 161]
+      [276, 161],
     ],
     [
       [15873, 95551],
@@ -2009,7 +2002,7 @@ export const GEO_DATA = {
       [-259, -29],
       [-517, -252],
       [-444, -91],
-      [-377, 128]
+      [-377, 128],
     ],
     [
       [13136, 82508],
@@ -2022,7 +2015,7 @@ export const GEO_DATA = {
       [-140, 184],
       [-51, 260],
       [16, 188],
-      [131, -76]
+      [131, -76],
     ],
     [
       [20696, 97433],
@@ -2035,7 +2028,7 @@ export const GEO_DATA = {
       [-619, 21],
       [268, 176],
       [-335, 142],
-      [-21, 227]
+      [-21, 227],
     ],
     [
       [15692, 79240],
@@ -2053,7 +2046,7 @@ export const GEO_DATA = {
       [94, -204],
       [138, -280],
       [277, -244],
-      [115, -327]
+      [115, -327],
     ],
     [
       [16239, 94566],
@@ -2072,7 +2065,7 @@ export const GEO_DATA = {
       [192, 432],
       [241, 388],
       [-272, 362],
-      [939, 93]
+      [939, 93],
     ],
     [
       [20050, 95391],
@@ -2096,7 +2089,7 @@ export const GEO_DATA = {
       [255, 215],
       [286, -68],
       [94, -282],
-      [109, -210]
+      [109, -210],
     ],
     [
       [20410, 93755],
@@ -2143,7 +2136,7 @@ export const GEO_DATA = {
       [140, 244],
       [-197, 606],
       [244, 86],
-      [276, -94]
+      [276, -94],
     ],
     [
       [22100, 93536],
@@ -2160,7 +2153,7 @@ export const GEO_DATA = {
       [-192, 225],
       [-690, 456],
       [5, 189],
-      [567, -73]
+      [567, -73],
     ],
     [
       [20389, 94064],
@@ -2168,7 +2161,7 @@ export const GEO_DATA = {
       [211, -130],
       [-244, -390],
       [-434, 413],
-      [95, 83]
+      [95, 83],
     ],
     [
       [22639, 95907],
@@ -2183,7 +2176,7 @@ export const GEO_DATA = {
       [299, -18],
       [419, 201],
       [390, -34],
-      [22, 77]
+      [22, 77],
     ],
     [
       [23329, 98201],
@@ -2206,7 +2199,7 @@ export const GEO_DATA = {
       [-508, -4],
       [-306, 196],
       [-176, 268],
-      [193, 262]
+      [193, 262],
     ],
     [
       [24559, 98965],
@@ -2273,7 +2266,7 @@ export const GEO_DATA = {
       [-491, 201],
       [-232, 239],
       [-324, 173],
-      [-61, 202]
+      [-61, 202],
     ],
     [
       [29106, 90427],
@@ -2284,7 +2277,7 @@ export const GEO_DATA = {
       [255, 82],
       [217, -163],
       [3, -253],
-      [-32, -82]
+      [-32, -82],
     ],
     [
       [23262, 91636],
@@ -2297,7 +2290,7 @@ export const GEO_DATA = {
       [194, 256],
       [295, -168],
       [166, -106],
-      [84, -112]
+      [84, -112],
     ],
     [
       [32078, 80046],
@@ -2307,7 +2300,7 @@ export const GEO_DATA = {
       [8, -108],
       [-135, -11],
       [-360, 186],
-      [-258, 279]
+      [-258, 279],
     ],
     [
       [32218, 78370],
@@ -2318,7 +2311,7 @@ export const GEO_DATA = {
       [-102, -38],
       [-353, 250],
       [-69, 198],
-      [105, 183]
+      [105, 183],
     ],
     [
       [31350, 77248],
@@ -2424,7 +2417,7 @@ export const GEO_DATA = {
       [-63, -266],
       [-3, -407],
       [14, -284],
-      [52, -201]
+      [52, -201],
     ],
     [
       [23016, 65864],
@@ -2454,7 +2447,7 @@ export const GEO_DATA = {
       [-419, 287],
       [26, 116],
       [-353, -64],
-      [-316, -46]
+      [-316, -46],
     ],
     [
       [17464, 69802],
@@ -2488,7 +2481,7 @@ export const GEO_DATA = {
       [148, -558],
       [69, 156],
       [-45, 484],
-      [-94, 485]
+      [-94, 485],
     ],
     [
       [6833, 62443],
@@ -2507,7 +2500,7 @@ export const GEO_DATA = {
       [-19, 116],
       [16, 55],
       [21, -11],
-      [107, -100]
+      [107, -100],
     ],
     [
       [6668, 62848],
@@ -2518,14 +2511,14 @@ export const GEO_DATA = {
       [-3, 37],
       [27, 50],
       [99, -56],
-      [73, -90]
+      [73, -90],
     ],
     [
       [6456, 63091],
       [-9, -63],
       [-149, 17],
       [21, 72],
-      [137, -26]
+      [137, -26],
     ],
     [
       [6104, 63411],
@@ -2536,7 +2529,7 @@ export const GEO_DATA = {
       [-97, 21],
       [-35, 133],
       [-11, 24],
-      [74, 82]
+      [74, 82],
     ],
     [
       [5732, 63705],
@@ -2545,7 +2538,7 @@ export const GEO_DATA = {
       [-93, 107],
       [14, 43],
       [43, 58],
-      [64, -12]
+      [64, -12],
     ],
     [
       [3759, 86256],
@@ -2554,7 +2547,7 @@ export const GEO_DATA = {
       [-171, -92],
       [-182, 110],
       [-168, 161],
-      [274, 101]
+      [274, 101],
     ],
     [
       [7436, 84829],
@@ -2565,7 +2558,7 @@ export const GEO_DATA = {
       [-142, 152],
       [-43, 277],
       [252, 210],
-      [148, 90]
+      [148, 90],
     ],
     [
       [13740, 82958],
@@ -2686,7 +2679,7 @@ export const GEO_DATA = {
       [214, -77],
       [370, 96],
       [421, -177],
-      [302, -83]
+      [302, -83],
     ],
     [
       [2297, 88264],
@@ -2700,7 +2693,7 @@ export const GEO_DATA = {
       [-106, 107],
       [-245, -34],
       [-66, 52],
-      [17, 223]
+      [17, 223],
     ],
     [
       [74266, 79657],
@@ -2714,7 +2707,7 @@ export const GEO_DATA = {
       [-550, -236],
       [250, -1026],
       [-190, -154],
-      [22, -337]
+      [22, -337],
     ],
     [
       [72294, 75601],
@@ -2728,7 +2721,7 @@ export const GEO_DATA = {
       [-43, -349],
       [-457, 204],
       [-183, -84],
-      [-62, -259]
+      [-62, -259],
     ],
     [
       [69711, 75551],
@@ -2749,7 +2742,7 @@ export const GEO_DATA = {
       [-431, 423],
       [-52, 51],
       [-715, -349],
-      [11, -2178]
+      [11, -2178],
     ],
     [
       [65546, 74986],
@@ -2757,7 +2750,7 @@ export const GEO_DATA = {
       [-195, 463],
       [-188, 166],
       [-315, -123],
-      [-123, -197]
+      [-123, -197],
     ],
     [
       [64583, 75266],
@@ -2777,7 +2770,7 @@ export const GEO_DATA = {
       [-278, -28],
       [-236, 144],
       [-321, -260],
-      [-259, -124]
+      [-259, -124],
     ],
     [
       [63639, 77993],
@@ -2829,7 +2822,7 @@ export const GEO_DATA = {
       [194, -115],
       [119, -251],
       [358, 79],
-      [147, -361]
+      [147, -361],
     ],
     [
       [69711, 75551],
@@ -2839,7 +2832,7 @@ export const GEO_DATA = {
       [198, 147],
       [329, -311],
       [-355, -425],
-      [-212, 58]
+      [-212, 58],
     ],
     [
       [69725, 74357],
@@ -2853,12 +2846,12 @@ export const GEO_DATA = {
       [-72, -261],
       [204, -140],
       [60, -440],
-      [-156, -598]
+      [-156, -598],
     ],
     [
       [68841, 72526],
       [-210, 124],
-      [-154, 4]
+      [-154, 4],
     ],
     [
       [68477, 72654],
@@ -2876,7 +2869,7 @@ export const GEO_DATA = {
       [-234, -343],
       [-237, -204],
       [45, -297],
-      [-313, -8]
+      [-313, -8],
     ],
     [
       [89166, 49043],
@@ -2910,12 +2903,12 @@ export const GEO_DATA = {
       [35, -436],
       [-218, -203],
       [-155, 99],
-      [-288, 25]
+      [-288, 25],
     ],
     [
       [89175, 45193],
       [-4, 1925],
-      [-5, 1925]
+      [-5, 1925],
     ],
     [
       [92399, 48417],
@@ -2931,7 +2924,7 @@ export const GEO_DATA = {
       [150, -166],
       [94, -130],
       [117, -142],
-      [111, -248]
+      [111, -248],
     ],
     [
       [92027, 47129],
@@ -2955,7 +2948,7 @@ export const GEO_DATA = {
       [-5, -327],
       [-93, -361],
       [-146, -48],
-      [-44, -166]
+      [-44, -166],
     ],
     [
       [92988, 47425],
@@ -2968,7 +2961,7 @@ export const GEO_DATA = {
       [-122, 375],
       [-59, 450],
       [38, 57],
-      [30, -175]
+      [30, -175],
     ],
     [
       [89175, 45193],
@@ -3006,12 +2999,12 @@ export const GEO_DATA = {
       [247, 1],
       [238, -206],
       [206, -212],
-      [298, -113]
+      [298, -113],
     ],
     [
       [84713, 45326],
       [28, -117],
-      [5, -179]
+      [5, -179],
     ],
     [
       [84746, 45030],
@@ -3020,7 +3013,7 @@ export const GEO_DATA = {
       [-33, 71],
       [25, 201],
       [119, 360],
-      [275, 235]
+      [275, 235],
     ],
     [
       [87280, 46506],
@@ -3029,7 +3022,7 @@ export const GEO_DATA = {
       [58, 200],
       [63, -173],
       [0, -282],
-      [-143, -402]
+      [-143, -402],
     ],
     [
       [82744, 53024],
@@ -3057,7 +3050,7 @@ export const GEO_DATA = {
       [-134, 505],
       [-38, 517],
       [32, 548],
-      [165, 392]
+      [165, 392],
     ],
     [
       [80461, 51765],
@@ -3073,7 +3066,7 @@ export const GEO_DATA = {
       [107, 205],
       [96, 672],
       [319, 0],
-      [241, -100]
+      [241, -100],
     ],
     [
       [85936, 48924],
@@ -3084,7 +3077,7 @@ export const GEO_DATA = {
       [-157, -39],
       [-192, 21],
       [65, 325],
-      [344, 24]
+      [344, 24],
     ],
     [
       [85242, 48340],
@@ -3092,7 +3085,7 @@ export const GEO_DATA = {
       [-54, 254],
       [281, 29],
       [69, -195],
-      [-104, -196]
+      [-104, -196],
     ],
     [
       [85536, 51864],
@@ -3107,7 +3100,7 @@ export const GEO_DATA = {
       [-112, 374],
       [-82, 755],
       [56, 472],
-      [92, 215]
+      [92, 215],
     ],
     [
       [84146, 51097],
@@ -3154,7 +3147,7 @@ export const GEO_DATA = {
       [58, 243],
       [237, 439],
       [217, -174],
-      [350, -82]
+      [350, -82],
     ],
     [
       [83414, 44519],
@@ -3163,7 +3156,7 @@ export const GEO_DATA = {
       [146, -180],
       [97, -180],
       [-17, -159],
-      [-117, -11]
+      [-117, -11],
     ],
     [
       [83705, 45536],
@@ -3174,7 +3167,7 @@ export const GEO_DATA = {
       [-370, 73],
       [0, 216],
       [220, 123],
-      [174, -177]
+      [174, -177],
     ],
     [
       [82849, 45639],
@@ -3186,7 +3179,7 @@ export const GEO_DATA = {
       [95, 340],
       [153, 5],
       [74, 209],
-      [100, -158]
+      [100, -158],
     ],
     [
       [80134, 46785],
@@ -3211,7 +3204,7 @@ export const GEO_DATA = {
       [191, 564],
       [337, -35],
       [224, -231],
-      [115, -45]
+      [115, -45],
     ],
     [
       [78991, 49939],
@@ -3248,7 +3241,7 @@ export const GEO_DATA = {
       [211, -270],
       [-111, -482],
       [159, -205],
-      [100, -15]
+      [100, -15],
     ],
     [
       [30935, 19481],
@@ -3258,13 +3251,13 @@ export const GEO_DATA = {
       [389, -147],
       [-125, -296],
       [-264, -29],
-      [-141, 208]
+      [-141, 208],
     ],
     [
       [31400, 18145],
       [-168, 16],
       [-297, 1],
-      [0, 1319]
+      [0, 1319],
     ],
     [
       [33993, 32727],
@@ -3272,7 +3265,7 @@ export const GEO_DATA = {
       [-74, -607],
       [3, -588],
       [-61, -132],
-      [-21, -382]
+      [-21, -382],
     ],
     [
       [33770, 30545],
@@ -3312,7 +3305,7 @@ export const GEO_DATA = {
       [-113, -276],
       [89, -614],
       [185, -342],
-      [-117, 30]
+      [-117, 30],
     ],
     [
       [30952, 19680],
@@ -3358,7 +3351,7 @@ export const GEO_DATA = {
       [-9, 985],
       [302, 291],
       [96, 614],
-      [-34, 148]
+      [-34, 148],
     ],
     [
       [31359, 37147],
@@ -3367,7 +3360,7 @@ export const GEO_DATA = {
       [163, -427],
       [109, 475],
       [316, -24],
-      [45, -127]
+      [45, -127],
     ],
     [
       [32587, 37434],
@@ -3381,7 +3374,7 @@ export const GEO_DATA = {
       [312, -91],
       [220, 95],
       [252, 453],
-      [45, 521]
+      [45, 521],
     ],
     [
       [34826, 35372],
@@ -3391,7 +3384,7 @@ export const GEO_DATA = {
       [-234, -326],
       [-186, -241],
       [-314, -573],
-      [-370, -806]
+      [-370, -806],
     ],
     [
       [31400, 18145],
@@ -3410,7 +3403,7 @@ export const GEO_DATA = {
       [143, 271],
       [90, 405],
       [256, 244],
-      [198, -70]
+      [198, -70],
     ],
     [
       [30669, 40193],
@@ -3420,7 +3413,7 @@ export const GEO_DATA = {
       [-88, -572],
       [150, -663],
       [109, -814],
-      [200, 81]
+      [200, 81],
     ],
     [
       [30952, 19680],
@@ -3463,12 +3456,12 @@ export const GEO_DATA = {
       [89, 1227],
       [87, 1321],
       [-20, 967],
-      [-58, 832]
+      [-58, 832],
     ],
     [
       [30452, 39739],
       [143, 151],
-      [74, 303]
+      [74, 303],
     ],
     [
       [58538, 45652],
@@ -3494,7 +3487,7 @@ export const GEO_DATA = {
       [-176, 55],
       [-131, -15],
       [-15, 184],
-      [-96, 15]
+      [-96, 15],
     ],
     [
       [56642, 44124],
@@ -3525,18 +3518,18 @@ export const GEO_DATA = {
       [-820, 8],
       [-98, -71],
       [-80, 11],
-      [-115, -79]
+      [-115, -79],
     ],
     [
       [53422, 46976],
-      [-39, 183]
+      [-39, 183],
     ],
     [
       [53383, 47159],
       [71, 62],
       [9, 258],
       [45, 152],
-      [101, 124]
+      [101, 124],
     ],
     [
       [53609, 47755],
@@ -3559,7 +3552,7 @@ export const GEO_DATA = {
       [34, 524],
       [55, 368],
       [83, 316],
-      [16, 357]
+      [16, 357],
     ],
     [
       [55125, 52650],
@@ -3580,7 +3573,7 @@ export const GEO_DATA = {
       [104, 51],
       [209, -62],
       [178, -14],
-      [91, 63]
+      [91, 63],
     ],
     [
       [57603, 53672],
@@ -3590,7 +3583,7 @@ export const GEO_DATA = {
       [128, -39],
       [155, 125],
       [66, -252],
-      [244, -393]
+      [244, -393],
     ],
     [
       [58564, 52653],
@@ -3602,25 +3595,25 @@ export const GEO_DATA = {
       [-59, -274],
       [-15, -475],
       [-65, -225],
-      [-2, -446]
+      [-2, -446],
     ],
     [
       [58216, 49787],
       [-80, -165],
       [-10, -351],
       [-38, -46],
-      [-26, -323]
+      [-26, -323],
     ],
     [
       [58062, 48902],
       [70, -268],
-      [17, -713]
+      [17, -713],
     ],
     [
       [61551, 49585],
       [-165, 488],
       [-3, 2152],
-      [243, 670]
+      [243, 670],
     ],
     [
       [61626, 52895],
@@ -3628,7 +3621,7 @@ export const GEO_DATA = {
       [178, 11],
       [247, 417],
       [362, 26],
-      [785, 1773]
+      [785, 1773],
     ],
     [
       [63274, 55308],
@@ -3637,7 +3630,7 @@ export const GEO_DATA = {
       [0, 308],
       [0, 596],
       [1, 244],
-      [2, 9]
+      [2, 9],
     ],
     [
       [63596, 57321],
@@ -3661,7 +3654,7 @@ export const GEO_DATA = {
       [-259, -450],
       [-304, -715],
       [-64, -312],
-      [-63, -140]
+      [-63, -140],
     ],
     [
       [59417, 50018],
@@ -3671,12 +3664,12 @@ export const GEO_DATA = {
       [101, 431],
       [-123, 678],
       [-32, 296],
-      [-132, 411]
+      [-132, 411],
     ],
     [
       [59445, 53091],
       [171, 352],
-      [188, 390]
+      [188, 390],
     ],
     [
       [59804, 53833],
@@ -3692,7 +3685,7 @@ export const GEO_DATA = {
       [82, 247],
       [254, 247],
       [112, -200],
-      [190, 0]
+      [190, 0],
     ],
     [
       [61551, 49585],
@@ -3702,7 +3695,7 @@ export const GEO_DATA = {
       [-40, -416],
       [-89, -238],
       [-54, -393],
-      [-112, -195]
+      [-112, -195],
     ],
     [
       [56824, 55442],
@@ -3712,7 +3705,7 @@ export const GEO_DATA = {
       [45, 246],
       [-1, 241],
       [-160, 369],
-      [-31, 253]
+      [-31, 253],
     ],
     [
       [56351, 57163],
@@ -3729,19 +3722,19 @@ export const GEO_DATA = {
       [73, 365],
       [127, 435],
       [240, -41],
-      [-14, 2345]
+      [-14, 2345],
     ],
     [
       [56621, 62148],
       [3, 248],
       [320, 2],
-      [0, 1180]
+      [0, 1180],
     ],
     [
       [56944, 63578],
       [1117, 0],
       [1077, 0],
-      [1102, 0]
+      [1102, 0],
     ],
     [
       [60240, 63578],
@@ -3750,7 +3743,7 @@ export const GEO_DATA = {
       [40, -608],
       [102, -706],
       [106, -145],
-      [152, -219]
+      [152, -219],
     ],
     [
       [60669, 61213],
@@ -3759,7 +3752,7 @@ export const GEO_DATA = {
       [-88, -181],
       [-27, -393],
       [-120, -868],
-      [30, -236]
+      [30, -236],
     ],
     [
       [60119, 59101],
@@ -3770,7 +3763,7 @@ export const GEO_DATA = {
       [-28, -241],
       [-132, -166],
       [-82, -618],
-      [4, -531]
+      [4, -531],
     ],
     [
       [59437, 55711],
@@ -3806,7 +3799,7 @@ export const GEO_DATA = {
       [-72, -528],
       [-95, -111],
       [-85, -65],
-      [189, -230]
+      [189, -230],
     ],
     [
       [56351, 57163],
@@ -3823,7 +3816,7 @@ export const GEO_DATA = {
       [-69, 134],
       [-46, 11],
       [-52, -152],
-      [-229, -44]
+      [-229, -44],
     ],
     [
       [54244, 54965],
@@ -3839,7 +3832,7 @@ export const GEO_DATA = {
       [-151, 537],
       [10, 393],
       [-18, 392],
-      [-111, 378]
+      [-111, 378],
     ],
     [
       [54026, 58177],
@@ -3855,13 +3848,13 @@ export const GEO_DATA = {
       [-116, 203],
       [-4, 188],
       [-104, 153],
-      [-68, 919]
+      [-68, 919],
     ],
     [
       [54125, 64088],
       [280, 323],
       [1108, -1132],
-      [1108, -1131]
+      [1108, -1131],
     ],
     [
       [30080, 62227],
@@ -3869,7 +3862,7 @@ export const GEO_DATA = {
       [-21, -228],
       [-68, -99],
       [71, -177],
-      [-5, -161]
+      [-5, -161],
     ],
     [
       [30081, 61241],
@@ -3887,7 +3880,7 @@ export const GEO_DATA = {
       [-175, 92],
       [62, 163],
       [170, -26],
-      [241, -93]
+      [241, -93],
     ],
     [
       [30080, 62227],
@@ -3910,7 +3903,7 @@ export const GEO_DATA = {
       [-92, -85],
       [-111, -405],
       [-71, 94],
-      [-14, 170]
+      [-14, 170],
     ],
     [
       [76049, 98451],
@@ -3923,7 +3916,7 @@ export const GEO_DATA = {
       [-462, 226],
       [-213, 423],
       [-379, 117],
-      [722, 404]
+      [722, 404],
     ],
     [
       [78565, 97421],
@@ -3932,7 +3925,7 @@ export const GEO_DATA = {
       [-1566, -228],
       [507, 776],
       [229, 66],
-      [208, -38]
+      [208, -38],
     ],
     [
       [88563, 95563],
@@ -3943,7 +3936,7 @@ export const GEO_DATA = {
       [-461, -139],
       [-550, 384],
       [149, 406],
-      [366, 111]
+      [366, 111],
     ],
     [
       [91172, 95096],
@@ -3952,7 +3945,7 @@ export const GEO_DATA = {
       [-444, 53],
       [-516, 233],
       [66, 192],
-      [518, -89]
+      [518, -89],
     ],
     [
       [88850, 93928],
@@ -3962,7 +3955,7 @@ export const GEO_DATA = {
       [34, -155],
       [-421, -4],
       [-569, 66],
-      [-49, 31]
+      [-49, 31],
     ],
     [
       [62457, 98194],
@@ -3979,24 +3972,24 @@ export const GEO_DATA = {
       [-324, -98],
       [-301, 140],
       [158, 185],
-      [-618, 18]
+      [-618, 18],
     ],
     [
       [56314, 82678],
       [-511, -9],
-      [-342, 67]
+      [-342, 67],
     ],
     [
       [55461, 82736],
       [63, 260],
-      [383, 191]
+      [383, 191],
     ],
     [
       [55907, 83187],
       [291, -103],
       [123, -94],
       [-30, -162],
-      [23, -150]
+      [23, -150],
     ],
     [
       [64863, 94153],
@@ -4024,7 +4017,7 @@ export const GEO_DATA = {
       [284, 126],
       [-10, 323],
       [551, 503],
-      [-255, 73]
+      [-255, 73],
     ],
     [
       [89698, 82309],
@@ -4048,11 +4041,11 @@ export const GEO_DATA = {
       [257, 271],
       [-110, 274],
       [123, 83],
-      [73, -391]
+      [73, -391],
     ],
     [
       [86327, 75524],
-      [-39, 104]
+      [-39, 104],
     ],
     [
       [86288, 75628],
@@ -4087,7 +4080,7 @@ export const GEO_DATA = {
       [-251, -627],
       [3, -260],
       [-392, -373],
-      [-333, 223]
+      [-333, 223],
     ],
     [
       [82410, 80055],
@@ -4119,11 +4112,11 @@ export const GEO_DATA = {
       [-242, 182],
       [-423, -278],
       [-530, -509],
-      [-292, -102]
+      [-292, -102],
     ],
     [
       [74375, 79706],
-      [-109, -49]
+      [-109, -49],
     ],
     [
       [63639, 77993],
@@ -4132,7 +4125,7 @@ export const GEO_DATA = {
       [-276, -610],
       [252, -561],
       [-27, -398],
-      [303, -696]
+      [303, -696],
     ],
     [
       [63495, 75281],
@@ -4140,7 +4133,7 @@ export const GEO_DATA = {
       [-48, -150],
       [-122, 40],
       [-191, 359],
-      [-78, 20]
+      [-78, 20],
     ],
     [
       [62890, 75312],
@@ -4152,7 +4145,7 @@ export const GEO_DATA = {
       [-378, 283],
       [-409, 96],
       [-235, 101],
-      [-34, -70]
+      [-34, -70],
     ],
     [
       [61098, 76242],
@@ -4164,7 +4157,7 @@ export const GEO_DATA = {
       [-156, 234],
       [410, 241],
       [-8, 129],
-      [-249, -95]
+      [-249, -95],
     ],
     [
       [60617, 78409],
@@ -4189,7 +4182,7 @@ export const GEO_DATA = {
       [-288, -57],
       [-84, 30],
       [-70, -134],
-      [-104, 23]
+      [-104, 23],
     ],
     [
       [58829, 81362],
@@ -4208,25 +4201,25 @@ export const GEO_DATA = {
       [-272, 141],
       [-146, -70],
       [-39, 146],
-      [-293, 149]
+      [-293, 149],
     ],
     [
       [57826, 83766],
       [-89, 348],
       [-24, 287],
-      [-134, 136]
+      [-134, 136],
     ],
     [
       [57579, 84537],
       [120, 187],
       [-83, 551],
       [198, 341],
-      [-42, 103]
+      [-42, 103],
     ],
     [
       [57772, 85719],
       [316, 327],
-      [-291, 280]
+      [-291, 280],
     ],
     [
       [57797, 86326],
@@ -4240,12 +4233,12 @@ export const GEO_DATA = {
       [-323, 673],
       [256, 445],
       [-425, 394],
-      [41, 414]
+      [41, 414],
     ],
     [
       [57942, 91385],
       [224, 54],
-      [473, 237]
+      [473, 237],
     ],
     [
       [58639, 91676],
@@ -4514,7 +4507,7 @@ export const GEO_DATA = {
       [-175, -8],
       [-175, 287],
       [-373, -432],
-      [-43, -197]
+      [-43, -197],
     ],
     [
       [0, 92833],
@@ -4526,7 +4519,7 @@ export const GEO_DATA = {
       [-363, -36],
       [99694, -30],
       [-49, 187],
-      [-99645, 247]
+      [-99645, 247],
     ],
     [
       [59287, 77741],
@@ -4534,7 +4527,7 @@ export const GEO_DATA = {
       [198, -127],
       [89, -23],
       [36, -117],
-      [42, -18]
+      [42, -18],
     ],
     [
       [59725, 77602],
@@ -4549,7 +4542,7 @@ export const GEO_DATA = {
       [-304, 173],
       [50, 113],
       [265, 197],
-      [-42, 71]
+      [-42, 71],
     ],
     [
       [28061, 66408],
@@ -4557,7 +4550,7 @@ export const GEO_DATA = {
       [184, -18],
       [8, -153],
       [-303, -95],
-      [-19, 219]
+      [-19, 219],
     ],
     [
       [28391, 66555],
@@ -4566,7 +4559,7 @@ export const GEO_DATA = {
       [-51, 75],
       [4, 309],
       [-124, 234],
-      [-1, 67]
+      [-1, 67],
     ],
     [
       [28280, 65474],
@@ -4576,7 +4569,7 @@ export const GEO_DATA = {
       [-68, -29],
       [-70, 340],
       [-104, 171],
-      [60, 375]
+      [60, 375],
     ],
     [
       [33000, 19946],
@@ -4588,7 +4581,7 @@ export const GEO_DATA = {
       [-375, -177],
       [-125, 207],
       [-236, -266],
-      [-139, 266]
+      [-139, 266],
     ],
     [
       [54206, 97653],
@@ -4608,7 +4601,7 @@ export const GEO_DATA = {
       [-216, 463],
       [757, 212],
       [152, -207],
-      [396, 8]
+      [396, 8],
     ],
     [
       [57942, 91385],
@@ -4620,7 +4613,7 @@ export const GEO_DATA = {
       [-298, 143],
       [-362, -29],
       [-309, 312],
-      [-167, -156]
+      [-167, -156],
     ],
     [
       [55734, 91409],
@@ -4640,7 +4633,7 @@ export const GEO_DATA = {
       [177, -300],
       [-92, -694],
       [-231, -405],
-      [-122, -341]
+      [-122, -341],
     ],
     [
       [53063, 85353],
@@ -4664,7 +4657,7 @@ export const GEO_DATA = {
       [499, 118],
       [869, -433],
       [-358, -158],
-      [305, -371]
+      [305, -371],
     ],
     [
       [57613, 97879],
@@ -4678,7 +4671,7 @@ export const GEO_DATA = {
       [403, -142],
       [281, 177],
       [702, -148],
-      [545, -207]
+      [545, -207],
     ],
     [
       [56867, 96577],
@@ -4688,7 +4681,7 @@ export const GEO_DATA = {
       [-167, 189],
       [575, 119],
       [110, -222],
-      [401, -134]
+      [401, -134],
     ],
     [
       [37010, 99398],
@@ -4822,7 +4815,7 @@ export const GEO_DATA = {
       [390, -46],
       [577, -192],
       [-660, 318],
-      [38, 253]
+      [38, 253],
     ],
     [
       [69148, 21851],
@@ -4833,7 +4826,7 @@ export const GEO_DATA = {
       [-427, -38],
       [-7, 314],
       [41, 244],
-      [19, 121]
+      [19, 121],
     ],
     [
       [84713, 45326],
@@ -4844,7 +4837,7 @@ export const GEO_DATA = {
       [105, -74],
       [-102, -160],
       [-289, -258],
-      [-233, -170]
+      [-233, -170],
     ],
     [
       [54540, 33696],
@@ -4855,7 +4848,7 @@ export const GEO_DATA = {
       [175, -112],
       [149, 43],
       [248, 302],
-      [0, 2182]
+      [0, 2182],
     ],
     [
       [55526, 35946],
@@ -4878,21 +4871,21 @@ export const GEO_DATA = {
       [83, 222],
       [93, 393],
       [249, 442],
-      [393, 435]
+      [393, 435],
     ],
     [
       [58175, 37528],
       [113, -7],
       [134, -100],
       [94, 71],
-      [148, -59]
+      [148, -59],
     ],
     [
       [58664, 37433],
       [133, -832],
       [72, -419],
       [-49, -659],
-      [23, -212]
+      [23, -212],
     ],
     [
       [58843, 35311],
@@ -4903,11 +4896,11 @@ export const GEO_DATA = {
       [2, -204],
       [166, -320],
       [163, 63],
-      [56, 263]
+      [56, 263],
     ],
     [
       [58908, 34785],
-      [211, -5]
+      [211, -5],
     ],
     [
       [59119, 34780],
@@ -4946,7 +4939,7 @@ export const GEO_DATA = {
       [-182, 553],
       [-139, 501],
       [-1, 1],
-      [-199, 768]
+      [-199, 768],
     ],
     [
       [58049, 33472],
@@ -4960,7 +4953,7 @@ export const GEO_DATA = {
       [155, 93],
       [47, 192],
       [85, 288],
-      [-96, 178]
+      [-96, 178],
     ],
     [
       [23016, 65864],
@@ -4996,7 +4989,7 @@ export const GEO_DATA = {
       [-42, -255],
       [-69, -461],
       [-71, 152],
-      [-58, -10]
+      [-58, -10],
     ],
     [
       [25472, 61510],
@@ -5004,7 +4997,7 @@ export const GEO_DATA = {
       [-99, -357],
       [-51, 70],
       [-33, -27],
-      [2, -87]
+      [2, -87],
     ],
     [
       [25238, 61101],
@@ -5021,7 +5014,7 @@ export const GEO_DATA = {
       [-133, -481],
       [39, -111],
       [-32, -138],
-      [-7, -172]
+      [-7, -172],
     ],
     [
       [24381, 59170],
@@ -5114,7 +5107,7 @@ export const GEO_DATA = {
       [-102, 369],
       [-103, 388],
       [-129, 472],
-      [-113, 531]
+      [-113, 531],
     ],
     [
       [33993, 32727],
@@ -5125,7 +5118,7 @@ export const GEO_DATA = {
       [218, -327],
       [160, -402],
       [-122, -280],
-      [77, -334]
+      [77, -334],
     ],
     [
       [35174, 30629],
@@ -5135,7 +5128,7 @@ export const GEO_DATA = {
       [-151, -63],
       [-256, 253],
       [-189, -19],
-      [-169, 327]
+      [-169, 327],
     ],
     [
       [34826, 35372],
@@ -5152,7 +5145,7 @@ export const GEO_DATA = {
       [-114, -116],
       [-293, 113],
       [18, 802],
-      [-82, 329]
+      [-82, 329],
     ],
     [
       [33842, 38659],
@@ -5185,7 +5178,7 @@ export const GEO_DATA = {
       [-243, -239],
       [-62, -179],
       [-143, -13],
-      [-206, 50]
+      [-206, 50],
     ],
     [
       [30686, 44109],
@@ -5208,7 +5201,7 @@ export const GEO_DATA = {
       [318, 402],
       [227, 114],
       [37, 89],
-      [251, -28]
+      [251, -28],
     ],
     [
       [30585, 48040],
@@ -5226,7 +5219,7 @@ export const GEO_DATA = {
       [92, 203],
       [77, -187],
       [55, -349],
-      [52, 73]
+      [52, 73],
     ],
     [
       [31423, 51320],
@@ -5249,7 +5242,7 @@ export const GEO_DATA = {
       [200, 92],
       [310, 221],
       [102, 225],
-      [-37, 167]
+      [-37, 167],
     ],
     [
       [33129, 53652],
@@ -5269,7 +5262,7 @@ export const GEO_DATA = {
       [126, 104],
       [90, 157],
       [154, -50],
-      [67, 21]
+      [67, 21],
     ],
     [
       [34294, 51702],
@@ -5279,7 +5272,7 @@ export const GEO_DATA = {
       [28, 171],
       [112, -53],
       [131, 61],
-      [159, -125]
+      [159, -125],
     ],
     [
       [34854, 51946],
@@ -5290,7 +5283,7 @@ export const GEO_DATA = {
       [133, 42],
       [107, 224],
       [85, 436],
-      [164, 540]
+      [164, 540],
     ],
     [
       [35650, 53035],
@@ -5349,7 +5342,7 @@ export const GEO_DATA = {
       [-244, -468],
       [-189, -277],
       [-127, -562],
-      [-183, -337]
+      [-183, -337],
     ],
     [
       [33842, 38659],
@@ -5359,7 +5352,7 @@ export const GEO_DATA = {
       [-484, -172],
       [-133, -520],
       [-7, -318],
-      [-110, -708]
+      [-110, -708],
     ],
     [
       [30669, 40193],
@@ -5371,7 +5364,7 @@ export const GEO_DATA = {
       [6, 503],
       [13, 415],
       [60, 200],
-      [-240, 951]
+      [-240, 951],
     ],
     [
       [30452, 39739],
@@ -5392,7 +5385,7 @@ export const GEO_DATA = {
       [90, 264],
       [-134, 563],
       [86, 414],
-      [221, 373]
+      [221, 373],
     ],
     [
       [27693, 48568],
@@ -5408,7 +5401,7 @@ export const GEO_DATA = {
       [334, 233],
       [303, 619],
       [86, 384],
-      [-38, 449]
+      [-38, 449],
     ],
     [
       [29063, 50490],
@@ -5424,7 +5417,7 @@ export const GEO_DATA = {
       [213, -276],
       [-179, -602],
       [83, -14],
-      [139, -314]
+      [139, -314],
     ],
     [
       [29063, 50490],
@@ -5434,7 +5427,7 @@ export const GEO_DATA = {
       [-235, 82],
       [-68, 255],
       [-52, -10],
-      [-278, 338]
+      [-278, 338],
     ],
     [
       [28095, 51396],
@@ -5450,7 +5443,7 @@ export const GEO_DATA = {
       [-62, 540],
       [59, 155],
       [-44, 500],
-      [-112, 315]
+      [-112, 315],
     ],
     [
       [28366, 54848],
@@ -5458,7 +5451,7 @@ export const GEO_DATA = {
       [89, -43],
       [52, 176],
       [-64, 348],
-      [34, 86]
+      [34, 86],
     ],
     [
       [28513, 55702],
@@ -5476,7 +5469,7 @@ export const GEO_DATA = {
       [134, 285],
       [98, -36],
       [73, -156],
-      [-54, -199]
+      [-54, -199],
     ],
     [
       [30185, 57537],
@@ -5510,7 +5503,7 @@ export const GEO_DATA = {
       [-140, -294],
       [100, -130],
       [74, -207],
-      [85, -589]
+      [85, -589],
     ],
     [
       [28366, 54848],
@@ -5537,7 +5530,7 @@ export const GEO_DATA = {
       [-72, 69],
       [-119, -1],
       [-8, -128],
-      [-32, 89]
+      [-32, 89],
     ],
     [
       [26954, 55439],
@@ -5547,7 +5540,7 @@ export const GEO_DATA = {
       [41, 70],
       [-58, 88],
       [-1, 238],
-      [107, 53]
+      [107, 53],
     ],
     [
       [27070, 56232],
@@ -5565,7 +5558,7 @@ export const GEO_DATA = {
       [155, -21],
       [124, -102],
       [90, -177],
-      [105, -164]
+      [105, -164],
     ],
     [
       [26954, 55439],
@@ -5586,7 +5579,7 @@ export const GEO_DATA = {
       [2, 179],
       [36, 187],
       [-78, 83],
-      [64, 114]
+      [64, 114],
     ],
     [
       [26191, 57131],
@@ -5596,13 +5589,13 @@ export const GEO_DATA = {
       [89, -50],
       [46, -121],
       [82, -40],
-      [66, 126]
+      [66, 126],
     ],
     [
       [26762, 57043],
       [70, -321],
       [108, -238],
-      [130, -252]
+      [130, -252],
     ],
     [
       [26191, 57131],
@@ -5613,7 +5606,7 @@ export const GEO_DATA = {
       [-140, 267],
       [31, 91],
       [46, -88],
-      [21, 41]
+      [21, 41],
     ],
     [
       [25745, 58251],
@@ -5638,7 +5631,7 @@ export const GEO_DATA = {
       [70, 0],
       [97, 77],
       [38, 81],
-      [95, -12]
+      [95, -12],
     ],
     [
       [26903, 59440],
@@ -5655,12 +5648,12 @@ export const GEO_DATA = {
       [19, -156],
       [-56, -151],
       [12, -159],
-      [43, -97]
+      [43, -97],
     ],
     [
       [25745, 58251],
       [-48, 185],
-      [-84, 51]
+      [-84, 51],
     ],
     [
       [25613, 58487],
@@ -5671,7 +5664,7 @@ export const GEO_DATA = {
       [-10, 79],
       [-84, 95],
       [-60, 118],
-      [-82, 50]
+      [-82, 50],
     ],
     [
       [25179, 59102],
@@ -5679,7 +5672,7 @@ export const GEO_DATA = {
       [-22, 116],
       [20, 113],
       [131, 166],
-      [127, 225]
+      [127, 225],
     ],
     [
       [25493, 59872],
@@ -5701,7 +5694,7 @@ export const GEO_DATA = {
       [85, -110],
       [80, -132],
       [101, -91],
-      [73, -162]
+      [73, -162],
     ],
     [
       [25613, 58487],
@@ -5710,7 +5703,7 @@ export const GEO_DATA = {
       [-100, 57],
       [-115, 117],
       [-154, 37],
-      [-79, 127]
+      [-79, 127],
     ],
     [
       [24973, 58695],
@@ -5718,26 +5711,26 @@ export const GEO_DATA = {
       [95, 149],
       [52, 66],
       [-15, 69],
-      [65, 37]
+      [65, 37],
     ],
     [
       [25238, 61101],
       [-2, -468],
       [-22, -667],
-      [83, 0]
+      [83, 0],
     ],
     [
       [25297, 59966],
       [90, -107],
       [24, 88],
-      [82, -75]
+      [82, -75],
     ],
     [
       [24973, 58695],
       [-142, 103],
       [-174, 11],
       [-127, 117],
-      [-149, 244]
+      [-149, 244],
     ],
     [
       [25472, 61510],
@@ -5751,7 +5744,7 @@ export const GEO_DATA = {
       [-32, -299],
       [-55, -156],
       [-50, -19],
-      [-55, -205]
+      [-55, -205],
     ],
     [
       [30185, 57537],
@@ -5786,7 +5779,7 @@ export const GEO_DATA = {
       [210, -291],
       [45, -473],
       [144, 13],
-      [109, -139]
+      [109, -139],
     ],
     [
       [33400, 55523],
@@ -5797,7 +5790,7 @@ export const GEO_DATA = {
       [-171, -95],
       [5, -273],
       [-75, -163],
-      [188, -448]
+      [188, -448],
     ],
     [
       [33400, 55523],
@@ -5806,7 +5799,7 @@ export const GEO_DATA = {
       [8, -304],
       [105, -14],
       [149, -289],
-      [109, -205]
+      [109, -205],
     ],
     [
       [34125, 54109],
@@ -5817,14 +5810,14 @@ export const GEO_DATA = {
       [123, -429],
       [89, -1],
       [37, -333],
-      [169, -514]
+      [169, -514],
     ],
     [
       [34125, 54109],
       [333, -119],
       [30, 107],
       [225, 43],
-      [298, -159]
+      [298, -159],
     ],
     [
       [35011, 53981],
@@ -5833,21 +5826,21 @@ export const GEO_DATA = {
       [109, -351],
       [-49, -254],
       [-24, -270],
-      [-71, -248]
+      [-71, -248],
     ],
     [
       [35011, 53981],
       [95, -65],
       [204, -140],
       [294, -499],
-      [46, -242]
+      [46, -242],
     ],
     [
       [51718, 79804],
       [131, -155],
       [400, -109],
       [-140, -404],
-      [-35, -421]
+      [-35, -421],
     ],
     [
       [52074, 78715],
@@ -5857,7 +5850,7 @@ export const GEO_DATA = {
       [-203, -332],
       [-5, -267],
       [133, 92],
-      [95, -259]
+      [95, -259],
     ],
     [
       [51900, 77752],
@@ -5866,14 +5859,14 @@ export const GEO_DATA = {
       [-97, -180],
       [72, -457],
       [151, -75],
-      [-32, -256]
+      [-32, -256],
     ],
     [
       [52065, 76395],
       [-252, -334],
       [-548, 160],
       [-404, -192],
-      [-32, -355]
+      [-32, -355],
     ],
     [
       [50829, 75674],
@@ -5881,7 +5874,7 @@ export const GEO_DATA = {
       [-313, 267],
       [-101, -127],
       [-511, 268],
-      [-111, 230]
+      [-111, 230],
     ],
     [
       [49471, 76235],
@@ -5897,7 +5890,7 @@ export const GEO_DATA = {
       [263, -254],
       [646, 461],
       [84, 484],
-      [243, 119]
+      [243, 119],
     ],
     [
       [50698, 80799],
@@ -5906,12 +5899,12 @@ export const GEO_DATA = {
       [129, -237],
       [194, -279],
       [143, 46],
-      [243, -269]
+      [243, -269],
     ],
     [
       [51576, 79843],
       [62, -52],
-      [80, 13]
+      [80, 13],
     ],
     [
       [52429, 75765],
@@ -5920,7 +5913,7 @@ export const GEO_DATA = {
       [-92, -456],
       [-126, 120],
       [-64, 398],
-      [56, 219]
+      [56, 219],
     ],
     [
       [27693, 48568],
@@ -5935,7 +5928,7 @@ export const GEO_DATA = {
       [105, 381],
       [-20, 241],
       [153, 126],
-      [190, 236]
+      [190, 236],
     ],
     [
       [31588, 61519],
@@ -5946,7 +5939,7 @@ export const GEO_DATA = {
       [-163, -21],
       [-16, 253],
       [40, 86],
-      [227, -3]
+      [227, -3],
     ],
     [
       [28453, 61504],
@@ -5959,7 +5952,7 @@ export const GEO_DATA = {
       [-159, 215],
       [34, 135],
       [116, 41],
-      [64, -20]
+      [64, -20],
     ],
     [
       [27147, 64280],
@@ -6003,7 +5996,7 @@ export const GEO_DATA = {
       [126, 131],
       [142, 116],
       [210, 56],
-      [67, 65]
+      [67, 65],
     ],
     [
       [58175, 37528],
@@ -6015,7 +6008,7 @@ export const GEO_DATA = {
       [-315, 649],
       [-87, 342],
       [-56, 105],
-      [-107, 473]
+      [-107, 473],
     ],
     [
       [57017, 40101],
@@ -6027,7 +6020,7 @@ export const GEO_DATA = {
       [100, 46],
       [33, 205],
       [159, 235],
-      [210, 81]
+      [210, 81],
     ],
     [
       [58409, 41417],
@@ -6044,7 +6037,7 @@ export const GEO_DATA = {
       [-31, -348],
       [-42, -53],
       [-74, -426],
-      [-292, -671]
+      [-292, -671],
     ],
     [
       [55526, 35946],
@@ -6056,11 +6049,11 @@ export const GEO_DATA = {
       [106, -243],
       [177, 231],
       [85, 2],
-      [156, 133]
+      [156, 133],
     ],
     [
       [56967, 40145],
-      [50, -44]
+      [50, -44],
     ],
     [
       [54540, 33696],
@@ -6076,7 +6069,7 @@ export const GEO_DATA = {
       [-146, 708],
       [-60, 371],
       [-226, 577],
-      [-17, 453]
+      [-17, 453],
     ],
     [
       [53259, 40357],
@@ -6088,14 +6081,14 @@ export const GEO_DATA = {
       [1126, 26],
       [192, -284],
       [673, -83],
-      [510, 241]
+      [510, 241],
     ],
     [
       [56448, 40227],
       [228, 134],
       [180, -34],
       [109, -133],
-      [2, -49]
+      [2, -49],
     ],
     [
       [45357, 58612],
@@ -6103,7 +6096,7 @@ export const GEO_DATA = {
       [-138, 210],
       [122, 112],
       [134, 415],
-      [66, 304]
+      [66, 304],
     ],
     [
       [45426, 60113],
@@ -6114,7 +6107,7 @@ export const GEO_DATA = {
       [133, -173],
       [184, -157],
       [168, -435],
-      [184, -405]
+      [184, -405],
     ],
     [
       [46619, 59216],
@@ -6122,7 +6115,7 @@ export const GEO_DATA = {
       [54, -338],
       [104, -166],
       [24, -229],
-      [-13, -184]
+      [-13, -184],
     ],
     [
       [46801, 57931],
@@ -6131,18 +6124,18 @@ export const GEO_DATA = {
       [-21, -66],
       [-61, -13],
       [-200, 144],
-      [-134, 6]
+      [-134, 6],
     ],
     [
       [46194, 58016],
       [-513, 25],
       [-75, -67],
       [-92, 19],
-      [-147, -96]
+      [-147, -96],
     ],
     [
       [45367, 57897],
-      [-46, 453]
+      [-46, 453],
     ],
     [
       [45321, 58350],
@@ -6159,7 +6152,7 @@ export const GEO_DATA = {
       [-110, 145],
       [-88, -9],
       [-63, -140],
-      [-302, -17]
+      [-302, -17],
     ],
     [
       [46619, 59216],
@@ -6175,7 +6168,7 @@ export const GEO_DATA = {
       [-48, 73],
       [-134, 2550],
       [-134, 2550],
-      [425, 10]
+      [425, 10],
     ],
     [
       [48632, 65335],
@@ -6185,7 +6178,7 @@ export const GEO_DATA = {
       [173, -169],
       [129, -96],
       [3, -376],
-      [308, 58]
+      [308, 58],
     ],
     [
       [51185, 61897],
@@ -6195,7 +6188,7 @@ export const GEO_DATA = {
       [-247, -94],
       [-379, -51],
       [-102, -210],
-      [-178, -23]
+      [-178, -23],
     ],
     [
       [50104, 59400],
@@ -6213,7 +6206,7 @@ export const GEO_DATA = {
       [-221, -490],
       [7, -200],
       [-76, -250],
-      [18, -343]
+      [18, -343],
     ],
     [
       [48498, 56707],
@@ -6225,7 +6218,7 @@ export const GEO_DATA = {
       [-51, -172],
       [-215, 5],
       [-77, 89],
-      [-36, -54]
+      [-36, -54],
     ],
     [
       [47769, 56610],
@@ -6247,11 +6240,11 @@ export const GEO_DATA = {
       [-46, 19],
       [-73, -78],
       [-44, -1],
-      [-16, 216]
+      [-16, 216],
     ],
     [
       [47587, 66766],
-      [1045, -1431]
+      [1045, -1431],
     ],
     [
       [45426, 60113],
@@ -6262,11 +6255,11 @@ export const GEO_DATA = {
       [-34, 294],
       [28, 295],
       [-72, 281],
-      [-146, 255]
+      [-146, 255],
     ],
     [
       [50747, 54278],
-      [-229, -69]
+      [-229, -69],
     ],
     [
       [50518, 54209],
@@ -6276,20 +6269,20 @@ export const GEO_DATA = {
       [-11, 290],
       [-96, 207],
       [-85, 174],
-      [35, 311]
+      [35, 311],
     ],
     [
       [50249, 57077],
       [96, 67],
       [56, 258],
       [136, 56],
-      [61, 176]
+      [61, 176],
     ],
     [
       [50598, 57634],
       [93, 173],
       [100, 2],
-      [212, -340]
+      [212, -340],
     ],
     [
       [51003, 57469],
@@ -6301,12 +6294,12 @@ export const GEO_DATA = {
       [-86, -181],
       [-52, -372],
       [7, -376],
-      [-16, -952]
+      [-16, -952],
     ],
     [
       [54026, 58177],
       [-78, -34],
-      [-9, -188]
+      [-9, -188],
     ],
     [
       [53939, 57955],
@@ -6329,7 +6322,7 @@ export const GEO_DATA = {
       [-72, -128],
       [-39, -340],
       [-80, -238],
-      [-19, -527]
+      [-19, -527],
     ],
     [
       [50598, 57634],
@@ -6338,19 +6331,19 @@ export const GEO_DATA = {
       [-9, 286],
       [-156, 386],
       [-37, 269],
-      [22, 286]
+      [22, 286],
     ],
     [
       [51185, 61897],
       [392, 263],
       [804, 1161],
-      [952, 1126]
+      [952, 1126],
     ],
     [
       [53333, 64447],
       [439, -255],
       [156, -324],
-      [197, 220]
+      [197, 220],
     ],
     [
       [53939, 57955],
@@ -6372,7 +6365,7 @@ export const GEO_DATA = {
       [-165, -345],
       [-81, -6],
       [-132, -570],
-      [-71, -418]
+      [-71, -418],
     ],
     [
       [52361, 53399],
@@ -6384,7 +6377,7 @@ export const GEO_DATA = {
       [-91, 427],
       [-197, 389],
       [-209, -7],
-      [-245, 1]
+      [-245, 1],
     ],
     [
       [54244, 54965],
@@ -6398,25 +6391,25 @@ export const GEO_DATA = {
       [103, -305],
       [127, -190],
       [12, -269],
-      [29, -172]
+      [29, -172],
     ],
     [
       [54447, 51919],
       [-20, -319],
       [-220, 140],
       [-225, 156],
-      [-350, 23]
+      [-350, 23],
     ],
     [
       [53632, 51919],
       [-35, 32],
       [-164, -76],
       [-169, 79],
-      [-132, -38]
+      [-132, -38],
     ],
     [
       [53132, 51916],
-      [-452, 13]
+      [-452, 13],
     ],
     [
       [52680, 51929],
@@ -6425,11 +6418,11 @@ export const GEO_DATA = {
       [-127, 100],
       [-56, 265],
       [-72, 85],
-      [4, 163]
+      [4, 163],
     ],
     [
       [50518, 54209],
-      [-224, -126]
+      [-224, -126],
     ],
     [
       [50294, 54083],
@@ -6441,18 +6434,18 @@ export const GEO_DATA = {
       [-27, 466],
       [1, 429],
       [-116, 305],
-      [20, 184]
+      [20, 184],
     ],
     [
       [50006, 57090],
-      [243, -13]
+      [243, -13],
     ],
     [
       [50294, 54083],
       [-436, -346],
       [-154, -203],
       [-250, -171],
-      [-248, 168]
+      [-248, 168],
     ],
     [
       [49206, 53531],
@@ -6460,7 +6453,7 @@ export const GEO_DATA = {
       [-121, 509],
       [73, 667],
       [117, 496],
-      [-74, 841]
+      [-74, 841],
     ],
     [
       [49214, 56277],
@@ -6469,7 +6462,7 @@ export const GEO_DATA = {
       [482, 27],
       [123, -43],
       [90, 96],
-      [128, -47]
+      [128, -47],
     ],
     [
       [48498, 56707],
@@ -6478,7 +6471,7 @@ export const GEO_DATA = {
       [125, -125],
       [97, 149],
       [130, 22],
-      [190, -152]
+      [190, -152],
     ],
     [
       [49206, 53531],
@@ -6488,7 +6481,7 @@ export const GEO_DATA = {
       [-329, -103],
       [-193, -170],
       [-275, -217],
-      [-54, 15]
+      [-54, 15],
     ],
     [
       [47857, 53158],
@@ -6500,7 +6493,7 @@ export const GEO_DATA = {
       [-81, 162],
       [60, 262],
       [-28, 286],
-      [13, 172]
+      [13, 172],
     ],
     [
       [47655, 55121],
@@ -6512,7 +6505,7 @@ export const GEO_DATA = {
       [-69, 473],
       [-64, 245],
       [23, 200],
-      [55, 46]
+      [55, 46],
     ],
     [
       [47655, 55121],
@@ -6523,7 +6516,7 @@ export const GEO_DATA = {
       [19, 237],
       [-116, 362],
       [-73, -67],
-      [-59, -13]
+      [-59, -13],
     ],
     [
       [47158, 55546],
@@ -6538,7 +6531,7 @@ export const GEO_DATA = {
       [-76, -13],
       [-48, -128],
       [-32, -163],
-      [-148, -260]
+      [-148, -260],
     ],
     [
       [46320, 55840],
@@ -6548,7 +6541,7 @@ export const GEO_DATA = {
       [-69, 118],
       [-32, 261],
       [-41, 130],
-      [-80, 97]
+      [-80, 97],
     ],
     [
       [45797, 57103],
@@ -6559,7 +6552,7 @@ export const GEO_DATA = {
       [44, 78],
       [-24, 196],
       [31, 62],
-      [5, 200]
+      [5, 200],
     ],
     [
       [45797, 57103],
@@ -6568,7 +6561,7 @@ export const GEO_DATA = {
       [-63, 166],
       [1, 90],
       [-84, 125],
-      [-18, 127]
+      [-18, 127],
     ],
     [
       [47857, 53158],
@@ -6576,14 +6569,14 @@ export const GEO_DATA = {
       [-286, 282],
       [-252, 449],
       [-237, 324],
-      [-187, 381]
+      [-187, 381],
     ],
     [
       [46822, 54589],
       [66, 189],
       [15, 172],
       [126, 320],
-      [129, 276]
+      [129, 276],
     ],
     [
       [46822, 54589],
@@ -6591,14 +6584,14 @@ export const GEO_DATA = {
       [-200, 238],
       [-144, 316],
       [-49, 216],
-      [-34, 437]
+      [-34, 437],
     ],
     [
       [55125, 52650],
       [-178, 33],
       [-188, 99],
       [-166, -313],
-      [-146, -550]
+      [-146, -550],
     ],
     [
       [56824, 55442],
@@ -6608,17 +6601,17 @@ export const GEO_DATA = {
       [116, -255],
       [70, -355],
       [208, -234],
-      [44, -187]
+      [44, -187],
     ],
     [
       [53609, 47755],
       [-104, 203],
       [-84, -100],
-      [-112, -255]
+      [-112, -255],
     ],
     [
       [53309, 47603],
-      [-228, 626]
+      [-228, 626],
     ],
     [
       [53081, 48229],
@@ -6637,7 +6630,7 @@ export const GEO_DATA = {
       [-69, 117],
       [-207, -48],
       [-78, 305],
-      [21, 258]
+      [21, 258],
     ],
     [
       [53081, 48229],
@@ -6647,18 +6640,18 @@ export const GEO_DATA = {
       [9, 196],
       [61, 189],
       [67, 430],
-      [56, 438]
+      [56, 438],
     ],
     [
       [52636, 51176],
       [94, 35],
       [404, -6],
-      [-2, 711]
+      [-2, 711],
     ],
     [
       [52636, 51176],
       [-52, 90],
-      [96, 663]
+      [96, 663],
     ],
     [
       [59099, 45126],
@@ -6669,12 +6662,12 @@ export const GEO_DATA = {
       [53, -490],
       [-87, -205],
       [-85, -549],
-      [147, -153]
+      [147, -153],
     ],
     [
       [59226, 42325],
       [-843, -487],
-      [26, -421]
+      [26, -421],
     ],
     [
       [56448, 40227],
@@ -6686,7 +6679,7 @@ export const GEO_DATA = {
       [41, 222],
       [-49, 277],
       [32, 286],
-      [-29, 184]
+      [-29, 184],
     ],
     [
       [59599, 43773],
@@ -6704,7 +6697,7 @@ export const GEO_DATA = {
       [-16, 237],
       [-110, 149],
       [-77, -54],
-      [-159, 284]
+      [-159, 284],
     ],
     [
       [61198, 44484],
@@ -6737,16 +6730,16 @@ export const GEO_DATA = {
       [-122, -219],
       [24, -248],
       [71, -40],
-      [-24, -311]
+      [-24, -311],
     ],
     [
       [58908, 34785],
       [-24, 261],
-      [-41, 265]
+      [-41, 265],
     ],
     [
       [53383, 47159],
-      [-74, 444]
+      [-74, 444],
     ],
     [
       [53259, 40357],
@@ -6768,17 +6761,17 @@ export const GEO_DATA = {
       [-84, 570],
       [-57, 396],
       [-139, 374],
-      [26, 115]
+      [26, 115],
     ],
     [
       [58062, 48902],
       [169, -46],
       [85, 336],
-      [147, -38]
+      [147, -38],
     ],
     [
       [59922, 69905],
-      [-49, -186]
+      [-49, -186],
     ],
     [
       [59873, 69719],
@@ -6787,17 +6780,17 @@ export const GEO_DATA = {
       [69, -66],
       [-71, -81],
       [-12, -156],
-      [131, 80]
+      [131, 80],
     ],
     [
       [59832, 69184],
       [7, -230],
-      [-139, -944]
+      [-139, -944],
     ],
     [
       [59700, 68010],
       [-27, 153],
-      [-155, 862]
+      [-155, 862],
     ],
     [
       [59518, 69025],
@@ -6806,32 +6799,32 @@ export const GEO_DATA = {
       [74, 276],
       [56, 446],
       [40, 149],
-      [8, 6]
+      [8, 6],
     ],
     [
       [59757, 70130],
       [93, -1],
       [25, 104],
-      [75, 8]
+      [75, 8],
     ],
     [
       [59950, 70241],
       [4, -242],
       [-38, -90],
-      [6, -4]
+      [6, -4],
     ],
     [
       [59757, 70130],
       [99, 482],
       [138, 416],
-      [5, 21]
+      [5, 21],
     ],
     [
       [59999, 71049],
       [125, -31],
       [45, -231],
       [-151, -223],
-      [-68, -323]
+      [-68, -323],
     ],
     [
       [63761, 43212],
@@ -6882,16 +6875,16 @@ export const GEO_DATA = {
       [153, 410],
       [6, 356],
       [92, 264],
-      [96, -254]
+      [96, -254],
     ],
     [
       [59873, 69719],
       [0, -362],
-      [-41, -173]
+      [-41, -173],
     ],
     [
       [45321, 58350],
-      [36, 262]
+      [36, 262],
     ],
     [
       [52633, 68486],
@@ -6903,7 +6896,7 @@ export const GEO_DATA = {
       [171, 330],
       [65, 487],
       [-44, 563],
-      [57, 303]
+      [57, 303],
     ],
     [
       [52339, 72408],
@@ -6920,7 +6913,7 @@ export const GEO_DATA = {
       [53, -322],
       [143, -10],
       [70, -281],
-      [106, -92]
+      [106, -92],
     ],
     [
       [53191, 70158],
@@ -6930,7 +6923,7 @@ export const GEO_DATA = {
       [-191, -228],
       [30, -244],
       [-24, -250],
-      [-136, -137]
+      [-136, -137],
     ],
     [
       [47592, 66920],
@@ -6948,7 +6941,7 @@ export const GEO_DATA = {
       [-73, 125],
       [-96, 624],
       [-17, 359],
-      [-104, 379]
+      [-104, 379],
     ],
     [
       [49397, 71358],
@@ -6962,7 +6955,7 @@ export const GEO_DATA = {
       [262, 232],
       [297, 5],
       [113, -137],
-      [190, 35]
+      [190, 35],
     ],
     [
       [52633, 68486],
@@ -6978,16 +6971,16 @@ export const GEO_DATA = {
       [99, -330],
       [130, 109],
       [219, -275],
-      [122, -370]
+      [122, -370],
     ],
     [
       [59922, 69905],
       [309, -234],
-      [544, 630]
+      [544, 630],
     ],
     [
       [60775, 70301],
-      [112, -720]
+      [112, -720],
     ],
     [
       [60887, 69581],
@@ -6999,11 +6992,11 @@ export const GEO_DATA = {
       [-212, -82],
       [-66, -213],
       [-120, -182],
-      [-310, 94]
+      [-310, 94],
     ],
     [
       [59709, 67924],
-      [-9, 86]
+      [-9, 86],
     ],
     [
       [64327, 64904],
@@ -7014,15 +7007,15 @@ export const GEO_DATA = {
       [168, -18],
       [190, 400],
       [207, 379],
-      [176, 364]
+      [176, 364],
     ],
     [
       [65575, 65974],
-      [52, -202]
+      [52, -202],
     ],
     [
       [65627, 65772],
-      [38, -466]
+      [38, -466],
     ],
     [
       [65665, 65306],
@@ -7032,14 +7025,14 @@ export const GEO_DATA = {
       [-126, -117],
       [-1, -241],
       [-81, -245],
-      [-7, -238]
+      [-7, -238],
     ],
     [
       [65335, 63996],
       [-56, -125],
       [-835, 298],
       [-106, 599],
-      [-11, 136]
+      [-11, 136],
     ],
     [
       [64113, 65205],
@@ -7048,29 +7041,29 @@ export const GEO_DATA = {
       [76, 64],
       [84, -185],
       [5, -346],
-      [-61, -348]
+      [-61, -348],
     ],
     [
       [64274, 65130],
       [-77, -42],
-      [-84, 117]
+      [-84, 117],
     ],
     [
       [63326, 68290],
       [58, -261],
       [-25, -135],
-      [89, -445]
+      [89, -445],
     ],
     [
       [63448, 67449],
       [-196, -16],
       [-69, 282],
-      [-248, 57]
+      [-248, 57],
     ],
     [
       [62935, 67772],
       [204, 567],
-      [187, -49]
+      [187, -49],
     ],
     [
       [60775, 70301],
@@ -7078,14 +7071,14 @@ export const GEO_DATA = {
       [105, 715],
       [-26, 431],
       [152, 146],
-      [142, 369]
+      [142, 369],
     ],
     [
       [61763, 72576],
       [119, 92],
       [324, -77],
       [97, -150],
-      [133, 100]
+      [133, 100],
     ],
     [
       [62436, 72541],
@@ -7100,18 +7093,18 @@ export const GEO_DATA = {
       [-46, -428],
       [89, 0],
       [3, -314],
-      [153, -311]
+      [153, -311],
     ],
     [
       [63490, 68261],
-      [-164, 29]
+      [-164, 29],
     ],
     [
       [62935, 67772],
       [-516, 47],
       [-784, 1188],
       [-413, 414],
-      [-335, 160]
+      [-335, 160],
     ],
     [
       [65665, 65306],
@@ -7142,32 +7135,32 @@ export const GEO_DATA = {
       [-134, -165],
       [-153, 56],
       [-186, -199],
-      [-128, -34]
+      [-128, -34],
     ],
     [
       [64752, 60417],
       [-91, 413],
-      [-217, 975]
+      [-217, 975],
     ],
     [
       [64444, 61805],
       [833, 591],
       [185, 1182],
-      [-127, 418]
+      [-127, 418],
     ],
     [
       [65575, 65974],
       [80, 201],
       [35, -51],
       [-26, -244],
-      [-37, -108]
+      [-37, -108],
     ],
     [
       [96448, 41190],
       [175, -339],
       [-92, -78],
       [-93, 259],
-      [10, 158]
+      [10, 158],
     ],
     [
       [96330, 41322],
@@ -7176,20 +7169,20 @@ export const GEO_DATA = {
       [133, -182],
       [45, -476],
       [-75, 74],
-      [-58, -32]
+      [-58, -32],
     ],
     [
       [78495, 57780],
       [-66, 713],
       [178, 492],
       [359, 112],
-      [261, -84]
+      [261, -84],
     ],
     [
       [79227, 59013],
       [229, -232],
       [126, 407],
-      [246, -217]
+      [246, -217],
     ],
     [
       [79828, 58971],
@@ -7198,13 +7191,13 @@ export const GEO_DATA = {
       [-467, -455],
       [122, -358],
       [-292, -43],
-      [-240, -238]
+      [-240, -238],
     ],
     [
       [78981, 56775],
       [-233, 87],
       [-112, 307],
-      [-141, 611]
+      [-141, 611],
     ],
     [
       [78495, 57780],
@@ -7221,7 +7214,7 @@ export const GEO_DATA = {
       [50, -512],
       [155, -338],
       [168, -69],
-      [144, -306]
+      [144, -306],
     ],
     [
       [78372, 54256],
@@ -7229,7 +7222,7 @@ export const GEO_DATA = {
       [-183, -71],
       [-22, 304],
       [-227, 258],
-      [-48, -105]
+      [-48, -105],
     ],
     [
       [77801, 54399],
@@ -7240,7 +7233,7 @@ export const GEO_DATA = {
       [-45, -347],
       [-53, 328],
       [30, 369],
-      [82, 566]
+      [82, 566],
     ],
     [
       [77375, 56448],
@@ -7260,7 +7253,7 @@ export const GEO_DATA = {
       [127, 639],
       [196, 26],
       [162, 256],
-      [159, 137]
+      [159, 137],
     ],
     [
       [77809, 62643],
@@ -7278,19 +7271,19 @@ export const GEO_DATA = {
       [18, -583],
       [224, -515],
       [-12, -500],
-      [-90, -266]
+      [-90, -266],
     ],
     [
       [77809, 62643],
       [59, 218],
-      [237, 384]
+      [237, 384],
     ],
     [
       [78105, 63245],
       [25, -139],
       [148, -16],
       [-42, 676],
-      [144, 86]
+      [144, 86],
     ],
     [
       [78380, 63852],
@@ -7305,7 +7298,7 @@ export const GEO_DATA = {
       [175, -520],
       [210, -411],
       [70, -418],
-      [-50, -590]
+      [-50, -590],
     ],
     [
       [77375, 56448],
@@ -7326,13 +7319,13 @@ export const GEO_DATA = {
       [-218, 681],
       [34, 213],
       [-163, 76],
-      [-197, 481]
+      [-197, 481],
     ],
     [
       [75657, 62792],
       [-18, 476],
       [97, -90],
-      [6, 424]
+      [6, 424],
     ],
     [
       [75742, 63602],
@@ -7349,7 +7342,7 @@ export const GEO_DATA = {
       [199, -107],
       [-23, 364],
       [97, 108],
-      [-20, 224]
+      [-20, 224],
     ],
     [
       [77035, 67277],
@@ -7367,7 +7360,7 @@ export const GEO_DATA = {
       [206, -222],
       [121, -109],
       [203, 172],
-      [9, -244]
+      [9, -244],
     ],
     [
       [78380, 63852],
@@ -7379,7 +7372,7 @@ export const GEO_DATA = {
       [254, -108],
       [-44, -340],
       [132, -240],
-      [280, -154]
+      [280, -154],
     ],
     [
       [80013, 63313],
@@ -7398,11 +7391,11 @@ export const GEO_DATA = {
       [-346, -550],
       [-101, 378],
       [78, 401],
-      [-206, 335]
+      [-206, 335],
     ],
     [
       [86327, 75524],
-      [0, 0]
+      [0, 0],
     ],
     [
       [86327, 75524],
@@ -7418,7 +7411,7 @@ export const GEO_DATA = {
       [-9, -256],
       [-32, -65],
       [111, -96],
-      [157, -259]
+      [157, -259],
     ],
     [
       [85652, 73393],
@@ -7427,7 +7420,7 @@ export const GEO_DATA = {
       [-197, -29],
       [-108, -266],
       [-124, 21],
-      [-17, -54]
+      [-17, -54],
     ],
     [
       [85048, 72883],
@@ -7443,7 +7436,7 @@ export const GEO_DATA = {
       [71, 319],
       [-18, 96],
       [-163, 65],
-      [-131, 158]
+      [-131, 158],
     ],
     [
       [84517, 74170],
@@ -7455,7 +7448,7 @@ export const GEO_DATA = {
       [-44, 312],
       [429, 254],
       [111, 331],
-      [179, -348]
+      [179, -348],
     ],
     [
       [85652, 73393],
@@ -7470,7 +7463,7 @@ export const GEO_DATA = {
       [51, 443],
       [-122, 615],
       [206, 99],
-      [-190, 506]
+      [-190, 506],
     ],
     [
       [82410, 80055],
@@ -7518,7 +7511,7 @@ export const GEO_DATA = {
       [-192, 476],
       [-396, 222],
       [-233, 313],
-      [-73, 413]
+      [-73, 413],
     ],
     [
       [75742, 63602],
@@ -7542,7 +7535,7 @@ export const GEO_DATA = {
       [171, -159],
       [-47, -356],
       [96, -444],
-      [43, -486]
+      [43, -486],
     ],
     [
       [74730, 63611],
@@ -7587,7 +7580,7 @@ export const GEO_DATA = {
       [-362, 716],
       [133, 214],
       [-82, 232],
-      [-326, 501]
+      [-326, 501],
     ],
     [
       [68937, 64577],
@@ -7610,7 +7603,7 @@ export const GEO_DATA = {
       [137, 255],
       [421, -144],
       [310, 88],
-      [268, 496]
+      [268, 496],
     ],
     [
       [71621, 71550],
@@ -7621,7 +7614,7 @@ export const GEO_DATA = {
       [-200, 79],
       [78, -651],
       [273, -374],
-      [386, -413]
+      [386, -413],
     ],
     [
       [72530, 68413],
@@ -7637,12 +7630,12 @@ export const GEO_DATA = {
       [231, 10],
       [32, 234],
       [-36, 375],
-      [21, 255]
+      [21, 255],
     ],
     [
       [74477, 67050],
       [170, 124],
-      [23, -465]
+      [23, -465],
     ],
     [
       [74670, 66709],
@@ -7652,7 +7645,7 @@ export const GEO_DATA = {
       [234, -39],
       [227, 17],
       [20, 363],
-      [-113, 189]
+      [-113, 189],
     ],
     [
       [75471, 66988],
@@ -7663,7 +7656,7 @@ export const GEO_DATA = {
       [198, 249],
       [130, -367],
       [-94, -248],
-      [300, -89]
+      [300, -89],
     ],
     [
       [75657, 62792],
@@ -7677,7 +7670,7 @@ export const GEO_DATA = {
       [-118, 120],
       [-41, -108],
       [-78, 65],
-      [-108, 53]
+      [-108, 53],
     ],
     [
       [74670, 66709],
@@ -7685,7 +7678,7 @@ export const GEO_DATA = {
       [150, 150],
       [198, -137],
       [147, -14],
-      [122, -159]
+      [122, -159],
     ],
     [
       [72530, 68413],
@@ -7697,7 +7690,7 @@ export const GEO_DATA = {
       [216, -117],
       [225, -259],
       [314, -136],
-      [324, -57]
+      [324, -57],
     ],
     [
       [68937, 64577],
@@ -7706,7 +7699,7 @@ export const GEO_DATA = {
       [-215, 450],
       [-512, -111],
       [-451, -11],
-      [-391, -83]
+      [-391, -83],
     ],
     [
       [67082, 65396],
@@ -7717,7 +7710,7 @@ export const GEO_DATA = {
       [-7, 520],
       [-266, 260],
       [-112, 357],
-      [-137, 310]
+      [-137, 310],
     ],
     [
       [66909, 68203],
@@ -7748,13 +7741,13 @@ export const GEO_DATA = {
       [298, 124],
       [319, 68],
       [141, 109],
-      [162, 67]
+      [162, 67],
     ],
     [
       [70877, 72519],
       [205, -276],
       [82, -454],
-      [457, -239]
+      [457, -239],
     ],
     [
       [68841, 72526],
@@ -7775,11 +7768,11 @@ export const GEO_DATA = {
       [123, 58],
       [173, 265],
       [192, -44],
-      [286, -1]
+      [286, -1],
     ],
     [
       [70827, 72688],
-      [50, -169]
+      [50, -169],
     ],
     [
       [66909, 68203],
@@ -7791,7 +7784,7 @@ export const GEO_DATA = {
       [119, 323],
       [-121, 87],
       [76, 430],
-      [113, 736]
+      [113, 736],
     ],
     [
       [67002, 71642],
@@ -7804,7 +7797,7 @@ export const GEO_DATA = {
       [234, 114],
       [44, 211],
       [131, -158],
-      [84, -19]
+      [84, -19],
     ],
     [
       [69725, 74357],
@@ -7813,7 +7806,7 @@ export const GEO_DATA = {
       [-26, -340],
       [301, 46],
       [343, -192],
-      [526, 89]
+      [526, 89],
     ],
     [
       [70465, 73876],
@@ -7821,7 +7814,7 @@ export const GEO_DATA = {
       [91, 59],
       [169, -134],
       [-10, -230],
-      [42, -337]
+      [42, -337],
     ],
     [
       [72294, 75601],
@@ -7834,7 +7827,7 @@ export const GEO_DATA = {
       [-192, -116],
       [-266, -279],
       [39, -138],
-      [-79, -136]
+      [-79, -136],
     ],
     [
       [67002, 71642],
@@ -7847,7 +7840,7 @@ export const GEO_DATA = {
       [-122, -110],
       [-186, 17],
       [-197, -338],
-      [-244, -114]
+      [-244, -114],
     ],
     [
       [64978, 72558],
@@ -7863,24 +7856,24 @@ export const GEO_DATA = {
       [-80, 338],
       [-224, -151],
       [-28, -433],
-      [-87, 383]
+      [-87, 383],
     ],
     [
       [62436, 72541],
       [-152, 473],
       [55, 183],
       [-87, 678],
-      [190, 168]
+      [190, 168],
     ],
     [
       [62442, 74043],
       [44, -223],
       [141, -273],
-      [190, -78]
+      [190, -78],
     ],
     [
       [62817, 73469],
-      [101, 17]
+      [101, 17],
     ],
     [
       [62918, 73486],
@@ -7889,7 +7882,7 @@ export const GEO_DATA = {
       [82, -174],
       [-95, -292],
       [173, -309],
-      [69, 29]
+      [69, 29],
     ],
     [
       [63578, 73220],
@@ -7898,7 +7891,7 @@ export const GEO_DATA = {
       [193, -296],
       [395, -102],
       [434, 156],
-      [27, 139]
+      [27, 139],
     ],
     [
       [67082, 65396],
@@ -7916,12 +7909,12 @@ export const GEO_DATA = {
       [-205, 788],
       [-149, -96],
       [-177, 196],
-      [-104, -231]
+      [-104, -231],
     ],
     [
       [59999, 71049],
       [-26, 452],
-      [68, 243]
+      [68, 243],
     ],
     [
       [60041, 71744],
@@ -7934,7 +7927,7 @@ export const GEO_DATA = {
       [229, 2],
       [320, 222],
       [149, -10],
-      [316, 92]
+      [316, 92],
     ],
     [
       [62817, 73469],
@@ -7942,18 +7935,18 @@ export const GEO_DATA = {
       [1, 91],
       [-123, -2],
       [-82, 159],
-      [-58, -16]
+      [-58, -16],
     ],
     [
       [62442, 74043],
       [-109, 172],
       [-207, 147],
       [27, 288],
-      [-47, 208]
+      [-47, 208],
     ],
     [
       [62106, 74858],
-      [386, 92]
+      [386, 92],
     ],
     [
       [62492, 74950],
@@ -7964,14 +7957,14 @@ export const GEO_DATA = {
       [-78, -189],
       [118, -160],
       [124, -97],
-      [7, -410]
+      [7, -410],
     ],
     [
       [55734, 91409],
       [371, -289],
       [433, -402],
       [8, -910],
-      [93, -230]
+      [93, -230],
     ],
     [
       [56639, 89578],
@@ -7992,7 +7985,7 @@ export const GEO_DATA = {
       [-321, -27],
       [-89, 558],
       [-232, 671],
-      [-211, 835]
+      [-211, 835],
     ],
     [
       [58829, 81362],
@@ -8009,7 +8002,7 @@ export const GEO_DATA = {
       [-281, 47],
       [-215, -14],
       [-152, -160],
-      [-133, -23]
+      [-133, -23],
     ],
     [
       [56535, 81053],
@@ -8018,7 +8011,7 @@ export const GEO_DATA = {
       [166, 121],
       [2, 235],
       [-77, 225],
-      [-12, 261]
+      [-12, 261],
     ],
     [
       [56523, 82432],
@@ -8026,12 +8019,12 @@ export const GEO_DATA = {
       [302, 223],
       [64, 333],
       [228, 190],
-      [-26, 264]
+      [-26, 264],
     ],
     [
       [57359, 83438],
       [169, 100],
-      [298, 228]
+      [298, 228],
     ],
     [
       [60617, 78409],
@@ -8039,7 +8032,7 @@ export const GEO_DATA = {
       [-185, -191],
       [-260, -31],
       [-239, -220],
-      [14, -317]
+      [14, -317],
     ],
     [
       [59287, 77741],
@@ -8048,13 +8041,13 @@ export const GEO_DATA = {
       [-19, 221],
       [-257, -73],
       [-103, -325],
-      [-215, -437]
+      [-215, -437],
     ],
     [
       [58223, 77340],
       [-126, 101],
       [-131, -95],
-      [-124, 109]
+      [-124, 109],
     ],
     [
       [57842, 77455],
@@ -8076,7 +8069,7 @@ export const GEO_DATA = {
       [-115, 22],
       [-204, 184],
       [-185, -58],
-      [-66, -87]
+      [-66, -87],
     ],
     [
       [57394, 79070],
@@ -8087,17 +8080,17 @@ export const GEO_DATA = {
       [-129, 144],
       [-178, 3],
       [-172, 65],
-      [-120, -127]
+      [-120, -127],
     ],
     [
       [56308, 78869],
       [-19, 159],
-      [-155, 161]
+      [-155, 161],
     ],
     [
       [56134, 79189],
       [55, 238],
-      [77, 154]
+      [77, 154],
     ],
     [
       [56266, 79581],
@@ -8106,7 +8099,7 @@ export const GEO_DATA = {
       [252, 491],
       [138, 69],
       [29, 166],
-      [-139, 515]
+      [-139, 515],
     ],
     [
       [56266, 79581],
@@ -8116,7 +8109,7 @@ export const GEO_DATA = {
       [-165, -127],
       [-140, 210],
       [-114, -81],
-      [-16, 36]
+      [-16, 36],
     ],
     [
       [55236, 79823],
@@ -8128,7 +8121,7 @@ export const GEO_DATA = {
       [-151, 122],
       [17, 163],
       [-207, 51],
-      [-132, 191]
+      [-132, 191],
     ],
     [
       [54171, 80775],
@@ -8137,7 +8130,7 @@ export const GEO_DATA = {
       [-69, 316],
       [-101, 210],
       [77, 158],
-      [-64, 300]
+      [-64, 300],
     ],
     [
       [53922, 82340],
@@ -8146,26 +8139,26 @@ export const GEO_DATA = {
       [350, 200],
       [277, -100],
       [21, -144],
-      [268, -7]
+      [268, -7],
     ],
     [
       [56314, 82678],
       [142, -64],
-      [67, -182]
+      [67, -182],
     ],
     [
       [54716, 79012],
       [-21, -241],
       [-156, -2],
       [53, -128],
-      [-92, -380]
+      [-92, -380],
     ],
     [
       [54500, 78261],
       [-53, -100],
       [-243, -14],
       [-140, -134],
-      [-229, 45]
+      [-229, 45],
     ],
     [
       [53835, 78058],
@@ -8173,14 +8166,14 @@ export const GEO_DATA = {
       [-62, 205],
       [-274, -102],
       [-32, -113],
-      [-169, 84]
+      [-169, 84],
     ],
     [
       [52900, 78285],
       [-142, 16],
       [-125, 108],
       [42, 145],
-      [-10, 104]
+      [-10, 104],
     ],
     [
       [52665, 78658],
@@ -8194,7 +8187,7 @@ export const GEO_DATA = {
       [26, 100],
       [-40, 385],
       [100, 75],
-      [98, 272]
+      [98, 272],
     ],
     [
       [53776, 79457],
@@ -8203,36 +8196,36 @@ export const GEO_DATA = {
       [98, 44],
       [215, -180],
       [131, 30],
-      [128, -111]
+      [128, -111],
     ],
     [
       [54711, 79292],
       [-23, -75],
-      [28, -205]
+      [28, -205],
     ],
     [
       [56308, 78869],
       [-170, -123],
       [-131, -401],
       [-168, -401],
-      [-223, -111]
+      [-223, -111],
     ],
     [
       [55616, 77833],
       [-173, 26],
-      [-213, -155]
+      [-213, -155],
     ],
     [
       [55230, 77704],
       [-104, -89],
       [-229, 114],
       [-208, 253],
-      [-88, 73]
+      [-88, 73],
     ],
     [
       [54601, 78055],
       [-54, 200],
-      [-47, 6]
+      [-47, 6],
     ],
     [
       [54716, 79012],
@@ -8247,7 +8240,7 @@ export const GEO_DATA = {
       [66, 139],
       [91, 36],
       [297, -180],
-      [59, 61]
+      [59, 61],
     ],
     [
       [57842, 77455],
@@ -8257,14 +8250,14 @@ export const GEO_DATA = {
       [-160, 352],
       [-89, 249],
       [-86, 175],
-      [-84, 58]
+      [-84, 58],
     ],
     [
       [58223, 77340],
       [6, -152],
       [-135, -128],
       [-84, 56],
-      [-78, -713]
+      [-78, -713],
     ],
     [
       [57932, 76403],
@@ -8275,7 +8268,7 @@ export const GEO_DATA = {
       [-408, 31],
       [-213, 92],
       [-108, -43],
-      [-80, 243]
+      [-80, 243],
     ],
     [
       [56293, 76715],
@@ -8287,11 +8280,11 @@ export const GEO_DATA = {
       [-22, 244],
       [-169, 139],
       [-31, 188],
-      [-151, 232]
+      [-151, 232],
     ],
     [
       [55907, 83187],
-      [-59, 497]
+      [-59, 497],
     ],
     [
       [55848, 83684],
@@ -8300,7 +8293,7 @@ export const GEO_DATA = {
       [273, 59],
       [39, -123],
       [148, -38],
-      [267, -287]
+      [267, -287],
     ],
     [
       [55848, 83684],
@@ -8309,14 +8302,14 @@ export const GEO_DATA = {
       [262, 202],
       [221, -442],
       [223, 12],
-      [53, 453]
+      [53, 453],
     ],
     [
       [56753, 84725],
       [237, 105],
       [121, -73],
       [239, -219],
-      [229, -1]
+      [229, -1],
     ],
     [
       [56753, 84725],
@@ -8327,7 +8320,7 @@ export const GEO_DATA = {
       [351, 164],
       [350, 86],
       [301, -97],
-      [287, 17]
+      [287, 17],
     ],
     [
       [54171, 80775],
@@ -8340,22 +8333,22 @@ export const GEO_DATA = {
       [49, -176],
       [30, -249],
       [141, -142],
-      [157, -254]
+      [157, -254],
     ],
     [
       [52665, 78658],
       [-298, 181],
       [-57, -128],
-      [-236, 4]
+      [-236, 4],
     ],
     [
       [51718, 79804],
       [16, 259],
-      [-56, 133]
+      [-56, 133],
     ],
     [
       [51678, 80196],
-      [32, 400]
+      [32, 400],
     ],
     [
       [51710, 80596],
@@ -8363,7 +8356,7 @@ export const GEO_DATA = {
       [167, 0],
       [70, 222],
       [69, 541],
-      [-51, 200]
+      [-51, 200],
     ],
     [
       [51918, 82178],
@@ -8372,12 +8365,12 @@ export const GEO_DATA = {
       [52, -130],
       [188, 291],
       [-63, 222],
-      [-13, 335]
+      [-13, 335],
     ],
     [
       [52368, 83053],
       [210, -78],
-      [178, 90]
+      [178, 90],
     ],
     [
       [52756, 83065],
@@ -8387,18 +8380,18 @@ export const GEO_DATA = {
       [283, 111],
       [156, 162],
       [313, -233],
-      [132, -189]
+      [132, -189],
     ],
     [
       [57932, 76403],
       [-144, -245],
       [-101, -422],
-      [89, -337]
+      [89, -337],
     ],
     [
       [57776, 75399],
       [-239, 79],
-      [-283, -186]
+      [-283, -186],
     ],
     [
       [57254, 75292],
@@ -8406,12 +8399,12 @@ export const GEO_DATA = {
       [-252, -56],
       [-196, 206],
       [-222, -162],
-      [-206, 17]
+      [-206, 17],
     ],
     [
       [56375, 75003],
       [-20, 391],
-      [-139, 189]
+      [-139, 189],
     ],
     [
       [56216, 75583],
@@ -8421,7 +8414,7 @@ export const GEO_DATA = {
       [105, 185],
       [-135, 255],
       [-24, 216],
-      [68, 134]
+      [68, 134],
     ],
     [
       [57302, 71436],
@@ -8434,13 +8427,13 @@ export const GEO_DATA = {
       [216, 34],
       [207, -42],
       [-7, -103],
-      [151, 71]
+      [151, 71],
     ],
     [
       [57254, 75292],
       [135, -157],
       [-86, -369],
-      [-66, -67]
+      [-66, -67],
     ],
     [
       [57237, 74699],
@@ -8468,14 +8461,14 @@ export const GEO_DATA = {
       [-49, 393],
       [-108, 272],
       [-143, 337],
-      [-18, 168]
+      [-18, 168],
     ],
     [
       [55597, 73991],
       [129, 287],
       [16, 192],
       [91, 85],
-      [5, 155]
+      [5, 155],
     ],
     [
       [55838, 74710],
@@ -8483,7 +8476,7 @@ export const GEO_DATA = {
       [106, 129],
       [150, -12],
       [46, 103],
-      [53, 20]
+      [53, 20],
     ],
     [
       [60041, 71744],
@@ -8514,12 +8507,12 @@ export const GEO_DATA = {
       [399, -228],
       [323, 91],
       [239, -53],
-      [328, 309]
+      [328, 309],
     ],
     [
       [61542, 75120],
       [296, 28],
-      [268, -290]
+      [268, -290],
     ],
     [
       [57776, 75399],
@@ -8530,7 +8523,7 @@ export const GEO_DATA = {
       [-118, -182],
       [-232, -319],
       [-87, 276],
-      [3, 121]
+      [3, 121],
     ],
     [
       [55597, 73991],
@@ -8540,32 +8533,32 @@ export const GEO_DATA = {
       [-24, 281],
       [23, 403],
       [38, 184],
-      [-47, 93]
+      [-47, 93],
     ],
     [
       [55380, 75322],
       [-18, 188],
       [120, 291],
       [18, -111],
-      [75, 52]
+      [75, 52],
     ],
     [
       [55575, 75742],
       [59, -159],
       [66, -60],
-      [19, -214]
+      [19, -214],
     ],
     [
       [55719, 75309],
       [-35, -201],
       [39, -254],
-      [115, -144]
+      [115, -144],
     ],
     [
       [55230, 77704],
       [67, -229],
       [89, -169],
-      [-107, -222]
+      [-107, -222],
     ],
     [
       [55279, 77084],
@@ -8581,11 +8574,11 @@ export const GEO_DATA = {
       [127, -221],
       [106, -130],
       [105, -247],
-      [246, -224]
+      [246, -224],
     ],
     [
       [55155, 75778],
-      [-31, -100]
+      [-31, -100],
     ],
     [
       [55124, 75678],
@@ -8600,7 +8593,7 @@ export const GEO_DATA = {
       [-85, -255],
       [-82, 198],
       [6, 205],
-      [10, 9]
+      [10, 9],
     ],
     [
       [53809, 77462],
@@ -8611,7 +8604,7 @@ export const GEO_DATA = {
       [-1, 165],
       [97, 60],
       [27, 239],
-      [221, 157]
+      [221, 157],
     ],
     [
       [52900, 78285],
@@ -8623,30 +8616,30 @@ export const GEO_DATA = {
       [-48, 94],
       [-156, -200],
       [-134, -28],
-      [-120, 126]
+      [-120, 126],
     ],
     [
       [51576, 79843],
       [30, 331],
-      [72, 22]
+      [72, 22],
     ],
     [
       [50698, 80799],
-      [222, 117]
+      [222, 117],
     ],
     [
       [50920, 80916],
       [204, -47],
       [257, 123],
       [176, -258],
-      [153, -138]
+      [153, -138],
     ],
     [
       [50920, 80916],
       [143, 162],
       [244, 869],
       [380, 248],
-      [231, -17]
+      [231, -17],
     ],
     [
       [47490, 75324],
@@ -8667,7 +8660,7 @@ export const GEO_DATA = {
       [96, -175],
       [-38, -161],
       [-103, -222],
-      [23, -195]
+      [23, -195],
     ],
     [
       [47929, 72498],
@@ -8684,7 +8677,7 @@ export const GEO_DATA = {
       [58, 355],
       [-6, 250],
       [-56, 212],
-      [-12, 200]
+      [-12, 200],
     ],
     [
       [47490, 75324],
@@ -8695,7 +8688,7 @@ export const GEO_DATA = {
       [373, 3],
       [296, -101],
       [230, 31],
-      [449, -19]
+      [449, -19],
     ],
     [
       [50829, 75674],
@@ -8717,7 +8710,7 @@ export const GEO_DATA = {
       [-136, 49],
       [-103, 199],
       [-79, 340],
-      [-259, 92]
+      [-259, 92],
     ],
     [
       [48278, 82406],
@@ -8728,14 +8721,14 @@ export const GEO_DATA = {
       [225, 617],
       [-145, 601],
       [378, 463],
-      [210, 276]
+      [210, 276],
     ],
     [
       [47896, 83153],
       [57, -317],
       [-57, -317],
       [172, 9],
-      [210, -122]
+      [210, -122],
     ],
     [
       [96049, 38125],
@@ -8750,7 +8743,7 @@ export const GEO_DATA = {
       [119, -9],
       [156, -201],
       [122, -200],
-      [89, -166]
+      [89, -166],
     ],
     [
       [95032, 44386],
@@ -8758,7 +8751,7 @@ export const GEO_DATA = {
       [-194, 4],
       [-106, 363],
       [166, -142],
-      [56, -22]
+      [56, -22],
     ],
     [
       [94910, 44908],
@@ -8767,7 +8760,7 @@ export const GEO_DATA = {
       [-57, 353],
       [94, 0],
       [100, -473],
-      [111, -283]
+      [111, -283],
     ],
     [
       [94680, 44747],
@@ -8777,7 +8770,7 @@ export const GEO_DATA = {
       [17, 235],
       [183, -93],
       [91, -124],
-      [45, -155]
+      [45, -155],
     ],
     [
       [94344, 45841],
@@ -8788,7 +8781,7 @@ export const GEO_DATA = {
       [-104, 197],
       [41, 60],
       [128, -142],
-      [228, -272]
+      [228, -272],
     ],
     [
       [93649, 46431],
@@ -8797,7 +8790,7 @@ export const GEO_DATA = {
       [-121, 134],
       [-114, 243],
       [14, 99],
-      [166, -250]
+      [166, -250],
     ],
     [
       [99134, 26908],
@@ -8835,7 +8828,7 @@ export const GEO_DATA = {
       [-212, 12],
       [-74, -179],
       [26, -254],
-      [-41, -110]
+      [-41, -110],
     ],
     [
       [97129, 24846],
@@ -8867,7 +8860,7 @@ export const GEO_DATA = {
       [149, 438],
       [349, 583],
       [179, 111],
-      [200, 225]
+      [200, 225],
     ],
     [
       [91024, 26469],
@@ -8886,7 +8879,7 @@ export const GEO_DATA = {
       [181, -52],
       [269, -204],
       [151, 81],
-      [217, 113]
+      [217, 113],
     ],
     [
       [85040, 31546],
@@ -9112,7 +9105,7 @@ export const GEO_DATA = {
       [-498, -56],
       [-359, -211],
       [-317, -197],
-      [-265, 39]
+      [-265, 39],
     ],
     [
       [72718, 55024],
@@ -9124,7 +9117,7 @@ export const GEO_DATA = {
       [126, 959],
       [192, -328],
       [129, -416],
-      [134, -616]
+      [134, -616],
     ],
     [
       [80409, 61331],
@@ -9136,7 +9129,7 @@ export const GEO_DATA = {
       [62, -226],
       [-122, -260],
       [-64, -341],
-      [-240, -284]
+      [-240, -284],
     ],
     [
       [84517, 74170],
@@ -9191,7 +9184,7 @@ export const GEO_DATA = {
       [-73, 429],
       [66, 228],
       [-373, 189],
-      [-131, -96]
+      [-131, -96],
     ],
     [
       [83826, 64992],
@@ -9202,12 +9195,12 @@ export const GEO_DATA = {
       [163, 581],
       [223, 447],
       [127, -176],
-      [-49, -357]
+      [-49, -357],
     ],
     [
       [53835, 78058],
       [-31, -291],
-      [67, -251]
+      [67, -251],
     ],
     [
       [53871, 77516],
@@ -9253,7 +9246,7 @@ export const GEO_DATA = {
       [-226, 195],
       [-128, -80],
       [-161, -274],
-      [-115, -43]
+      [-115, -43],
     ],
     [
       [54100, 73116],
@@ -9266,7 +9259,7 @@ export const GEO_DATA = {
       [-387, 300],
       [38, 304],
       [325, -54],
-      [284, 64]
+      [284, 64],
     ],
     [
       [52419, 74744],
@@ -9278,7 +9271,7 @@ export const GEO_DATA = {
       [-105, 156],
       [-11, 713],
       [-64, 338],
-      [153, -30]
+      [153, -30],
     ],
     [
       [52368, 83053],
@@ -9296,7 +9289,7 @@ export const GEO_DATA = {
       [-68, -223],
       [-83, 64],
       [-200, -425],
-      [76, -288]
+      [76, -288],
     ],
     [
       [53436, 83731],
@@ -9304,13 +9297,13 @@ export const GEO_DATA = {
       [-166, -478],
       [-291, 333],
       [-39, 246],
-      [408, 195]
+      [408, 195],
     ],
     [
       [47896, 83153],
       [233, 24],
       [298, -365],
-      [-149, -406]
+      [-149, -406],
     ],
     [
       [49140, 82132],
@@ -9360,7 +9353,7 @@ export const GEO_DATA = {
       [291, 183],
       [-152, 319],
       [52, 387],
-      [413, -54]
+      [413, -54],
     ],
     [
       [45969, 89843],
@@ -9382,7 +9375,7 @@ export const GEO_DATA = {
       [422, 321],
       [349, -167],
       [453, 315],
-      [461, -42]
+      [461, -42],
     ],
     [
       [63495, 75281],
@@ -9394,7 +9387,7 @@ export const GEO_DATA = {
       [-49, -459],
       [-48, -207],
       [-101, -138],
-      [7, -293]
+      [7, -293],
     ],
     [
       [62492, 74950],
@@ -9403,7 +9396,7 @@ export const GEO_DATA = {
       [149, -36],
       [38, 70],
       [-136, 319],
-      [72, 82]
+      [72, 82],
     ],
     [
       [61542, 75120],
@@ -9411,7 +9404,7 @@ export const GEO_DATA = {
       [-70, 403],
       [-160, 218],
       [-154, 68],
-      [-102, 181]
+      [-102, 181],
     ],
     [
       [83564, 58086],
@@ -9419,7 +9412,7 @@ export const GEO_DATA = {
       [238, -22],
       [97, -213],
       [-74, -510],
-      [-119, 295]
+      [-119, 295],
     ],
     [
       [84051, 56477],
@@ -9433,7 +9426,7 @@ export const GEO_DATA = {
       [-87, -373],
       [-87, -175],
       [-171, 409],
-      [57, 158]
+      [57, 158],
     ],
     [
       [85104, 55551],
@@ -9462,7 +9455,7 @@ export const GEO_DATA = {
       [-16, 457],
       [225, -280],
       [23, -297],
-      [20, -218]
+      [20, -218],
     ],
     [
       [82917, 56084],
@@ -9473,7 +9466,7 @@ export const GEO_DATA = {
       [146, 587],
       [49, -482],
       [-183, -325],
-      [-146, -406]
+      [-146, -406],
     ],
     [
       [83982, 61347],
@@ -9508,7 +9501,7 @@ export const GEO_DATA = {
       [169, -1],
       [171, -168],
       [85, 153],
-      [26, -150]
+      [26, -150],
     ],
     [
       [83899, 57324],
@@ -9519,7 +9512,7 @@ export const GEO_DATA = {
       [-129, -251],
       [-176, -178],
       [-10, 275],
-      [20, 301]
+      [20, 301],
     ],
     [
       [84861, 57766],
@@ -9535,7 +9528,7 @@ export const GEO_DATA = {
       [-4, 224],
       [-169, 451],
       [266, -13],
-      [77, -220]
+      [77, -220],
     ],
     [
       [78372, 54256],
@@ -9557,7 +9550,7 @@ export const GEO_DATA = {
       [-38, 489],
       [-100, 322],
       [30, 431],
-      [-61, 250]
+      [-61, 250],
     ],
     [
       [80461, 51765],
@@ -9567,7 +9560,7 @@ export const GEO_DATA = {
       [119, 112],
       [333, 128],
       [199, 467],
-      [137, 374]
+      [137, 374],
     ],
     [
       [81723, 53254],
@@ -9575,7 +9568,7 @@ export const GEO_DATA = {
       [58, 202],
       [133, -19],
       [16, 377],
-      [13, 291]
+      [13, 291],
     ],
     [
       [82069, 53798],
@@ -9589,16 +9582,16 @@ export const GEO_DATA = {
       [-20, -232],
       [-186, -29],
       [50, -289],
-      [-205, -201]
+      [-205, -201],
     ],
     [
       [81723, 53254],
       [110, 221],
-      [236, 323]
+      [236, 323],
     ],
     [
       [53809, 77462],
-      [62, 54]
+      [62, 54],
     ],
     [
       [57797, 86326],
@@ -9614,7 +9607,7 @@ export const GEO_DATA = {
       [635, 640],
       [185, 124],
       [-28, 250],
-      [-387, 279]
+      [-387, 279],
     ],
     [
       [54711, 79292],
@@ -9626,7 +9619,7 @@ export const GEO_DATA = {
       [18, 134],
       [64, 26],
       [43, 106],
-      [82, 1]
+      [82, 1],
     ],
     [
       [60669, 61213],
@@ -9637,12 +9630,12 @@ export const GEO_DATA = {
       [154, -336],
       [151, -341],
       [87, -203],
-      [136, -178]
+      [136, -178],
     ],
     [
       [61966, 58083],
       [-83, -144],
-      [-119, 51]
+      [-119, 51],
     ],
     [
       [61764, 57990],
@@ -9656,7 +9649,7 @@ export const GEO_DATA = {
       [-163, -139],
       [-168, 268],
       [-87, -441],
-      [-323, 124]
+      [-323, 124],
     ],
     [
       [89411, 73729],
@@ -9695,7 +9688,7 @@ export const GEO_DATA = {
       [117, 374],
       [295, 108],
       [152, -819],
-      [-9, -479]
+      [-9, -479],
     ],
     [
       [90169, 76553],
@@ -9713,7 +9706,7 @@ export const GEO_DATA = {
       [83, 460],
       [326, -615],
       [213, -198],
-      [195, -126]
+      [195, -126],
     ],
     [
       [86769, 70351],
@@ -9727,7 +9720,7 @@ export const GEO_DATA = {
       [-143, -137],
       [-73, -346],
       [-181, 168],
-      [2, 281]
+      [2, 281],
     ],
     [
       [64752, 60417],
@@ -9757,7 +9750,7 @@ export const GEO_DATA = {
       [56, 29],
       [-29, 270],
       [34, 114],
-      [-12, 257]
+      [-12, 257],
     ],
     [
       [61883, 60238],
@@ -9774,7 +9767,7 @@ export const GEO_DATA = {
       [130, 99],
       [199, 620],
       [259, 266],
-      [801, 226]
+      [801, 226],
     ],
     [
       [63448, 67449],
@@ -9787,11 +9780,11 @@ export const GEO_DATA = {
       [35, -199],
       [80, -165],
       [37, -194],
-      [41, -145]
+      [41, -145],
     ],
     [
       [64274, 65130],
-      [53, -226]
+      [53, -226],
     ],
     [
       [61883, 60238],
@@ -9819,7 +9812,7 @@ export const GEO_DATA = {
       [-139, -3],
       [44, 325],
       [12, 206],
-      [34, 236]
+      [34, 236],
     ],
     [
       [36483, 4468],
@@ -9842,7 +9835,7 @@ export const GEO_DATA = {
       [174, 254],
       [126, 220],
       [168, 209],
-      [180, 243]
+      [180, 243],
     ],
     [
       [31586, 3163],
@@ -9857,7 +9850,7 @@ export const GEO_DATA = {
       [-621, -35],
       [-348, 197],
       [0, 23],
-      [-152, 174]
+      [-152, 174],
     ],
     [
       [29468, 8472],
@@ -9884,7 +9877,7 @@ export const GEO_DATA = {
       [-310, -81],
       [-212, 174],
       [-16, 243],
-      [305, 231]
+      [305, 231],
     ],
     [
       [21575, 8103],
@@ -9899,7 +9892,7 @@ export const GEO_DATA = {
       [-343, 23],
       [-376, -35],
       [-283, 116],
-      [-146, 243]
+      [-146, 243],
     ],
     [
       [15938, 7061],
@@ -9910,7 +9903,7 @@ export const GEO_DATA = {
       [-158, -208],
       [-261, -151],
       [-386, 47],
-      [-278, 208]
+      [-278, 208],
     ],
     [
       [14643, 7177],
@@ -9919,7 +9912,7 @@ export const GEO_DATA = {
       [425, -231],
       [-164, 23],
       [-359, 58],
-      [-381, 162]
+      [-381, 162],
     ],
     [
       [4524, 4144],
@@ -9932,7 +9925,7 @@ export const GEO_DATA = {
       [-364, 208],
       [-163, 209],
       [-11, 35],
-      [-180, 162]
+      [-180, 162],
     ],
     [
       [0, 529],
@@ -10488,7 +10481,7 @@ export const GEO_DATA = {
       [767, 151],
       [636, -186],
       [479, -142],
-      [-99999, 0]
+      [-99999, 0],
     ],
     [
       [59092, 71341],
@@ -10497,7 +10490,7 @@ export const GEO_DATA = {
       [200, -8],
       [253, 176],
       [-188, -251],
-      [21, -111]
+      [21, -111],
     ],
     [
       [59437, 71293],
@@ -10509,7 +10502,7 @@ export const GEO_DATA = {
       [-20, 37],
       [-54, 6],
       [-75, -51],
-      [-52, 31]
+      [-52, 31],
     ],
     [
       [59437, 71293],
@@ -10517,7 +10510,7 @@ export const GEO_DATA = {
       [-285, -240],
       [-136, 77],
       [-64, 237],
-      [132, 22]
+      [132, 22],
     ],
     [
       [45272, 63236],
@@ -10551,7 +10544,7 @@ export const GEO_DATA = {
       [167, -251],
       [264, 41],
       [288, -131],
-      [121, -6]
+      [121, -6],
     ],
     [
       [56944, 63578],
@@ -10560,7 +10553,7 @@ export const GEO_DATA = {
       [-83, 476],
       [71, 365],
       [-43, 253],
-      [101, 283]
+      [101, 283],
     ],
     [
       [56990, 69231],
@@ -10576,7 +10569,7 @@ export const GEO_DATA = {
       [65, 193],
       [222, -140],
       [217, -33],
-      [137, 149]
+      [137, 149],
     ],
     [
       [59700, 68010],
@@ -10597,7 +10590,7 @@ export const GEO_DATA = {
       [-55, -103],
       [9, -384],
       [323, -530],
-      [49, -121]
+      [49, -121],
     ],
     [
       [53191, 70158],
@@ -10620,7 +10613,7 @@ export const GEO_DATA = {
       [104, -2],
       [88, -101],
       [276, -70],
-      [68, -195]
+      [68, -195],
     ],
     [
       [59804, 53833],
@@ -10631,7 +10624,7 @@ export const GEO_DATA = {
       [-171, 42],
       [95, 337],
       [147, 14],
-      [42, 181]
+      [42, 181],
     ],
     [
       [61764, 57990],
@@ -10641,7 +10634,7 @@ export const GEO_DATA = {
       [4, -180],
       [155, -10],
       [67, 42],
-      [62, -106]
+      [62, -106],
     ],
     [
       [61882, 57035],
@@ -10650,18 +10643,18 @@ export const GEO_DATA = {
       [102, -285],
       [106, -210],
       [909, -702],
-      [233, 4]
+      [233, 4],
     ],
     [
       [61966, 58083],
       [66, -183],
       [-9, -245],
       [-158, -142],
-      [119, -161]
+      [119, -161],
     ],
     [
       [61984, 57352],
-      [-102, -317]
+      [-102, -317],
     ],
     [
       [61984, 57352],
@@ -10674,12 +10667,12 @@ export const GEO_DATA = {
       [245, 184],
       [138, 39],
       [99, 108],
-      [158, 20]
+      [158, 20],
     ],
     [
       [58449, 49909],
       [-166, -182],
-      [-67, 60]
+      [-67, 60],
     ],
     [
       [58564, 52653],
@@ -10687,7 +10680,7 @@ export const GEO_DATA = {
       [176, -132],
       [224, 138],
       [195, -1],
-      [171, 272]
+      [171, 272],
     ],
     [
       [55279, 77084],
@@ -10695,25 +10688,25 @@ export const GEO_DATA = {
       [-69, -260],
       [134, -227],
       [-41, -278],
-      [-65, -27]
+      [-65, -27],
     ],
     [
       [55338, 76294],
       [-52, -53],
       [-90, -138],
-      [-41, -325]
+      [-41, -325],
     ],
     [
       [55719, 75309],
       [35, -5],
       [13, 121],
       [164, 91],
-      [62, 23]
+      [62, 23],
     ],
     [
       [55993, 75539],
       [95, 35],
-      [128, 9]
+      [128, 9],
     ],
     [
       [55993, 75539],
@@ -10728,7 +10721,7 @@ export const GEO_DATA = {
       [-40, 84],
       [-50, -33],
       [-38, -196],
-      [-66, -43]
+      [-66, -43],
     ],
     [
       [55627, 75874],
@@ -10736,17 +10729,17 @@ export const GEO_DATA = {
       [-106, 123],
       [-91, 63],
       [-40, 82],
-      [-74, 101]
+      [-74, 101],
     ],
     [
       [55380, 75322],
       [-58, 46],
       [-78, 192],
-      [-120, 118]
+      [-120, 118],
     ],
     [
       [55627, 75874],
-      [-52, -132]
+      [-52, -132],
     ],
     [
       [32866, 56937],
@@ -10756,12 +10749,12 @@ export const GEO_DATA = {
       [-232, -65],
       [-50, 53],
       [81, 163],
-      [-6, 233]
-    ]
+      [-6, 233],
+    ],
   ],
-  "bbox": [-180, -85.60903777459771, 180, 83.64513000000001],
-  "transform": {
-    "scale": [0.0036000360003600037, 0.0016925586033320105],
-    "translate": [-180, -85.60903777459771]
-  }
-}
+  bbox: [-180, -85.60903777459771, 180, 83.64513000000001],
+  transform: {
+    scale: [0.0036000360003600037, 0.0016925586033320105],
+    translate: [-180, -85.60903777459771],
+  },
+};

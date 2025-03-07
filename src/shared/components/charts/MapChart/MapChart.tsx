@@ -16,6 +16,7 @@ interface Props {
   data: Data[];
 }
 
+// memoized to prevent unnecessary re-renders
 export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
   // Refs for container dimensions and tooltip positioning
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,7 +84,9 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
 
     return { x: offsetX, y: offsetY };
   };
-  if (!data || chartData.length === 0) {
+
+  // Early return if no data
+  if (!data.length) {
     return <NoData />;
   }
 

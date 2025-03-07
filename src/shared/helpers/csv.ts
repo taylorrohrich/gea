@@ -13,7 +13,7 @@ export function exportDataToCsv(
   // Create CSV content header
   let csvContent = "data:text/csv;charset=utf-8,";
 
-  // Add headers - first column is x value (typically year)
+  // Add headers
   const headers = ["Year"];
   data.forEach((series) => {
     headers.push(series.label);

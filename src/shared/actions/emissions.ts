@@ -6,19 +6,20 @@ import { Data, Point } from "../types/data";
 import { CountryCode } from "../types/countries";
 import { COUNTRY_CODES_MAP } from "../constants/countries";
 
-// Define acceptable parameters
 export interface GetEmissionsParams {
   startYear: number;
   endYear: number;
   countries: CountryCode[];
 }
 
-// Cache to store fetched data across requests
+// Cache to store emissions data
 const dataCache: Record<string, Data[]> = {};
 
 /**
- * Server Action to fetch emissions data
- * This function can be called directly from client components
+ * Fetches emissions data for the specified countries and years.
+ *
+ * @param body - An object containing the start year, end year, and an array of country codes.
+ * @returns A promise that resolves to an array of data by country.
  */
 export async function getEmissionsData({
   startYear,
@@ -26,6 +27,7 @@ export async function getEmissionsData({
   countries,
 }: GetEmissionsParams): Promise<Data[]> {
   try {
+    // make sure we aren't passing invalid country codes
     const invalidCodes = countries.filter(
       (code) => !Object.keys(COUNTRY_CODES_MAP).includes(code)
     );
@@ -42,11 +44,11 @@ export async function getEmissionsData({
     }
 
     // Fetch data for each country in parallel
-    const promises = countries.map((countryCode) =>
-      fetchEmissionsData(countryCode, startYear, endYear)
+    const countriesRawData = await Promise.all(
+      countries.map((countryCode) =>
+        fetchEmissionsData(countryCode, startYear, endYear)
+      )
     );
-
-    const countriesRawData = await Promise.all(promises);
 
     // Transform the data into our desired format
     const processedData: Data[] = countries.map((code, index) => {
@@ -64,6 +66,7 @@ export async function getEmissionsData({
       const countryName =
         countryData[0]?.country?.value ?? COUNTRY_CODES_MAP[code] ?? code;
 
+      // Generate points
       const values: Point[] = countryData.map((item) => ({
         x: item.date,
         y: item.value,
@@ -76,7 +79,7 @@ export async function getEmissionsData({
       };
     });
 
-    // Store in our cache
+    // Store in our cache before returning
     dataCache[cacheKey] = processedData;
     return processedData;
   } catch (error) {

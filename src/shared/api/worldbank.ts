@@ -2,6 +2,13 @@ import { WorldBankDataPoint, WorldBankMetadata } from "./types";
 
 const INDICATOR = "EN.GHG.ALL.MT.CE.AR5";
 
+/**
+ *  api helper to fetch emissions data from the World Bank API
+ * @param countryCode
+ * @param startYear
+ * @param endYear
+ * @returns A promise that resolves to an array of data points
+ */
 export async function fetchEmissionsData(
   countryCode: string,
   startYear: number,
@@ -45,7 +52,9 @@ export async function fetchEmissionsData(
       console.error("Error fetching World Bank emissions data:", error);
       break;
     }
+    // Keep on fetching while the api response is paginated
   } while (currentPage <= totalPages);
 
+  // Return data sorted by date
   return allData.sort((a, b) => parseInt(a.date) - parseInt(b.date));
 }

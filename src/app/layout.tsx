@@ -3,6 +3,7 @@ import "./globals.css";
 import React from "react";
 export { metadata } from "@/shared/constants/metadata";
 
+// load fonts
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
