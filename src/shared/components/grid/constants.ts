@@ -34,7 +34,7 @@ export const DEFAULT_CONFIG: Tile[] = [
     type: Chart.Pie,
     layout: { x: 2, y: 7, w: 2, h: 5 },
     metadata: {
-      title: "Pie Chart",
+      title: "Greenhouse Gas Emissions Pie Chart",
       description: "View aggregated emissions by country",
     },
     viewMode: "chart",
@@ -44,7 +44,7 @@ export const DEFAULT_CONFIG: Tile[] = [
     type: Chart.Map,
     layout: { x: 0, y: 7, w: 2, h: 5 },
     metadata: {
-      title: "Greenhouse Gas Map Chart",
+      title: "Greenhouse Gas Emissions Map Chart",
       description:
         "Analyze the geographical correlation with greenhouse emissions",
     },
@@ -55,7 +55,7 @@ export const DEFAULT_CONFIG: Tile[] = [
     type: Chart.Line,
     layout: { x: 0, y: 12, w: 4, h: 4 },
     metadata: {
-      title: "Table (Line Chart)",
+      title: "Greenhouse Gas Emissions Table (Line Chart)",
       description: "Analyze the raw data per year by country",
     },
     viewMode: "table",
