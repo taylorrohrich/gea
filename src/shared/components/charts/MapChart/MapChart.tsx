@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useState, useEffect, useRef } from "react";
-import { Box, Typography, CircularProgress, Alert } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Data } from "@/shared/types/data";
 import { scaleLinear } from "d3-scale";
 import {
@@ -8,27 +8,19 @@ import {
   Geography,
   ZoomableGroup,
 } from "react-simple-maps";
+import { transformAggregateData } from "../helpers";
+import { NoData } from "../../NoData";
+import { GEO_DATA } from "./constants";
 
-// Use reliable sources for the world map topology
-// Primary source: Natural Earth via GitHub
-const PRIMARY_GEO_URL =
-  "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
-
-interface MapChartProps {
-  id: number;
+interface Props {
   data: Data[];
 }
 
-export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
+export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
   // Refs for container dimensions and tooltip positioning
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 400 });
   const [isMounted, setIsMounted] = useState(false);
-
-  // State for handling map loading and errors
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [geoData, setGeoData] = useState<any>(null);
   const [tooltipInfo, setTooltipInfo] = useState<{
     content: string;
     position: { x: number; y: number };
@@ -61,61 +53,18 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
     return () => window.removeEventListener("resize", updateDimensions);
   }, [isMounted]);
 
-  // Fetch geo data
-  useEffect(() => {
-    const fetchGeoData = async () => {
-      setIsLoading(true);
-      try {
-        // Try the primary URL first
-        const response = await fetch(PRIMARY_GEO_URL, { cache: "force-cache" });
-
-        if (!response.ok) {
-          throw new Error("Could not load map data from either source");
-        } else {
-          const data = await response.json();
-          setGeoData(data);
-        }
-
-        setError(null);
-      } catch (err) {
-        console.error("Error loading map data:", err);
-        setError(
-          err instanceof Error ? err.message : "Failed to load map data"
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchGeoData();
-  }, []);
-
-  // Process data to get value by country
-  const countryData = useMemo(() => {
-    const result: Record<string, number> = {};
-
-    data.forEach((series) => {
-      // Use the series label as the country name
-      const countryName = series.label;
-
-      // Calculate the sum of values for this series
-      const sum = series.values.reduce((acc, point) => acc + point.y, 0);
-      result[countryName] = sum;
-    });
-
-    return result;
-  }, [data]);
+  const chartData = useMemo(() => transformAggregateData(data), [data]);
 
   // Calculate min and max values for the color scale
   const { minValue, maxValue } = useMemo(() => {
-    const values = Object.values(countryData);
+    const values = chartData.map((d) => d.value);
     if (values.length === 0) return { minValue: 0, maxValue: 100 };
 
     return {
       minValue: Math.min(...values),
       maxValue: Math.max(...values),
     };
-  }, [countryData]);
+  }, [chartData]);
 
   // Create color scale from light blue to dark blue
   const colorScale = useMemo(() => {
@@ -134,73 +83,8 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
 
     return { x: offsetX, y: offsetY };
   };
-
-  // Handle missing data
-  if (!data || data.length === 0) {
-    return (
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        height="100%"
-      >
-        <Typography variant="body2" color="text.secondary">
-          No data available for map visualization
-        </Typography>
-      </Box>
-    );
-  }
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        height="100%"
-        flexDirection="column"
-        gap={2}
-      >
-        <CircularProgress size={40} />
-        <Typography variant="body2">Loading map data...</Typography>
-      </Box>
-    );
-  }
-
-  // Show error if any
-  if (error || !geoData) {
-    return (
-      <Box
-        p={2}
-        height="100%"
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-      >
-        <Alert severity="error" sx={{ mb: 2 }}>
-          {error || "Failed to load map data"}
-        </Alert>
-        <Box sx={{ overflow: "auto", flexGrow: 1 }}>
-          <Typography variant="h6" gutterBottom>
-            Data Summary
-          </Typography>
-          {Object.entries(countryData)
-            .sort(([, valueA], [, valueB]) => valueB - valueA)
-            .map(([country, value]) => (
-              <Box
-                key={country}
-                sx={{ mb: 1, display: "flex", justifyContent: "space-between" }}
-              >
-                <Typography variant="body2">{country}:</Typography>
-                <Typography variant="body2" fontWeight="bold">
-                  {value.toFixed(2)}
-                </Typography>
-              </Box>
-            ))}
-        </Box>
-      </Box>
-    );
+  if (!data || chartData.length === 0) {
+    return <NoData />;
   }
 
   // Render the map
@@ -232,7 +116,6 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
           <Typography variant="caption">{tooltipInfo.content}</Typography>
         </Box>
       )}
-
       <Box sx={{ height: "100%", width: "100%" }}>
         <ComposableMap
           projectionConfig={{
@@ -247,7 +130,7 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
           height={dimensions.height}
         >
           <ZoomableGroup center={[0, 0]} zoom={1}>
-            <Geographies geography={geoData}>
+            <Geographies geography={GEO_DATA}>
               {({ geographies }) =>
                 geographies.map((geo) => {
                   // Get name either from NAME, name, or some other property depending on the data source
@@ -255,12 +138,12 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
                     geo.properties?.NAME || geo.properties?.name || "";
 
                   // Try to find a match in our data (case insensitive)
-                  const countryKey = Object.keys(countryData).find((name) =>
+                  const countrySeries = chartData.find(({ name }) =>
                     countryName.toLowerCase().startsWith(name.toLowerCase())
                   );
 
                   // Get value or default to 0
-                  const value = countryKey ? countryData[countryKey] : 0;
+                  const value = countrySeries ? countrySeries.value : 0;
                   const fill = value > 0 ? colorScale(value) : "#F5F5F5";
 
                   return (
@@ -298,10 +181,14 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
                             clientX,
                             clientY
                           );
-                          setTooltipInfo((ti) => ({
-                            ...ti,
-                            position: relativePosition,
-                          }));
+                          setTooltipInfo((ti) =>
+                            ti
+                              ? {
+                                  ...ti,
+                                  position: relativePosition,
+                                }
+                              : ti
+                          );
                         }
                       }}
                       onMouseLeave={() => {
@@ -315,8 +202,6 @@ export const MapChart: React.FC<MapChartProps> = memo(({ id, data }) => {
           </ZoomableGroup>
         </ComposableMap>
       </Box>
-
-      {/* Legend */}
       <Box
         sx={{
           position: "absolute",

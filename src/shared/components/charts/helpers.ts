@@ -1,22 +1,10 @@
 import { Data } from "@/shared/types/data";
 
-export function transformData(data: Data[], { aggregate = false } = {}) {
+export function transformData(data: Data[]) {
   // If no data, return empty array
   if (!data || data.length === 0) {
     return [];
   }
-
-  if (aggregate) {
-    return data.map((series) => {
-      const totalValue = series.values.reduce((sum, point) => sum + point.y, 0);
-
-      return {
-        name: series.label,
-        value: totalValue,
-      };
-    });
-  }
-
   // Get all x values from all data series
   const allXValues = new Set<string>();
   data.forEach((series) => {
@@ -39,5 +27,20 @@ export function transformData(data: Data[], { aggregate = false } = {}) {
     });
 
     return dataPoint;
+  });
+}
+
+export function transformAggregateData(data: Data[]) {
+  // If no data, return empty array
+  if (!data || data.length === 0) {
+    return [];
+  }
+  return data.map((series) => {
+    const totalValue = series.values.reduce((sum, point) => sum + point.y, 0);
+
+    return {
+      name: series.label,
+      value: totalValue,
+    };
   });
 }

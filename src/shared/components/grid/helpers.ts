@@ -3,43 +3,12 @@ import { Layout } from "react-grid-layout";
 import { Tile } from "./types";
 import { GRID_COLS, TILE_HEIGHT, TILE_WIDTH } from "./constants";
 
-const chartTypes = Object.values(Chart);
 /**
  * Generates a default chart title based on the chart type
  */
 export function getDefaultTitle(chartType: Chart): string {
   const prefix = chartType.charAt(0).toUpperCase() + chartType.slice(1);
   return `${prefix} Chart`;
-}
-
-/**
- * Creates default tile configurations
- */
-export function createDefaultTiles(): Tile[] {
-  return [0, 1, 2].map((id) => {
-    const tilesPerRow = Math.floor(GRID_COLS / TILE_WIDTH);
-    const row = Math.floor(id / tilesPerRow);
-    const col = (id % tilesPerRow) * TILE_WIDTH;
-
-    const chartType = chartTypes[id % chartTypes.length];
-    const defaultTitle = getDefaultTitle(chartType);
-
-    return {
-      id,
-      type: chartType,
-      layout: {
-        x: col,
-        y: row * TILE_HEIGHT,
-        w: TILE_WIDTH,
-        h: TILE_HEIGHT,
-      },
-      metadata: {
-        title: defaultTitle,
-        description: `Showing data visualization using ${chartType} chart`,
-      },
-      viewMode: "chart",
-    };
-  });
 }
 
 /**

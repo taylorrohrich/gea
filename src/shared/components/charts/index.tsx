@@ -38,7 +38,9 @@ const PieChart = dynamic(
 
 const MapChart = dynamic(
   () =>
-    import("@/shared/components/charts/MapChart").then((mod) => mod.MapChart),
+    import("@/shared/components/charts/MapChart/MapChart").then(
+      (mod) => mod.MapChart
+    ),
   {
     ssr: false,
     loading: () => <ChartLoading />,

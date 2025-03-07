@@ -16,7 +16,14 @@ export const Tile = memo(({ tile }: Props) => {
 
   const Chart = useMemo(() => CHART_COMPONENT_MAP[tile.type], [tile.type]);
   return (
-    <div className="h-full flex flex-col bg-white rounded-lg p-2.5 shadow-sm w-full">
+    <div
+      className="h-full flex flex-col bg-white rounded-lg p-2.5 shadow-sm w-full cursor-default"
+      onClick={(e) => {
+        console.log(e);
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       <TileHeader tile={tile} />
       <div className="flex-grow overflow-hidden">
         {viewMode === "chart" ? (

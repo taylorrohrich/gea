@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Data } from "@/shared/types/data";
-import { transformData } from "./helpers";
+import { transformAggregateData } from "./helpers";
 import { NoData } from "../NoData";
 import { COUNTRY_COLORS_MAP } from "./constants";
 
@@ -17,10 +17,7 @@ interface Props {
 }
 
 export function PieChart({ data }: Props) {
-  const chartData = useMemo(
-    () => transformData(data, { aggregate: true }),
-    [data]
-  );
+  const chartData = useMemo(() => transformAggregateData(data), [data]);
   if (!data || chartData.length === 0) {
     return <NoData />;
   }

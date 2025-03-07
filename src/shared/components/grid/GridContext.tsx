@@ -12,8 +12,7 @@ import {
 import { Tile, ViewMode } from "./types";
 import { Data } from "@/shared/types/data";
 import { debounce } from "lodash";
-import { LOCAL_STORAGE_KEY } from "./constants";
-import { createDefaultTiles } from "./helpers";
+import { DEFAULT_CONFIG, LOCAL_STORAGE_KEY } from "./constants";
 
 // Define action types using an enum for better type safety
 export enum GridActionType {
@@ -139,19 +138,20 @@ export function GridProvider({
   // Initialize tiles configuration
   const initialTiles = useMemo(() => {
     if (typeof window === "undefined") {
-      return createDefaultTiles();
+      return DEFAULT_CONFIG;
     }
 
     const savedConfig = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (!savedConfig) {
-      return createDefaultTiles();
+      return DEFAULT_CONFIG;
     }
 
     try {
+      console.log(savedConfig);
       return JSON.parse(savedConfig);
     } catch (e) {
       console.error("Failed to parse saved grid configuration", e);
-      return createDefaultTiles();
+      return DEFAULT_CONFIG;
     }
   }, []);
 
