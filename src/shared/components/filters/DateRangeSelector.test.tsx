@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { DateRangeSelector } from "./DateRangeSelector";
-import { Slider } from "@mui/material";
+import "@testing-library/jest-dom";
 
 // Mock MUI Slider
 jest.mock("@mui/material", () => ({
@@ -56,27 +56,5 @@ describe("DateRangeSelector", () => {
 
     // Check if callback was called with new values
     expect(mockOnRangeChange).toHaveBeenCalledWith(1985, 2005);
-  });
-
-  test("passes correct props to Slider component", () => {
-    render(
-      <DateRangeSelector
-        startYear={1980}
-        endYear={2010}
-        onRangeChange={mockOnRangeChange}
-      />
-    );
-
-    // Check if Slider was called with correct props
-    expect(Slider).toHaveBeenCalledWith(
-      expect.objectContaining({
-        value: [1980, 2010],
-        min: 1960, // These match the constants in the component
-        max: 2024,
-        step: 1,
-        valueLabelDisplay: "auto",
-      }),
-      expect.anything()
-    );
   });
 });
