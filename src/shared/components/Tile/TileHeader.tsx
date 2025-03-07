@@ -90,6 +90,7 @@ export function TileHeader({ tile }: Props) {
         </ToggleButtonGroup>
         <Tooltip title="Download CSV">
           <IconButton
+            disabled={!data?.length}
             size="small"
             onClick={() =>
               exportDataToCsv(data, tile.type, title || "chart-data")
