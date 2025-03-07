@@ -34,7 +34,7 @@ export function BarChart({ data }: Props) {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="x"
-          label={{ value: "X Axis", position: "insideBottom", offset: -40 }}
+          label={{ value: "Year", position: "insideBottom", offset: -40 }}
         />
         <YAxis
           label={{
