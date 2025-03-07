@@ -11,23 +11,12 @@ import {
 } from "recharts";
 import { Data } from "@/shared/types/data";
 
-// These are some colors that work well together for a chart
-const CHART_COLORS = [
-  "#8884d8", // Purple
-  "#82ca9d", // Green
-  "#ffc658", // Yellow
-  "#ff8042", // Orange
-  "#0088FE", // Blue
-  "#FF5733", // Red
-];
-
 interface LineChartProps {
   id: number;
   data: Data[];
 }
 
-export const LineChart: React.FC<LineChartProps> = ({ id, data }) => {
-  console.log(data);
+export const LineChart: React.FC<LineChartProps> = ({ data }) => {
   // Process data for the chart - this merges the data by x-axis value for all series
   const chartData = useMemo(() => {
     // If no data, return empty array

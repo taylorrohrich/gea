@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from "react";
 import { Tile as TileType } from "../grid/types";
 import { TileHeader } from "./TileHeader";
-import { DataTable } from "../charts/DataTable";
+import { DataTable } from "../charts/Table";
 import { useGridContext } from "../grid/GridContext";
 import { CHART_COMPONENT_MAP } from "../charts";
 
@@ -22,7 +22,7 @@ export const Tile = memo(({ tile }: Props) => {
         {viewMode === "chart" ? (
           <Chart tile={tile} data={data} />
         ) : (
-          <DataTable title={tile.metadata.title} chartType={tile.type} />
+          <DataTable chartType={tile.type} data={data} />
         )}
       </div>
     </div>

@@ -71,6 +71,7 @@ export async function getEmissionsData({
         }));
 
       return {
+        id: code,
         label: countryName,
         values,
       };

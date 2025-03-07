@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useMemo,
+  useEffect,
+} from "react";
 import GridLayout, { Layout, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -18,6 +24,9 @@ import { GRID_COLS, ROW_HEIGHT } from "./constants";
 
 // Separate component that uses the GridContext
 export function Grid() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => setIsClient(true), []);
   const { tiles, dispatch } = useGridContext();
 
   const gridRef = useRef<HTMLDivElement>(null);
@@ -111,6 +120,7 @@ export function Grid() {
       )),
     [tiles]
   );
+  if (!isClient) return null;
 
   return (
     <div>
