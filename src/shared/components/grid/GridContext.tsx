@@ -21,6 +21,7 @@ export enum GridActionType {
   UPDATE_TILE_VIEW_MODE = "UPDATE_TILE_VIEW_MODE",
   UPDATE_TILES_FROM_LAYOUT = "UPDATE_TILES_FROM_LAYOUT",
   ADD_TILE = "ADD_TILE",
+  RESET_GRID = "RESET_GRID",
 }
 
 // Define action interfaces
@@ -38,7 +39,8 @@ export type GridAction =
       viewMode: ViewMode;
     }
   | { type: GridActionType.UPDATE_TILES_FROM_LAYOUT; newTilesConfig: Tile[] }
-  | { type: GridActionType.ADD_TILE; tile: Tile };
+  | { type: GridActionType.ADD_TILE; tile: Tile }
+  | { type: GridActionType.RESET_GRID };
 
 // Define the context state and value types
 export interface GridContextState {
@@ -59,6 +61,11 @@ export function gridReducer(
   action: GridAction
 ): GridContextState {
   switch (action.type) {
+    case GridActionType.RESET_GRID:
+      return {
+        ...state,
+        tiles: DEFAULT_CONFIG,
+      };
     case GridActionType.UPDATE_TILE_METADATA:
       return {
         ...state,
@@ -147,7 +154,6 @@ export function GridProvider({
     }
 
     try {
-      console.log(savedConfig);
       return JSON.parse(savedConfig);
     } catch (e) {
       console.error("Failed to parse saved grid configuration", e);

@@ -16,15 +16,15 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { COUNTRY_CODES_MAP } from "@/shared/constants/countries";
 import { CountryCode } from "@/shared/types/countries";
 
-interface CountrySelectorProps {
+interface Props {
   selectedCountries: CountryCode[]; // Array of country codes
   onSelectionChange: (selected: CountryCode[]) => void;
 }
 
-export const CountrySelector: React.FC<CountrySelectorProps> = ({
+export function CountrySelector({
   selectedCountries,
   onSelectionChange,
-}) => {
+}: Props) {
   const isAllSelected =
     selectedCountries.length === Object.keys(COUNTRY_CODES_MAP).length;
 
@@ -110,4 +110,4 @@ export const CountrySelector: React.FC<CountrySelectorProps> = ({
       </FormControl>
     </Box>
   );
-};
+}

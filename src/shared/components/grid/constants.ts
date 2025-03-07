@@ -1,13 +1,16 @@
+import { Chart } from "@/shared/types/chart";
+import { Tile } from "./types";
+
 export const GRID_COLS = 4;
 export const ROW_HEIGHT = 100;
 export const TILE_WIDTH = 2;
 export const TILE_HEIGHT = 4;
 export const LOCAL_STORAGE_KEY = "grid-tiles-config";
 
-export const DEFAULT_CONFIG = [
+export const DEFAULT_CONFIG: Tile[] = [
   {
     id: 1,
-    type: "line",
+    type: Chart.Line,
     layout: { x: 0, y: 0, w: 4, h: 4 },
     metadata: {
       title: "Greenhouse Gas Emissions Line Chart",
@@ -18,7 +21,7 @@ export const DEFAULT_CONFIG = [
   },
   {
     id: 2,
-    type: "bar",
+    type: Chart.Bar,
     layout: { x: 0, y: 4, w: 4, h: 3 },
     metadata: {
       title: "Greenhouse Gas Emissions Bar Chart",
@@ -28,7 +31,7 @@ export const DEFAULT_CONFIG = [
   },
   {
     id: 3,
-    type: "pie",
+    type: Chart.Pie,
     layout: { x: 2, y: 7, w: 2, h: 5 },
     metadata: {
       title: "Pie Chart",
@@ -38,7 +41,7 @@ export const DEFAULT_CONFIG = [
   },
   {
     id: 4,
-    type: "map",
+    type: Chart.Map,
     layout: { x: 0, y: 7, w: 2, h: 5 },
     metadata: {
       title: "Greenhouse Gas Map Chart",
@@ -49,7 +52,7 @@ export const DEFAULT_CONFIG = [
   },
   {
     id: 5,
-    type: "line",
+    type: Chart.Line,
     layout: { x: 0, y: 12, w: 4, h: 4 },
     metadata: {
       title: "Table (Line Chart)",

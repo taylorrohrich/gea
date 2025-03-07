@@ -8,7 +8,6 @@ export async function fetchEmissionsData(
   endYear: number
 ): Promise<WorldBankDataPoint[]> {
   const baseUrl = `https://api.worldbank.org/v2/country/${countryCode}/indicator/${INDICATOR}`;
-
   let allData: WorldBankDataPoint[] = [];
   let currentPage = 1;
   let totalPages = 1;

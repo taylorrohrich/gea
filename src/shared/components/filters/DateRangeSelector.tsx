@@ -1,7 +1,7 @@
 import React, { ComponentProps } from "react";
 import { Slider } from "@mui/material";
 
-const MIN_YEAR = 1950;
+const MIN_YEAR = 1960;
 const MAX_YEAR = 2024;
 
 const MARKS: ComponentProps<typeof Slider>["marks"] = [];

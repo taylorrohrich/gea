@@ -13,7 +13,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import { Chart } from "../../types/chart";
 import { useIsomorphicLayoutEffect } from "../../hooks/useIsomorphicLayoutEffect";
 
-interface ContextMenuProps {
+interface Props {
   position: { x: number; y: number };
   onSelectChart: (chartType: Chart) => void;
   onClose: () => void;
@@ -26,15 +26,12 @@ const chartTypes = [
   { label: "Map Chart", type: Chart.Map, icon: <PublicIcon /> }, // Add Map option
 ];
 
-export const ContextMenu: React.FC<ContextMenuProps> = ({
-  position,
-  onSelectChart,
-  onClose,
-}) => {
+const menuWidth = 200;
+const menuHeight = 150;
+
+export function ContextMenu({ position, onSelectChart, onClose }: Props) {
   // State to track adjusted position
   const [menuPosition, setMenuPosition] = useState(position);
-  const menuWidth = 200;
-  const menuHeight = 250; // Approximate height of the menu
 
   // Adjust menu position when it would go off-screen - use layout effect for smoother positioning
   useIsomorphicLayoutEffect(() => {
@@ -105,4 +102,4 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
       </Paper>
     </div>
   );
-};
+}

@@ -1,7 +1,7 @@
 import { getEmissionsData } from "@/shared/actions/emissions";
 import { Grid } from "@/shared/components/Grid";
 import { Suspense } from "react";
-import { Container, Box } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { EmissionsFilters } from "@/shared/components/Filters/EmissionsFilters";
 import { CountryCode } from "@/shared/types/countries";
 import { GridProvider } from "@/shared/components/Grid/GridContext";
@@ -45,21 +45,18 @@ export default async function Home({
   });
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <h1 className="text-2xl font-bold mb-6">
-          Greenhouse Gas Emissions Dashboard
-        </h1>
-        <EmissionsFilters
-          startYear={startYear}
-          endYear={endYear}
-          countries={countries}
-        />
-      </Box>
+    <div className="container mx-auto py-16 flex gap-4 flex-col">
+      <h1 className="text-2xl font-bold">Greenhouse Gas Emissions Dashboard</h1>
+      <EmissionsFilters
+        startYear={startYear}
+        endYear={endYear}
+        countries={countries}
+      />
+
       <Suspense
         fallback={
-          <div className="flex justify-center items-center h-full">
-            Loading chart data...
+          <div className="flex justify-center items-center h-[500px]">
+            <CircularProgress />
           </div>
         }
       >
@@ -67,6 +64,6 @@ export default async function Home({
           <Grid />
         </GridProvider>
       </Suspense>
-    </Container>
+    </div>
   );
 }

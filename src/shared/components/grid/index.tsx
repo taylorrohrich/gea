@@ -21,6 +21,7 @@ import {
   createNewTile,
 } from "./helpers";
 import { GRID_COLS, ROW_HEIGHT } from "./constants";
+import { Button } from "@mui/material";
 
 // Separate component that uses the GridContext
 export function Grid() {
@@ -123,29 +124,35 @@ export function Grid() {
   if (!isClient) return null;
 
   return (
-    <div>
+    <>
       <div className="bg-gray-100 relative rounded-lg border border-dashed border-gray-300 min-h-[500px] flex flex-col">
         <div
           ref={gridRef}
           className="w-full overflow-hidden cursor-context-menu pb-12 h-full flex-1"
           onContextMenu={handleContextMenu}
         >
-          <ResponsiveGridLayout
-            className="layout"
-            layout={layout}
-            cols={GRID_COLS}
-            onLayoutChange={debouncedHandleLayoutChange}
-            rowHeight={ROW_HEIGHT}
-            maxRows={500}
-            compactType="vertical"
-            useCSSTransforms={true}
-            measureBeforeMount={false}
-            isDraggable
-            draggableHandle=".drag-handle"
-            margin={[20, 20]}
-          >
-            {renderedTiles}
-          </ResponsiveGridLayout>
+          {layout.length ? (
+            <ResponsiveGridLayout
+              className="layout"
+              layout={layout}
+              cols={GRID_COLS}
+              onLayoutChange={debouncedHandleLayoutChange}
+              rowHeight={ROW_HEIGHT}
+              maxRows={500}
+              compactType="vertical"
+              useCSSTransforms={true}
+              measureBeforeMount={false}
+              isDraggable
+              draggableHandle=".drag-handle"
+              margin={[20, 20]}
+            >
+              {renderedTiles}
+            </ResponsiveGridLayout>
+          ) : (
+            <div className="w-full h-[500px] mx-auto flex items-center justify-center ">
+              <div>Right-click to add a chart</div>
+            </div>
+          )}
         </div>
         {contextMenuPos && (
           <ContextMenu
@@ -155,6 +162,16 @@ export function Grid() {
           />
         )}
       </div>
-    </div>
+      <Button
+        onClick={() => {
+          dispatch({
+            type: GridActionType.RESET_GRID,
+          });
+          localStorage.clear();
+        }}
+      >
+        Reset Grid To Example
+      </Button>
+    </>
   );
 }

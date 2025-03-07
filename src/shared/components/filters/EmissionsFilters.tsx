@@ -85,17 +85,17 @@ export function EmissionsFilters({
       <div className="bg-white rounded shadow">
         {/* Header - Always visible */}
         <div
-          className="p-4 flex justify-between items-center cursor-pointer"
+          className="p-4 flex justify-between items-center cursor-pointer gap-4"
           onClick={toggleExpanded}
         >
           <div className="flex items-center gap-2">
             <FilterListIcon color="primary" />
-            <h6 className="text-lg font-medium">Emissions Data Filters</h6>
+            <h6 className="text-lg font-medium">Filters</h6>
           </div>
 
           {/* Summary when collapsed */}
           {!expanded && (
-            <div className="flex items-center gap-2 flex-1 mx-2 overflow-hidden">
+            <div className="flex items-center gap-4 flex-1 overflow-hidden">
               <Chip
                 label={`Year Range: ${startYear}-${endYear}`}
                 size="small"
@@ -110,8 +110,8 @@ export function EmissionsFilters({
                   variant="outlined"
                 />
               ) : (
-                <div className="flex gap-1 overflow-auto flex-nowrap">
-                  {selectedCountries.slice(0, 3).map((code) => {
+                <div className="flex gap-1 overflow-auto flex-wrap">
+                  {selectedCountries.map((code) => {
                     const country = COUNTRY_CODES_MAP[code];
                     return (
                       <Chip
@@ -123,14 +123,6 @@ export function EmissionsFilters({
                       />
                     );
                   })}
-                  {selectedCountries.length > 3 && (
-                    <Chip
-                      label={`+${selectedCountries.length - 3} more`}
-                      size="small"
-                      color="primary"
-                      variant="outlined"
-                    />
-                  )}
                 </div>
               )}
             </div>

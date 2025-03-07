@@ -64,12 +64,10 @@ export async function getEmissionsData({
       const countryName =
         countryData[0]?.country?.value ?? COUNTRY_CODES_MAP[code] ?? code;
 
-      const values: Point[] = countryData
-        .filter((item) => item.value !== null && item.value !== undefined)
-        .map((item) => ({
-          x: item.date,
-          y: item.value,
-        }));
+      const values: Point[] = countryData.map((item) => ({
+        x: item.date,
+        y: item.value,
+      }));
 
       return {
         id: code,
@@ -80,7 +78,6 @@ export async function getEmissionsData({
 
     // Store in our cache
     dataCache[cacheKey] = processedData;
-
     return processedData;
   } catch (error) {
     console.error("Error processing emissions data request:", error);

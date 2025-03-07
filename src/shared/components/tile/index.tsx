@@ -18,8 +18,7 @@ export const Tile = memo(({ tile }: Props) => {
   return (
     <div
       className="h-full flex flex-col bg-white rounded-lg p-2.5 shadow-sm w-full cursor-default"
-      onClick={(e) => {
-        console.log(e);
+      onContextMenu={(e) => {
         e.preventDefault();
         e.stopPropagation();
       }}
