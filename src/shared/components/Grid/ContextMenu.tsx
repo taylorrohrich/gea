@@ -41,8 +41,7 @@ export function ContextMenu({ position, onSelectChart, onClose }: Props) {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    // Calculate adjusted position - all in one synchronous operation
-    // to avoid any flickering or visual jumps
+    // Calculate adjusted position
     let adjustedX = position.x;
     let adjustedY = position.y;
 

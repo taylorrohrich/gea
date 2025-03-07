@@ -58,6 +58,6 @@ export const DEFAULT_CONFIG: Tile[] = [
       title: "Greenhouse Gas Emissions Table (Line Chart)",
       description: "Analyze the raw data per year by country",
     },
-    viewMode: ViewMode.Chart,
+    viewMode: ViewMode.Table,
   },
 ];
