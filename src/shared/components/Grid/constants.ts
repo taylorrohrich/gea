@@ -1,5 +1,5 @@
 import { Chart } from "@/shared/types/chart";
-import { Tile } from "./types";
+import { Tile, ViewMode } from "./types";
 
 export const GRID_COLS = 4;
 export const ROW_HEIGHT = 100;
@@ -17,7 +17,7 @@ export const DEFAULT_CONFIG: Tile[] = [
       description:
         "Note changes in trends within individual countries over time",
     },
-    viewMode: "chart",
+    viewMode: ViewMode.Chart,
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const DEFAULT_CONFIG: Tile[] = [
       title: "Greenhouse Gas Emissions Bar Chart",
       description: "See how the stacked emissions vary by year",
     },
-    viewMode: "chart",
+    viewMode: ViewMode.Chart,
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ export const DEFAULT_CONFIG: Tile[] = [
       title: "Greenhouse Gas Emissions Pie Chart",
       description: "View aggregated emissions by country",
     },
-    viewMode: "chart",
+    viewMode: ViewMode.Chart,
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const DEFAULT_CONFIG: Tile[] = [
       description:
         "Analyze the geographical correlation with greenhouse emissions",
     },
-    viewMode: "chart",
+    viewMode: ViewMode.Chart,
   },
   {
     id: 5,
@@ -58,6 +58,6 @@ export const DEFAULT_CONFIG: Tile[] = [
       title: "Greenhouse Gas Emissions Table (Line Chart)",
       description: "Analyze the raw data per year by country",
     },
-    viewMode: "table",
+    viewMode: ViewMode.Chart,
   },
 ];

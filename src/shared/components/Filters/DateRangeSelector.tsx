@@ -3,13 +3,11 @@ import { Slider } from "@mui/material";
 
 const MIN_YEAR = 1960;
 const MAX_YEAR = 2024;
-
 const MARKS: ComponentProps<typeof Slider>["marks"] = [];
 for (let i = MAX_YEAR; i >= MIN_YEAR; i -= 10) {
   MARKS.push({ value: i, label: i.toString() });
 }
 MARKS.push({ value: MIN_YEAR, label: MIN_YEAR.toString() });
-
 const STEP = 1;
 
 interface Props {
@@ -31,7 +29,7 @@ export function DateRangeSelector({
   };
 
   return (
-    <div className="w-full py-4 px-2">
+    <div className="w-full p-2 pt-0">
       <h3 className="text-base font-medium mb-2">Date Range</h3>
       <div className="text-center">
         <span className="text-sm bg-blue-50 text-blue-800 py-1 px-3 rounded-full">

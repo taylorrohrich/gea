@@ -20,6 +20,7 @@ interface Props {
 
 export function LineChart({ data }: Props) {
   const chartData = useMemo(() => transformData(data), [data]);
+  // Exit early if no data
   if (!data || chartData.length === 0) {
     return <NoData />;
   }

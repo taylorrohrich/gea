@@ -1,7 +1,10 @@
 import { Chart } from "../../types/chart";
 
 // Define the view mode options
-export type ViewMode = "chart" | "table";
+export enum ViewMode {
+  Chart = "chart",
+  Table = "table",
+}
 
 interface TileLayout {
   x: number;

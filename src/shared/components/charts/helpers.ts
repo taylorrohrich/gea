@@ -1,5 +1,6 @@
 import { Data } from "@/shared/types/data";
 
+// transform data for line, bar charts
 export function transformData(data: Data[]) {
   // If no data, return empty array
   if (!data || data.length === 0) {
@@ -30,11 +31,13 @@ export function transformData(data: Data[]) {
   });
 }
 
+// transform + aggregate data for map, pie chart
 export function transformAggregateData(data: Data[]) {
   // If no data, return empty array
   if (!data || data.length === 0) {
     return [];
   }
+  // Aggregate data by series
   return data.map((series) => {
     const totalValue = series.values.reduce((sum, point) => sum + point.y, 0);
 

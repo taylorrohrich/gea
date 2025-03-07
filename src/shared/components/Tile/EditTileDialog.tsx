@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useGridContext, GridActionType } from "../Grid/GridContext";
 
-interface EditTileDialogProps {
+interface Props {
   id: number;
   title: string;
   description: string;
@@ -23,7 +23,7 @@ export function EditTileDialog({
   description,
   isOpen,
   onClose,
-}: EditTileDialogProps) {
+}: Props) {
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
   const { dispatch } = useGridContext();

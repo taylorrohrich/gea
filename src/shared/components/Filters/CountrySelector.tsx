@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  Box,
-  Typography,
   Checkbox,
   FormControl,
   InputLabel,
@@ -17,7 +15,7 @@ import { COUNTRY_CODES_MAP } from "@/shared/constants/countries";
 import { CountryCode } from "@/shared/types/countries";
 
 interface Props {
-  selectedCountries: CountryCode[]; // Array of country codes
+  selectedCountries: CountryCode[];
   onSelectionChange: (selected: CountryCode[]) => void;
 }
 
@@ -29,19 +27,16 @@ export function CountrySelector({
     selectedCountries.length === Object.keys(COUNTRY_CODES_MAP).length;
 
   // Handle selection change
-  const handleChange = (event: SelectChangeEvent<CountryCode[]>) => {
+  const handleChange = (event: SelectChangeEvent<(CountryCode | "all")[]>) => {
     const value = event.target.value;
 
-    // On autofill we get a string array
-    const selected = typeof value === "string" ? value.split(",") : value;
-
     // Check if "All" is being toggled
-    if (selected.includes("all")) {
+    if (value.includes("all")) {
       // If all countries were previously selected, clear the selection
       // Otherwise select all countries
       onSelectionChange(isAllSelected ? [] : Object.values(CountryCode));
     } else {
-      onSelectionChange(selected as CountryCode[]);
+      onSelectionChange(value as CountryCode[]);
     }
   };
 
@@ -53,10 +48,8 @@ export function CountrySelector({
   };
 
   return (
-    <Box sx={{ width: "100%", padding: 2 }}>
-      <Typography variant="subtitle1" gutterBottom>
-        Countries
-      </Typography>
+    <div className="w-full p-2">
+      <h3 className="text-base font-medium mb-2">Countries</h3>
       <FormControl fullWidth>
         <InputLabel id="countries-select-label">Selected Countries</InputLabel>
         <Select
@@ -67,7 +60,7 @@ export function CountrySelector({
           onChange={handleChange}
           input={<OutlinedInput label="Selected Countries" />}
           renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+            <div className="flex flex-wrap gap-1">
               {selected.map((code) => {
                 const countryName = COUNTRY_CODES_MAP[code];
                 return (
@@ -83,7 +76,7 @@ export function CountrySelector({
                   />
                 );
               })}
-            </Box>
+            </div>
           )}
           MenuProps={{
             PaperProps: {
@@ -108,6 +101,6 @@ export function CountrySelector({
           ))}
         </Select>
       </FormControl>
-    </Box>
+    </div>
   );
 }

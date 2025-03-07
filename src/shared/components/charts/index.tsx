@@ -9,6 +9,7 @@ function ChartLoading() {
   );
 }
 
+// Lazily load other components
 const LineChart = dynamic(
   () =>
     import("@/shared/components/charts/LineChart").then((mod) => mod.LineChart),

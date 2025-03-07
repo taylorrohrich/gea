@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { CountryCode } from "@/shared/types/countries";
 import { COUNTRY_CODES_MAP, COUNTRY_COUNT } from "@/shared/constants/countries";
 
-interface EmissionsFiltersProps {
+interface Props {
   startYear: number;
   endYear: number;
   countries: CountryCode[];
@@ -20,7 +20,7 @@ export function EmissionsFilters({
   startYear: initialStartYear,
   endYear: initialEndYear,
   countries: initialCountries,
-}: EmissionsFiltersProps) {
+}: Props) {
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
   // Local state for filters - initialized from props
@@ -29,6 +29,7 @@ export function EmissionsFilters({
   const [selectedCountries, setSelectedCountries] =
     useState<CountryCode[]>(initialCountries);
 
+  // Reset state to initial values
   const resetState = () => {
     setStartYear(initialStartYear);
     setEndYear(initialEndYear);
@@ -73,14 +74,13 @@ export function EmissionsFilters({
   const resetFilters = () => {
     toggleExpanded();
 
-    // // Reset URL to default values or clear params
+    // Reset URL to default values or clear params
     router.push("/", { scroll: false });
   };
 
   return (
     <div className="mb-4 relative">
       <div className="bg-white rounded shadow">
-        {/* Header - Always visible */}
         <div
           className="p-4 flex justify-between items-center cursor-pointer gap-4"
           onClick={toggleExpanded}
@@ -89,8 +89,6 @@ export function EmissionsFilters({
             <FilterListIcon color="primary" />
             <h6 className="text-lg font-medium">Filters</h6>
           </div>
-
-          {/* Summary when collapsed */}
           {!expanded && (
             <div className="flex items-center gap-4 flex-1 overflow-hidden">
               <Chip
@@ -131,9 +129,7 @@ export function EmissionsFilters({
             {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </IconButton>
         </div>
-
         <Divider />
-
         {/* Collapsible content */}
         <div
           className={`transition-all duration-300 ease-in-out overflow-hidden ${

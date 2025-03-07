@@ -20,6 +20,8 @@ interface Props {
 
 export function BarChart({ data }: Props) {
   const chartData = useMemo(() => transformData(data), [data]);
+
+  // If no data exit early
   if (!data || chartData.length === 0) {
     return <NoData />;
   }
@@ -44,8 +46,6 @@ export function BarChart({ data }: Props) {
         />
         <Tooltip formatter={(value: number) => value.toFixed(2)} />
         <Legend />
-
-        {/* Render stacked bars - all using the same stackId */}
         {data.map((series) => (
           <Bar
             key={series.label}

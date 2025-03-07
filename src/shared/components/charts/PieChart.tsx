@@ -18,6 +18,8 @@ interface Props {
 
 export function PieChart({ data }: Props) {
   const chartData = useMemo(() => transformAggregateData(data), [data]);
+
+  // Exit early if no data
   if (!data || chartData.length === 0) {
     return <NoData />;
   }

@@ -1,5 +1,4 @@
 import React, { memo, useMemo, useState, useEffect, useRef } from "react";
-import { Box, Typography } from "@mui/material";
 import { Data } from "@/shared/types/data";
 import { scaleLinear } from "d3-scale";
 import {
@@ -92,34 +91,21 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
 
   // Render the map
   return (
-    <Box
-      height="100%"
-      width="100%"
-      position="relative"
-      ref={containerRef}
-      sx={{ overflow: "hidden" }}
-    >
+    <div className="relative w-full h-full overflow-hidden" ref={containerRef}>
       {/* Custom tooltip */}
       {tooltipInfo && (
-        <Box
-          sx={{
-            position: "absolute",
+        <div
+          className="absolute p-1 bg-white bg-opacity-95 shadow-lg rounded border border-gray-200 pointer-events-none z-50"
+          style={{
             top: tooltipInfo.position.y - 10, // Offset above cursor
             left: tooltipInfo.position.x,
             transform: "translate(-50%, -100%)",
-            bgcolor: "rgba(255, 255, 255, 0.95)",
-            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
-            p: 1,
-            borderRadius: 1,
-            zIndex: 1000,
-            pointerEvents: "none",
-            border: "1px solid rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Typography variant="caption">{tooltipInfo.content}</Typography>
-        </Box>
+          <span className="text-xs">{tooltipInfo.content}</span>
+        </div>
       )}
-      <Box sx={{ height: "100%", width: "100%" }}>
+      <div className="w-full h-full">
         <ComposableMap
           projectionConfig={{
             scale: 150,
@@ -136,9 +122,9 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
             <Geographies geography={GEO_DATA}>
               {({ geographies }) =>
                 geographies.map((geo) => {
-                  // Get name either from NAME, name, or some other property depending on the data source
+                  // Get name either from NAME, name
                   const countryName =
-                    geo.properties?.NAME || geo.properties?.name || "";
+                    geo.properties?.NAME || geo.properties?.name;
 
                   // Try to find a match in our data (case insensitive)
                   const countrySeries = chartData.find(({ name }) =>
@@ -162,6 +148,7 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
                         pressed: { outline: "none" },
                       }}
                       onMouseEnter={(evt) => {
+                        // move tooltip to cursor position when entering chart
                         const { clientX, clientY } = evt;
                         const tooltipText =
                           value > 0
@@ -178,6 +165,7 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
                         });
                       }}
                       onMouseMove={(evt) => {
+                        // move tooltip to cursor position when moving within chart
                         const { clientX, clientY } = evt;
                         if (tooltipInfo) {
                           const relativePosition = getRelativeTooltipPosition(
@@ -195,6 +183,7 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
                         }
                       }}
                       onMouseLeave={() => {
+                        // remove tooltip when leaving chart
                         setTooltipInfo(null);
                       }}
                     />
@@ -204,36 +193,13 @@ export const MapChart: React.FC<Props> = memo(({ data }: Props) => {
             </Geographies>
           </ZoomableGroup>
         </ComposableMap>
-      </Box>
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 10,
-          right: 10,
-          bgcolor: "rgba(255, 255, 255, 0.9)",
-          p: 1,
-          borderRadius: 1,
-          boxShadow: 1,
-          border: "1px solid rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <Typography variant="caption" display="block">
-          Min: {minValue.toFixed(2)}
-        </Typography>
-        <Box
-          sx={{
-            width: 100,
-            height: 10,
-            background: `linear-gradient(to right, #e3f2fd, #1565c0)`,
-            my: 0.5,
-            borderRadius: 0.5,
-          }}
-        />
-        <Typography variant="caption" display="block">
-          Max: {maxValue.toFixed(2)}
-        </Typography>
-      </Box>
-    </Box>
+      </div>
+      <div className="absolute bottom-2 right-2 bg-white bg-opacity-90 p-1 rounded shadow border border-gray-200">
+        <span className="text-xs block">Min: {minValue.toFixed(2)}</span>
+        <div className="w-24 h-2 bg-gradient-to-r from-blue-100 to-blue-900 my-1 rounded"></div>
+        <span className="text-xs block">Max: {maxValue.toFixed(2)}</span>
+      </div>
+    </div>
   );
 });
 

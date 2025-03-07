@@ -17,7 +17,7 @@ export function DataTable({ data, chartType }: Props) {
     [data, chartType]
   );
 
-  // If no data, show a message
+  // If no data, exit early
   if (rows.length === 0) {
     return <NoData />;
   }
@@ -34,7 +34,7 @@ export function DataTable({ data, chartType }: Props) {
           sorting: {
             sortModel: shouldShowAggregatedData(chartType)
               ? [{ field: "value", sort: "desc" }]
-              : [{ field: "x", sort: "asc" }],
+              : [{ field: "x", sort: "desc" }],
           },
         }}
         pageSizeOptions={[5, 10, 25, 50]}

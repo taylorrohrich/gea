@@ -128,22 +128,19 @@ export function useGridContext() {
   return context;
 }
 
-// Export the provider directly
-const GridContextProvider = GridContext.Provider;
 const saveTiles = debounce((data: Tile[]) => {
   if (typeof window !== "undefined") {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
   }
 }, 500);
 
-// Save to localStorage when tiles change
 export function GridProvider({
   data: promiseData,
   children,
 }: PropsWithChildren<{ data: Promise<Data[]> }>) {
   const data = use(promiseData);
   // Initialize tiles configuration
-  const initialTiles = useMemo(() => {
+  const initialTiles: Tile[] = useMemo(() => {
     if (typeof window === "undefined") {
       return DEFAULT_CONFIG;
     }
@@ -164,17 +161,20 @@ export function GridProvider({
   // Set up the reducer for tiles management
   const [state, dispatch] = useReducer(gridReducer, { tiles: initialTiles });
 
+  // Memoize the context value to prevent unnecessary re-renders
   const providerValue = useMemo(
     () => ({ tiles: state.tiles, data, dispatch }),
     [state.tiles, data]
   );
 
+  // Save to localStorage when tiles change
   useEffect(() => {
     saveTiles(state.tiles);
   }, [state.tiles]);
 
-  // Pass the state and dispatch to children via context
   return (
-    <GridContextProvider value={providerValue}>{children}</GridContextProvider>
+    <GridContext.Provider value={providerValue}>
+      {children}
+    </GridContext.Provider>
   );
 }

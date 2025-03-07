@@ -2,10 +2,12 @@ import { GridColDef } from "@mui/x-data-grid";
 import { Chart } from "@/shared/types/chart";
 import { Data } from "@/shared/types/data";
 
+// if we should aggregate the data for the table
 export function shouldShowAggregatedData(chartType: Chart): boolean {
-  return chartType === Chart.Pie || chartType === Chart.Map;
+  return [Chart.Pie, Chart.Map].includes(chartType);
 }
 
+// Columns for aggregation table
 const aggregationColumns: GridColDef[] = [
   {
     field: "label",
@@ -27,6 +29,7 @@ const aggregationColumns: GridColDef[] = [
   },
 ];
 
+// Creates aggregated tabular data
 export function createAggregatedGridData(data: Data[]) {
   // Calculate total for percentage calculation
   const total = data.reduce((sum, series) => {
@@ -53,9 +56,7 @@ export function createAggregatedGridData(data: Data[]) {
   return { rows, columns: aggregationColumns };
 }
 
-/**
- * Creates time series data format for Line, Bar, and Area charts
- */
+// Creates time series tabular data
 export function createTimeSeriesGridData(data: Data[]) {
   // Get all x values from all series
   const allXValues = new Set<string>();
@@ -109,9 +110,7 @@ export function createTimeSeriesGridData(data: Data[]) {
   return { rows, columns };
 }
 
-/**
- * Prepares the table data based on the chart type
- */
+// Prepares the table data based on the chart type
 export function prepareTableData(data: Data[], chartType: Chart) {
   if (!data || data.length === 0) {
     return { rows: [], columns: [] };

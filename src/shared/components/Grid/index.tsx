@@ -23,25 +23,36 @@ import {
 import { GRID_COLS, ROW_HEIGHT } from "./constants";
 import { Button } from "@mui/material";
 
-// Separate component that uses the GridContext
 export function Grid() {
   const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => setIsClient(true), []);
-  const { tiles, dispatch } = useGridContext();
-
-  const gridRef = useRef<HTMLDivElement>(null);
   const [contextMenuPos, setContextMenuPos] = useState<{
     x: number;
     y: number;
   } | null>(null);
   const [gridPos, setGridPos] = useState<{ x: number; y: number } | null>(null);
+  const { tiles, dispatch } = useGridContext();
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  // Use memoized version of WidthProvider to prevent unnecessary re-renders
+  /* 
+   Strange way to go about it, but recommended on 
+   https://github.com/react-grid-layout/react-grid-layout?tab=readme-ov-file#react-hooks-performance 
+   to prevent unnecessary re-renders
+   */
   const ResponsiveGridLayout = useMemo(() => WidthProvider(GridLayout), []);
 
-  // Derive layout from tiles using memoization instead of separate state
+  // Derive layout from tiles
   const layout = useMemo(() => createLayoutFromTiles(tiles), [tiles]);
+
+  // Render tiles
+  const renderedTiles = useMemo(
+    () =>
+      tiles.map((tile) => (
+        <div key={`tile-${tile.id}`}>
+          <Tile tile={tile} />
+        </div>
+      )),
+    [tiles]
+  );
 
   // Layout change handler
   const handleLayoutChange = useCallback(
@@ -68,7 +79,6 @@ export function Grid() {
       if (!gridPos) return;
 
       const newTile = createNewTile(tiles, chartType, gridPos);
-
       dispatch({ type: GridActionType.ADD_TILE, tile: newTile });
     },
     [gridPos, tiles, dispatch]
@@ -111,16 +121,8 @@ export function Grid() {
     [gridRef]
   );
 
-  // Render tiles
-  const renderedTiles = useMemo(
-    () =>
-      tiles.map((tile) => (
-        <div key={`tile-${tile.id}`}>
-          <Tile tile={tile} />
-        </div>
-      )),
-    [tiles]
-  );
+  useEffect(() => setIsClient(true), []);
+
   if (!isClient) return null;
 
   return (

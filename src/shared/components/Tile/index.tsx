@@ -9,6 +9,7 @@ interface Props {
   tile: TileType;
 }
 
+// memoize to prevent rerenders
 export const Tile = memo(({ tile }: Props) => {
   const { data } = useGridContext();
 

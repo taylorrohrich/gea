@@ -50,9 +50,7 @@ export function TileHeader({ tile }: Props) {
 
   return (
     <>
-      {/* Header Bar */}
       <div className="flex items-center gap-2 p-2 border-b border-gray-200 bg-white relative z-10 h-[52px]">
-        {/* Drag handle */}
         <DragIndicator
           fontSize="small"
           color="action"
@@ -83,10 +81,10 @@ export function TileHeader({ tile }: Props) {
             },
           }}
         >
-          <ToggleButton value="chart" aria-label="chart view">
+          <ToggleButton value={ViewMode.Chart} aria-label="chart view">
             <BarChartIcon fontSize="small" />
           </ToggleButton>
-          <ToggleButton value="table" aria-label="table view">
+          <ToggleButton value={ViewMode.Table} aria-label="table view">
             <TableChartIcon fontSize="small" />
           </ToggleButton>
         </ToggleButtonGroup>

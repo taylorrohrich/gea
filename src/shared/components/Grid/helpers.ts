@@ -1,32 +1,24 @@
 import { Chart } from "@/shared/types/chart";
 import { Layout } from "react-grid-layout";
-import { Tile } from "./types";
+import { Tile, ViewMode } from "./types";
 import { GRID_COLS, TILE_HEIGHT, TILE_WIDTH } from "./constants";
+import { pick } from "lodash";
 
-/**
- * Generates a default chart title based on the chart type
- */
+// Generates a default chart title based on the chart type
 export function getDefaultTitle(chartType: Chart): string {
   const prefix = chartType.charAt(0).toUpperCase() + chartType.slice(1);
   return `${prefix} Chart`;
 }
 
-/**
- * Converts tile configurations to react-grid-layout format
- */
+// Converts tile configurations to react-grid-layout format
 export function createLayoutFromTiles(tiles: Tile[]): Layout[] {
   return tiles.map((tile) => ({
     i: `tile-${tile.id}`,
-    x: tile.layout.x,
-    y: tile.layout.y,
-    w: tile.layout.w,
-    h: tile.layout.h,
+    ...pick(tile.layout, ["x", "y", "w", "h"]),
   }));
 }
 
-/**
- * Updates tiles configuration from layout changes
- */
+// Updates tiles configuration from layout changes
 export function updateTilesFromLayout(
   tiles: Tile[],
   newLayout: Layout[]
@@ -40,21 +32,14 @@ export function updateTilesFromLayout(
     if (layoutItem) {
       return {
         ...tile,
-        layout: {
-          x: layoutItem.x,
-          y: layoutItem.y,
-          w: layoutItem.w,
-          h: layoutItem.h,
-        },
+        layout: pick(layoutItem, ["x", "y", "w", "h"]),
       };
     }
     return tile;
   });
 }
 
-/**
- * Creates a new tile configuration
- */
+// Creates a new tile
 export function createNewTile(
   tiles: Tile[],
   chartType: Chart,
@@ -81,6 +66,6 @@ export function createNewTile(
       title: getDefaultTitle(chartType),
       description: `Showing data visualization using ${chartType} chart`,
     },
-    viewMode: "chart",
+    viewMode: ViewMode.Chart,
   };
 }

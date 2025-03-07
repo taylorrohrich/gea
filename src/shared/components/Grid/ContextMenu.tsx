@@ -23,7 +23,7 @@ const chartTypes = [
   { label: "Line Chart", type: Chart.Line, icon: <TimelineIcon /> },
   { label: "Bar Chart", type: Chart.Bar, icon: <BarChartIcon /> },
   { label: "Pie Chart", type: Chart.Pie, icon: <PieChartIcon /> },
-  { label: "Map Chart", type: Chart.Map, icon: <PublicIcon /> }, // Add Map option
+  { label: "Map Chart", type: Chart.Map, icon: <PublicIcon /> },
 ];
 
 const menuWidth = 200;
