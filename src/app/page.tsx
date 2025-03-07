@@ -50,6 +50,8 @@ export default async function Home({
     <div className="container mx-auto py-16 flex gap-4 flex-col">
       <h1 className="text-2xl font-bold">Global Emissions Analytics</h1>
       <EmissionsFilters
+        //reset state on change
+        key={`${startYear}-${endYear}-${countries.join(",")}`}
         startYear={startYear}
         endYear={endYear}
         countries={countries}
