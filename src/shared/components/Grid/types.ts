@@ -22,6 +22,6 @@ export interface Tile {
   id: number;
   layout: TileLayout;
   metadata: TileMetadata;
-  viewMode?: ViewMode; // Add viewMode property to save chart/table preference
+  viewMode?: ViewMode;
   type: Chart;
 }

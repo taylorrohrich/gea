@@ -6,6 +6,21 @@ export function transformData(data: Data[]) {
   if (!data || data.length === 0) {
     return [];
   }
+
+  // Create a map to organize data by x value
+  const rowsMap = new Map<string, Record<string, number | string>>();
+
+  // Populate the map with all data points
+  data.forEach((series) => {
+    series.values.forEach((point) => {
+      if (!rowsMap.has(point.x)) {
+        rowsMap.set(point.x, { x: point.x });
+      }
+      // Add this series' value to the row data
+      rowsMap.get(point.x)![series.label] = point.y;
+    });
+  });
+
   // Get all x values from all data series
   const allXValues = new Set<string>();
   data.forEach((series) => {
@@ -13,22 +28,9 @@ export function transformData(data: Data[]) {
       allXValues.add(point.x);
     });
   });
-
-  // Sort x values
-  const sortedXValues = Array.from(allXValues).sort();
-
-  // Create a data point for each x value with values for each series
-  return sortedXValues.map((x) => {
-    const dataPoint: Record<string, number | string | null> = { x };
-
-    // Add each series' value for this x
-    data.forEach((series) => {
-      const point = series.values.find((p) => p.x === x);
-      dataPoint[series.label] = point ? point.y : null;
-    });
-
-    return dataPoint;
-  });
+  return Array.from(rowsMap.values()).sort((a, b) =>
+    String(a.x).localeCompare(String(b.x))
+  );
 }
 
 // transform + aggregate data for map, pie chart

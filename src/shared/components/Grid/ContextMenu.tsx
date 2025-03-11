@@ -63,11 +63,6 @@ export function ContextMenu({ position, onSelectChart, onClose }: Props) {
     setMenuPosition({ x: adjustedX, y: adjustedY });
   }, [position]);
 
-  // Handle chart selection
-  const handleSelectChart = (chart: Chart) => {
-    onSelectChart(chart);
-  };
-
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 z-50" onClick={onClose}>
       <Paper
@@ -90,7 +85,7 @@ export function ContextMenu({ position, onSelectChart, onClose }: Props) {
               key={chart.type}
               onClick={(e) => {
                 e.stopPropagation();
-                handleSelectChart(chart.type);
+                onSelectChart(chart.type);
               }}
             >
               <ListItemIcon>{chart.icon}</ListItemIcon>

@@ -5,7 +5,7 @@ import React, { ComponentType } from "react";
 // Loading component
 function ChartLoading() {
   return (
-    <div className="flex justify-center items-center h-full bg-gray-50 animate-pulse"></div>
+    <div className="flex justify-center items-center h-full bg-gray-50 animate-pulse" />
   );
 }
 

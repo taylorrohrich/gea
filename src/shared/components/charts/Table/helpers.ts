@@ -1,6 +1,8 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { Chart } from "@/shared/types/chart";
 import { Data } from "@/shared/types/data";
+import { transformAggregateData, transformData } from "../helpers";
+import { sumBy } from "lodash";
 
 // if we should aggregate the data for the table
 export function shouldShowAggregatedData(chartType: Chart): boolean {
@@ -31,22 +33,16 @@ const aggregationColumns: GridColDef[] = [
 
 // Creates aggregated tabular data
 export function createAggregatedGridData(data: Data[]) {
+  const aggData = transformAggregateData(data);
   // Calculate total for percentage calculation
-  const total = data.reduce((sum, series) => {
-    const seriesSum = series.values.reduce((acc, point) => acc + point.y, 0);
-    return sum + seriesSum;
-  }, 0);
-
-  // Create rows with id and formatted data
-  const rows = data.map((series, index) => {
-    const value = series.values.reduce((sum, point) => sum + point.y, 0);
+  const total = sumBy(aggData, "value");
+  const rows = aggData.map((series, index) => {
     const percentage =
-      total > 0 ? Number(((value / total) * 100).toFixed(1)) : 0;
-
+      total > 0 ? Number(((series.value / total) * 100).toFixed(1)) : 0;
     return {
       id: index,
-      label: series.label,
-      value,
+      label: series.name,
+      value: series.value,
       percentage,
     };
   });
@@ -59,33 +55,7 @@ export function createAggregatedGridData(data: Data[]) {
 // Creates time series tabular data
 export function createTimeSeriesGridData(data: Data[]) {
   // Get all x values from all series
-  const allXValues = new Set<string>();
-  data.forEach((series) => {
-    series.values.forEach((point) => {
-      allXValues.add(point.x);
-    });
-  });
-
-  // Create a map to hold all data points by x value
-  const rowsMap = new Map<string, Record<string, unknown>>();
-
-  // Initialize map with x values and ids
-  Array.from(allXValues).forEach((x, index) => {
-    rowsMap.set(x, { id: index, x });
-  });
-
-  // Fill in values for each series
-  data.forEach((series) => {
-    series.values.forEach((point) => {
-      const row = rowsMap.get(point.x);
-      if (row) {
-        row[series.label] = point.y;
-      }
-    });
-  });
-
-  // Convert map to array of rows
-  const rows = Array.from(rowsMap.values());
+  const rows = transformData(data).map((row, index) => ({ id: index, ...row }));
 
   // Define columns
   const columns: GridColDef[] = [

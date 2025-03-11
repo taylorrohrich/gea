@@ -1,3 +1,4 @@
+import { transformData } from "../components/charts/helpers";
 import { createAggregatedGridData } from "../components/charts/Table/helpers";
 import { Chart } from "../types/chart";
 import { Data } from "../types/data";
@@ -40,26 +41,7 @@ export function exportDataToCsv(
       headers.push(series.label);
     });
     csvContent += headers.join(",") + "\n";
-
-    // Create a map to organize data by x value
-    const rowsMap = new Map<string, Record<string, number | string>>();
-
-    // Populate the map with all data points
-    data.forEach((series) => {
-      series.values.forEach((point) => {
-        if (!rowsMap.has(point.x)) {
-          rowsMap.set(point.x, { x: point.x });
-        }
-        // Add this series' value to the row data
-        rowsMap.get(point.x)![series.label] = point.y;
-      });
-    });
-
-    // Sort rows by x value and convert to CSV
-    const sortedRows = Array.from(rowsMap.values()).sort((a, b) =>
-      String(a.x).localeCompare(String(b.x))
-    );
-
+    const sortedRows = transformData(data);
     // Build CSV rows
     sortedRows.forEach((row) => {
       const line = [row.x];

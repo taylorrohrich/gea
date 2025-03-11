@@ -14,7 +14,6 @@ import { Data } from "@/shared/types/data";
 import { debounce } from "lodash";
 import { DEFAULT_CONFIG, LOCAL_STORAGE_KEY } from "./constants";
 
-// Define action types using an enum for better type safety
 export enum GridActionType {
   UPDATE_TILE_METADATA = "UPDATE_TILE_METADATA",
   DELETE_TILE = "DELETE_TILE",
