@@ -21,13 +21,6 @@ export function transformData(data: Data[]) {
     });
   });
 
-  // Get all x values from all data series
-  const allXValues = new Set<string>();
-  data.forEach((series) => {
-    series.values.forEach((point) => {
-      allXValues.add(point.x);
-    });
-  });
   return Array.from(rowsMap.values()).sort((a, b) =>
     String(a.x).localeCompare(String(b.x))
   );
